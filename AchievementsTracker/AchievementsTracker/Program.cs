@@ -8,9 +8,7 @@ using System.Threading;
 namespace AchievementsTracker
 {
     static class Program
-    {
-        private static readonly Object dataLock = new Object();
-        
+    {     
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -26,6 +24,7 @@ namespace AchievementsTracker
             
             // Create tracker thread
             Thread trackerThread = new Thread(() => new Tracker(form).Main());
+            trackerThread.IsBackground = true;
             trackerThread.Start();
 
             Application.Run(form);
