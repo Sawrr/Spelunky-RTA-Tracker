@@ -32,6 +32,7 @@ namespace AchievementsTracker
         public void RunStarted()
         {
             ui.StartTimer();
+            runManager.StartRun();
         }
 
         public void RunCompleted()
@@ -39,24 +40,50 @@ namespace AchievementsTracker
             ui.StopTimer();
         }
 
+        public void JournalEvent(int num)
+        {
+            if (!runManager.IsAchievementDone(Achievement.Journal))
+            {
+                ui.SetJournalStatus(num);
+            }
+            if (num == 114)
+            {
+                runManager.FinishAchievement(Achievement.Journal);
+            }
+        }
+
+        public void CharactersEvent(int num)
+        {
+            if (!runManager.IsAchievementDone(Achievement.Characters))
+            {
+                ui.SetCharactersStatus(num);
+            }
+            if (num == 16)
+            {
+                runManager.FinishAchievement(Achievement.Characters);
+            }
+        }
+
         public void DamselEvent(int num)
         {
-            Console.WriteLine("damsels: " + num);
-            ui.SetDamselCount(num);
-            if (num == 3)
+            if (!runManager.IsAchievementDone(Achievement.Casanova)) {
+                ui.SetDamselCount(num);
+            }
+            if (num >= 10)
             {
-                //ui.FinishAchievement(Achievements.Damsels);
-                runManager.FinishAchievement(Achievement.Damsels);
+                runManager.FinishAchievement(Achievement.Casanova);
             }
         }
 
         public void ShoppieEvent(int num)
         {
-            ui.SetShoppieCount(num);
-            if (num == 3)
+            if (!runManager.IsAchievementDone(Achievement.PublicEnemy))
             {
-                //ui.FinishAchievement(Achievements.Shoppies);
-                runManager.FinishAchievement(Achievement.Shoppies);
+                ui.SetShoppieCount(num);
+            }
+            if (num >= 12)
+            {
+                runManager.FinishAchievement(Achievement.PublicEnemy);
             }
         }
 
@@ -67,7 +94,7 @@ namespace AchievementsTracker
 
             // Listen for Spelunky Process
             spelunky = SpelunkyProcessListener.listenForSpelunkyProcess();
-            Console.WriteLine(" Spelunky detected");
+            Console.WriteLine("Spelunky detected");
             ui.SetSpelunkyRunning(true);
             int processHandle = (int)OpenProcess(PROCESS_WM_READ, false, spelunky.Id);
             int baseAddress = spelunky.MainModule.BaseAddress.ToInt32();

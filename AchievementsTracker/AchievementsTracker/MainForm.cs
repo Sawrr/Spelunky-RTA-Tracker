@@ -26,7 +26,10 @@ namespace AchievementsTracker
 
         public void StartTimer()
         {
-            startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            if (startTime == 0)
+            {
+                startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            }
         }
 
         public void StopTimer()
@@ -73,6 +76,80 @@ namespace AchievementsTracker
             runningLabel.Text = value ? "Spelunky is running!" : "Waiting for Spelunky process";
         }
 
+        public void FinishHell()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(FinishHell), new object[] { });
+                return;
+            }
+            HellStatus.Text = "Done";
+        }
+
+        public void FinishSpeedlunky()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(FinishSpeedlunky), new object[] { });
+                return;
+            }
+            SpeedlunkyStatus.Text = "Done";
+        }
+
+        public void FinishBigMoney()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(FinishBigMoney), new object[] { });
+                return;
+            }
+            BigMoneyStatus.Text = "Done";
+        }
+
+        public void FinishNoGold()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(FinishNoGold), new object[] { });
+                return;
+            }
+            NoGoldStatus.Text = "Done";
+        }
+
+        public void SetJournalStatus(int num)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<int>(SetJournalStatus), new object[] { num });
+                return;
+            }
+            if (num == 114)
+            {
+                JournalStatus.Text = "Done";
+            }
+            else
+            {
+                JournalStatus.Text = num + "/114";
+            }
+        }
+
+        public void SetCharactersStatus(int num)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<int>(SetCharactersStatus), new object[] { num });
+                return;
+            }
+            if (num == 16)
+            {
+                CharactersStatus.Text = "Done";
+            }
+            else
+            {
+                CharactersStatus.Text = num + "/16";
+            }
+        }
+
         public void SetDamselCount(int num)
         {
             if (InvokeRequired)
@@ -80,7 +157,13 @@ namespace AchievementsTracker
                 Invoke(new Action<int>(SetDamselCount), new object[] { num });
                 return;
             }
-            damselCount.Text = "" + num;
+            if (num >= 10)
+            {
+                CasanovaStatus.Text = "Done";
+            } else
+            {
+                CasanovaStatus.Text = num + "/10";
+            }
         }
 
         public void SetShoppieCount(int num)
@@ -90,7 +173,14 @@ namespace AchievementsTracker
                 Invoke(new Action<int>(SetShoppieCount), new object[] { num });
                 return;
             }
-            shoppieCount.Text = "" + num;
+            if (num >= 12)
+            {
+                PublicEnemyStatus.Text = "Done";
+            } else
+            {
+                PublicEnemyStatus.Text = num + "/12";
+            }
+
         }
 
     }

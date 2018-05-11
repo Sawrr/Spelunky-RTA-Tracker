@@ -18,9 +18,26 @@ namespace AchievementsTracker
             this.memoryReader = memoryReader;
         }
 
+        private void resetRun()
+        {
+            tracker.DamselEvent(0);
+            tracker.ShoppieEvent(0);
+        }
+
         public void update()
         {
             ScreenState newState = (ScreenState)memoryReader.ReadScreenState();
+            if ((newState == ScreenState.DeathScreen && state != ScreenState.DeathScreen) || 
+                (newState == ScreenState.MainMenu && state != ScreenState.MainMenu))
+            {
+                // run over
+                resetRun();
+            }
+            if (newState == ScreenState.VictoryWalking && state != ScreenState.VictoryWalking)
+            {
+                // run victory
+                resetRun();
+            }
             state = newState;
 
             int newCharSelect = memoryReader.ReadCharSelect();

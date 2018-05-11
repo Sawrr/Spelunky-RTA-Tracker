@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AchievementsTracker
 {
-    enum RunState
+    public enum RunState
     {
         Waiting, InProgress, Done
     }

@@ -9,14 +9,20 @@ namespace AchievementsTracker
     class RunManager
     {
         private Tracker tracker;
-        //private RunState state;
+        private RunState state;
         private bool[] achievements;
 
         public RunManager(Tracker tracker)
         {
             this.tracker = tracker;
+            state = RunState.Waiting;
             int numAchievements = Enum.GetNames(typeof(Achievement)).Length;
             achievements = new bool[numAchievements];
+        }
+
+        public bool IsAchievementDone(Achievement ach)
+        {
+            return state == RunState.InProgress && achievements[(int)ach];
         }
 
         public void FinishAchievement(Achievement ach)
@@ -28,6 +34,11 @@ namespace AchievementsTracker
                 Console.WriteLine("Achievement finished: " + ach);
                 checkForAllAchievements();
             }
+        }
+
+        public void StartRun()
+        {
+            state = RunState.InProgress;
         }
 
         private void checkForAllAchievements()
@@ -42,6 +53,7 @@ namespace AchievementsTracker
 
             // Run complete
             Console.WriteLine("You did it!");
+            state = RunState.Done;
             tracker.RunCompleted();
         }
     }

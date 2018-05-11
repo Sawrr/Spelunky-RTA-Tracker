@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AchievementsTracker
 {
-    enum Achievement
+    public enum Achievement
     {
-        Damsels, Shoppies
+        Hell, Journal, Characters, Speedlunky, BigMoney, NoGold, Casanova, PublicEnemy
     }
 }
