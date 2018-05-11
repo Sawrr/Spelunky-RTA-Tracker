@@ -22,7 +22,12 @@ namespace AchievementsTracker
 
         public bool IsAchievementDone(Achievement ach)
         {
-            return state == RunState.InProgress && achievements[(int)ach];
+            return achievements[(int)ach];
+        }
+
+        public bool IsRunInProgress()
+        {
+            return state == RunState.InProgress;
         }
 
         public void FinishAchievement(Achievement ach)

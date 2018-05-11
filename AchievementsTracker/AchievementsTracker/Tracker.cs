@@ -42,7 +42,7 @@ namespace AchievementsTracker
 
         public void JournalEvent(int num)
         {
-            if (!runManager.IsAchievementDone(Achievement.Journal))
+            if (!runManager.IsAchievementDone(Achievement.Journal) && runManager.IsRunInProgress())
             {
                 ui.SetJournalStatus(num);
             }
@@ -54,7 +54,7 @@ namespace AchievementsTracker
 
         public void CharactersEvent(int num)
         {
-            if (!runManager.IsAchievementDone(Achievement.Characters))
+            if (!runManager.IsAchievementDone(Achievement.Characters) && runManager.IsRunInProgress())
             {
                 ui.SetCharactersStatus(num);
             }
@@ -66,7 +66,7 @@ namespace AchievementsTracker
 
         public void DamselEvent(int num)
         {
-            if (!runManager.IsAchievementDone(Achievement.Casanova)) {
+            if (!runManager.IsAchievementDone(Achievement.Casanova) && runManager.IsRunInProgress()) {
                 ui.SetDamselCount(num);
             }
             if (num >= 10)
@@ -77,7 +77,7 @@ namespace AchievementsTracker
 
         public void ShoppieEvent(int num)
         {
-            if (!runManager.IsAchievementDone(Achievement.PublicEnemy))
+            if (!runManager.IsAchievementDone(Achievement.PublicEnemy) && runManager.IsRunInProgress())
             {
                 ui.SetShoppieCount(num);
             }
