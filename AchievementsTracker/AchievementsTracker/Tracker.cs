@@ -40,6 +40,42 @@ namespace AchievementsTracker
             ui.StopTimer();
         }
 
+        public void HellAchieved()
+        {
+            if (!runManager.IsAchievementDone(Achievement.Hell) && runManager.IsRunInProgress())
+            {
+                ui.FinishHell();
+                runManager.FinishAchievement(Achievement.Hell);
+            }
+        }
+
+        public void SpeedlunkyAchieved()
+        {
+            if (!runManager.IsAchievementDone(Achievement.Speedlunky) && runManager.IsRunInProgress())
+            {
+                ui.FinishSpeedlunky();
+                runManager.FinishAchievement(Achievement.Speedlunky);
+            }
+        }
+
+        public void BigMoneyAchieved()
+        {
+            if (!runManager.IsAchievementDone(Achievement.BigMoney) && runManager.IsRunInProgress())
+            {
+                ui.FinishBigMoney();
+                runManager.FinishAchievement(Achievement.BigMoney);
+            }
+        }
+
+        public void NoGoldAchieved()
+        {
+            if (!runManager.IsAchievementDone(Achievement.NoGold) && runManager.IsRunInProgress())
+            {
+                ui.FinishNoGold();
+                runManager.FinishAchievement(Achievement.NoGold);
+            }
+        }
+
         public void JournalEvent(int num)
         {
             if (!runManager.IsAchievementDone(Achievement.Journal) && runManager.IsRunInProgress())
@@ -124,7 +160,13 @@ namespace AchievementsTracker
 
                 long currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 long sleepTime = wakeUpTime - currentTime;
-                Thread.Sleep((int)sleepTime);
+                if (sleepTime > 0)
+                {
+                    Thread.Sleep((int)sleepTime);
+                } else
+                {
+                    Console.WriteLine("This tick took longer than 16 ms");
+                }
             }
         }
     }
