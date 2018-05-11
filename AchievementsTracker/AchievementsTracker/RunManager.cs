@@ -8,12 +8,13 @@ namespace AchievementsTracker
 {
     class RunManager
     {
-        //private long startTime;
+        private Tracker tracker;
         //private RunState state;
         private bool[] achievements;
 
-        public RunManager()
+        public RunManager(Tracker tracker)
         {
+            this.tracker = tracker;
             int numAchievements = Enum.GetNames(typeof(Achievement)).Length;
             achievements = new bool[numAchievements];
         }
@@ -41,6 +42,7 @@ namespace AchievementsTracker
 
             // Run complete
             Console.WriteLine("You did it!");
+            tracker.RunCompleted();
         }
     }
 }

@@ -20,39 +20,44 @@ namespace AchievementsTracker
         private Process spelunky;
         private bool running;
         private RunManager runManager;
-        private GameEvents events;
 
         public Tracker(MainForm form)
         {
             ui = form;
 
             // create run manager
-            runManager = new RunManager();
-            
-            // create game events
-            events = new GameEvents();
+            runManager = new RunManager(this);
+        }
 
-            // create event handlers
-            events.DamselEvent += new GameEvents.DamselEventHandler(num =>
+        public void RunStarted()
+        {
+            ui.StartTimer();
+        }
+
+        public void RunCompleted()
+        {
+            ui.StopTimer();
+        }
+
+        public void DamselEvent(int num)
+        {
+            Console.WriteLine("damsels: " + num);
+            ui.SetDamselCount(num);
+            if (num == 3)
             {
-                ui.SetDamselCount(num);
-                if (num == 3)
-                {
-                    //ui.FinishAchievement(Achievements.Damsels);
-                    runManager.FinishAchievement(Achievement.Damsels);
-                }
-            });
+                //ui.FinishAchievement(Achievements.Damsels);
+                runManager.FinishAchievement(Achievement.Damsels);
+            }
+        }
 
-            events.ShoppieEvent += new GameEvents.ShoppieEventHandler(num =>
+        public void ShoppieEvent(int num)
+        {
+            ui.SetShoppieCount(num);
+            if (num == 3)
             {
-                ui.SetShoppieCount(num);
-                if (num == 3)
-                {
-                    //ui.FinishAchievement(Achievements.Shoppies);
-                    runManager.FinishAchievement(Achievement.Shoppies);
-                }
-            });
-
+                //ui.FinishAchievement(Achievements.Shoppies);
+                runManager.FinishAchievement(Achievement.Shoppies);
+            }
         }
 
         public void Main()
@@ -78,7 +83,7 @@ namespace AchievementsTracker
             });
 
             // Create game manager
-            GameManager gameManager = new GameManager(events, new MemoryReader(processHandle, baseAddress));
+            GameManager gameManager = new GameManager(this, new MemoryReader(processHandle, baseAddress));
 
             // main game loop
             running = true;

@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Achievement.cs" />
-    <Compile Include="GameEvents.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

@@ -9,7 +9,8 @@ namespace AchievementsTracker
         public static extern bool ReadProcessMemory(int hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
 
         private int[] SCREEN_STATE = { 0x1384B4, 0x58 };
-        private int[] DAMSEL_COUNT = { 0x138558, 0x30, 0x280, 0x94 };
+        private int[] CHAR_SELECT = { 0x1384B4, 0x4C, 0x122BEC };
+        private int[] DAMSEL_COUNT = { 0x138558, 0x30, 0x280, -0x70 };
         private int[] SHOPPIE_COUNT = { 0x138558, 0x30, 0x280, 0x6CB0 };
 
         private int processHandle;
@@ -39,6 +40,13 @@ namespace AchievementsTracker
         {
             byte[] buffer = new byte[1];
             ReadMemory(buffer, baseAddress, SCREEN_STATE);
+            return buffer[0];
+        }
+
+        public int ReadCharSelect()
+        {
+            byte[] buffer = new byte[1];
+            ReadMemory(buffer, baseAddress, CHAR_SELECT);
             return buffer[0];
         }
 
