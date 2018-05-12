@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
 
 namespace AchievementsTracker
 {
@@ -15,6 +16,15 @@ namespace AchievementsTracker
         [STAThread]
         static void Main()
         {
+            // Logging
+            string logFolder = "AchievementsTrackerLogs";
+            Directory.CreateDirectory(logFolder);
+            string logName = logFolder + "\\log_" + (DateTime.Now.ToString("MMddyyyy_HHmmss")) + ".txt";
+            StreamWriter logFile = File.CreateText(logName);
+            logFile.AutoFlush = true;
+            Console.SetOut(logFile);
+            Console.SetError(logFile);
+            
             // Initial setup
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

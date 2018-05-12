@@ -36,14 +36,17 @@ namespace AchievementsTracker
             if (!achievements[idx])
             {
                 achievements[idx] = true;
-                Console.WriteLine("Achievement finished: " + ach);
+                Log.WriteLine("Achievement finished: " + ach);
                 checkForAllAchievements();
             }
         }
 
         public void StartRun()
         {
-            state = RunState.InProgress;
+            if (state == RunState.Waiting)
+            {
+                state = RunState.InProgress;
+            }
         }
 
         private void checkForAllAchievements()
@@ -57,7 +60,7 @@ namespace AchievementsTracker
             }
 
             // Run complete
-            Console.WriteLine("You did it!");
+            Log.WriteLine("Achievements run completed");
             state = RunState.Done;
             tracker.RunCompleted();
         }

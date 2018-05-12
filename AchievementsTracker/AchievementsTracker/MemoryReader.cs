@@ -18,6 +18,7 @@ namespace AchievementsTracker
         private int[] JOURNAL_ITEMS = { 0x1384B4, 0x445FEC };
         private int[] JOURNAL_TRAPS = { 0x1384B4, 0x4460EC };
         private int[] RUN_TIME = { 0x138558, 0x30, 0x280, 0x52AC };
+        private int[] STAGE_TIME = { 0x138558, 0x30, 0x280, 0x52BC };
         private int[] LEVEL_IDX = { 0x138558, 0x30, 0x280, -0xC0 };
         private int[] SCORE = { 0x138558, 0x30, 0x280, 0x5298 };
 
@@ -44,11 +45,22 @@ namespace AchievementsTracker
             return BitConverter.ToInt32(buffer, 0);
         }
 
+        public int ReadStageTimeInMilliseconds()
+        {
+            byte[] buffer = new byte[16];
+            ReadMemory(buffer, baseAddress, STAGE_TIME);
+            return convertToTime(buffer);
+        }
+
         public int ReadRunTimeInMilliseconds()
         {
             byte[] buffer = new byte[16];
             ReadMemory(buffer, baseAddress, RUN_TIME);
+            return convertToTime(buffer);
+        }
 
+        private int convertToTime(byte[] buffer)
+        {
             int min = BitConverter.ToInt32(buffer, 0);
             int sec = BitConverter.ToInt32(buffer, 4);
             int ms = (int)BitConverter.ToDouble(buffer, 8);

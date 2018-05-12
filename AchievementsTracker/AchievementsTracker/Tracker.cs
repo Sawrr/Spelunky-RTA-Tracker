@@ -129,17 +129,27 @@ namespace AchievementsTracker
             running = false;
 
             // Listen for Spelunky Process
-            spelunky = SpelunkyProcessListener.listenForSpelunkyProcess();
-            Console.WriteLine("Spelunky detected");
-            ui.SetSpelunkyRunning(true);
-            int processHandle = (int)OpenProcess(PROCESS_WM_READ, false, spelunky.Id);
-            int baseAddress = spelunky.MainModule.BaseAddress.ToInt32();
+            int processHandle = 0;
+            int baseAddress = 0;
+            try
+            {
+                spelunky = SpelunkyProcessListener.listenForSpelunkyProcess();
+                Log.WriteLine("Spelunky process detected");
+                ui.SetSpelunkyRunning(true);
+                processHandle = (int)OpenProcess(PROCESS_WM_READ, false, spelunky.Id);
+                baseAddress = spelunky.MainModule.BaseAddress.ToInt32();
+            } catch (Exception e)
+            {
+                Log.WriteLine("Error encountered listening for or opening the process");
+                Log.WriteLine(e.ToString());
+                Main();
+            }
 
             // Listen for process terminating
             spelunky.EnableRaisingEvents = true;
             spelunky.Exited += new EventHandler((s, e) =>
             {
-                Console.WriteLine("Spelunky process exited.");
+                Log.WriteLine("Spelunky process exited");
 
                 // Now start over
                 Main();
@@ -165,7 +175,7 @@ namespace AchievementsTracker
                     Thread.Sleep((int)sleepTime);
                 } else
                 {
-                    Console.WriteLine("This tick took longer than 16 ms");
+                    Log.WriteLine("This tick took longer than 16 ms");
                 }
             }
         }

@@ -29,14 +29,14 @@ namespace AchievementsTracker
 
         private void startRun()
         {
-            Console.WriteLine("A run has begun");
+            Log.WriteLine("Run started from Level 1");
             runIsValid = true;
             runIsNoGold = true;
         }
 
         private void resetRun()
         {
-            Console.WriteLine("A run has been lost!");
+            Log.WriteLine("Run status reset");
             runIsValid = false;
             tracker.DamselEvent(0);
             tracker.ShoppieEvent(0);
@@ -48,13 +48,21 @@ namespace AchievementsTracker
             int newScore = memoryReader.ReadScore();
             if (newScore != score && state == ScreenState.Running)
             {
-                runIsNoGold = false;
-                Console.WriteLine("got gold");
+                if (runIsNoGold)
+                {
+                    runIsNoGold = false;
+                    Log.WriteLine("No gold lost");
+                }
+                if (newScore > 500000)
+                {
+                    tracker.BigMoneyAchieved();
+                }
             }
             score = newScore;
 
             // Times
             int newRunTime = memoryReader.ReadRunTimeInMilliseconds();
+            int newStageTime = memoryReader.ReadStageTimeInMilliseconds();
             if (newRunTime - runTime < 0 && state == ScreenState.Running)
             {
                 // Filter out beginning of olmec, yama cutscenes
@@ -65,6 +73,7 @@ namespace AchievementsTracker
                 }
             }
             runTime = newRunTime;
+            stageTime = newStageTime;
 
             // Level index
             levelIdx = memoryReader.ReadLevelIndex();
@@ -118,7 +127,7 @@ namespace AchievementsTracker
             if (state == ScreenState.ChooseCharacter && charSelect == 0 && newCharSelect != 0)
             {
                 // Start timer
-                Console.WriteLine("Run is starting");
+                Log.WriteLine("Achievements run started!");
                 tracker.RunStarted();
             }
             charSelect = newCharSelect;
@@ -146,7 +155,7 @@ namespace AchievementsTracker
                     newChars++;
                 }
             }
-            if (newChars != characters)
+            if (newChars != characters && newChars > 0 && newChars <= 16)
             {
                 tracker.CharactersEvent(newChars);
             }
@@ -186,7 +195,7 @@ namespace AchievementsTracker
                 }
             }
 
-            if (newJournal != journal)
+            if (newJournal != journal && newJournal > 0 && newJournal <= 144)
             {
                 tracker.JournalEvent(newJournal);
             }
