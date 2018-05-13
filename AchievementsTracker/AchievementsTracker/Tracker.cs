@@ -40,15 +40,6 @@ namespace AchievementsTracker
             ui.StopTimer();
         }
 
-        public void HellAchieved()
-        {
-            if (!runManager.IsAchievementDone(Achievement.Hell) && runManager.IsRunInProgress())
-            {
-                ui.FinishHell();
-                runManager.FinishAchievement(Achievement.Hell);
-            }
-        }
-
         public void SpeedlunkyAchieved()
         {
             if (!runManager.IsAchievementDone(Achievement.Speedlunky) && runManager.IsRunInProgress())

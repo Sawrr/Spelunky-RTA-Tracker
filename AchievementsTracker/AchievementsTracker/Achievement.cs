@@ -8,6 +8,6 @@ namespace AchievementsTracker
 {
     public enum Achievement
     {
-        Hell, Journal, Characters, Speedlunky, BigMoney, NoGold, Casanova, PublicEnemy
+        Journal, Characters, Speedlunky, BigMoney, NoGold, Casanova, PublicEnemy
     }
 }

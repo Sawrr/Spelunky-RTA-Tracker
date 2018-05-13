@@ -101,7 +101,6 @@ namespace AchievementsTracker
                 else if (levelIdx == 20)
                 {
                     score += 100000;
-                    tracker.HellAchieved();
                 }
                 // check for speedlunky
                 if (runIsValid && runTime < 8 * 60 * 1000)

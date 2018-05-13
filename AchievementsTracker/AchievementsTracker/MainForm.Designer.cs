@@ -35,7 +35,6 @@
             this.Casanova = new System.Windows.Forms.Label();
             this.PublicEnemy = new System.Windows.Forms.Label();
             this.timer = new System.Windows.Forms.Label();
-            this.Hell = new System.Windows.Forms.Label();
             this.Journal = new System.Windows.Forms.Label();
             this.Characters = new System.Windows.Forms.Label();
             this.Speedlunky = new System.Windows.Forms.Label();
@@ -46,7 +45,6 @@
             this.SpeedlunkyStatus = new System.Windows.Forms.Label();
             this.CharactersStatus = new System.Windows.Forms.Label();
             this.JournalStatus = new System.Windows.Forms.Label();
-            this.HellStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // runningLabel
@@ -61,7 +59,7 @@
             // 
             this.CasanovaStatus.AutoSize = true;
             this.CasanovaStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CasanovaStatus.Location = new System.Drawing.Point(236, 305);
+            this.CasanovaStatus.Location = new System.Drawing.Point(236, 277);
             this.CasanovaStatus.Name = "CasanovaStatus";
             this.CasanovaStatus.Size = new System.Drawing.Size(46, 20);
             this.CasanovaStatus.TabIndex = 1;
@@ -71,7 +69,7 @@
             // 
             this.PublicEnemyStatus.AutoSize = true;
             this.PublicEnemyStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PublicEnemyStatus.Location = new System.Drawing.Point(236, 340);
+            this.PublicEnemyStatus.Location = new System.Drawing.Point(236, 312);
             this.PublicEnemyStatus.Name = "PublicEnemyStatus";
             this.PublicEnemyStatus.Size = new System.Drawing.Size(46, 20);
             this.PublicEnemyStatus.TabIndex = 2;
@@ -81,7 +79,7 @@
             // 
             this.Casanova.AutoSize = true;
             this.Casanova.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Casanova.Location = new System.Drawing.Point(12, 305);
+            this.Casanova.Location = new System.Drawing.Point(12, 277);
             this.Casanova.Name = "Casanova";
             this.Casanova.Size = new System.Drawing.Size(88, 20);
             this.Casanova.TabIndex = 3;
@@ -91,7 +89,7 @@
             // 
             this.PublicEnemy.AutoSize = true;
             this.PublicEnemy.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PublicEnemy.Location = new System.Drawing.Point(12, 340);
+            this.PublicEnemy.Location = new System.Drawing.Point(12, 312);
             this.PublicEnemy.Name = "PublicEnemy";
             this.PublicEnemy.Size = new System.Drawing.Size(117, 20);
             this.PublicEnemy.TabIndex = 4;
@@ -102,7 +100,7 @@
             this.timer.AutoSize = true;
             this.timer.Font = new System.Drawing.Font("MS Reference Sans Serif", 38F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timer.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.timer.Location = new System.Drawing.Point(-10, 399);
+            this.timer.Location = new System.Drawing.Point(-5, 371);
             this.timer.Name = "timer";
             this.timer.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.timer.Size = new System.Drawing.Size(304, 63);
@@ -110,21 +108,11 @@
             this.timer.Text = "         0.00";
             this.timer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // Hell
-            // 
-            this.Hell.AutoSize = true;
-            this.Hell.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Hell.Location = new System.Drawing.Point(12, 95);
-            this.Hell.Name = "Hell";
-            this.Hell.Size = new System.Drawing.Size(41, 20);
-            this.Hell.TabIndex = 7;
-            this.Hell.Text = "Hell";
-            // 
             // Journal
             // 
             this.Journal.AutoSize = true;
             this.Journal.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Journal.Location = new System.Drawing.Point(12, 130);
+            this.Journal.Location = new System.Drawing.Point(12, 102);
             this.Journal.Name = "Journal";
             this.Journal.Size = new System.Drawing.Size(67, 20);
             this.Journal.TabIndex = 8;
@@ -134,7 +122,7 @@
             // 
             this.Characters.AutoSize = true;
             this.Characters.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Characters.Location = new System.Drawing.Point(12, 165);
+            this.Characters.Location = new System.Drawing.Point(12, 137);
             this.Characters.Name = "Characters";
             this.Characters.Size = new System.Drawing.Size(96, 20);
             this.Characters.TabIndex = 9;
@@ -144,7 +132,7 @@
             // 
             this.Speedlunky.AutoSize = true;
             this.Speedlunky.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Speedlunky.Location = new System.Drawing.Point(12, 200);
+            this.Speedlunky.Location = new System.Drawing.Point(12, 172);
             this.Speedlunky.Name = "Speedlunky";
             this.Speedlunky.Size = new System.Drawing.Size(102, 20);
             this.Speedlunky.TabIndex = 10;
@@ -154,7 +142,7 @@
             // 
             this.BigMoney.AutoSize = true;
             this.BigMoney.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BigMoney.Location = new System.Drawing.Point(12, 235);
+            this.BigMoney.Location = new System.Drawing.Point(12, 207);
             this.BigMoney.Name = "BigMoney";
             this.BigMoney.Size = new System.Drawing.Size(93, 20);
             this.BigMoney.TabIndex = 11;
@@ -164,7 +152,7 @@
             // 
             this.NoGold.AutoSize = true;
             this.NoGold.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NoGold.Location = new System.Drawing.Point(12, 270);
+            this.NoGold.Location = new System.Drawing.Point(12, 242);
             this.NoGold.Name = "NoGold";
             this.NoGold.Size = new System.Drawing.Size(74, 20);
             this.NoGold.TabIndex = 12;
@@ -174,7 +162,7 @@
             // 
             this.NoGoldStatus.AutoSize = true;
             this.NoGoldStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NoGoldStatus.Location = new System.Drawing.Point(236, 270);
+            this.NoGoldStatus.Location = new System.Drawing.Point(236, 242);
             this.NoGoldStatus.Name = "NoGoldStatus";
             this.NoGoldStatus.Size = new System.Drawing.Size(0, 20);
             this.NoGoldStatus.TabIndex = 13;
@@ -183,7 +171,7 @@
             // 
             this.BigMoneyStatus.AutoSize = true;
             this.BigMoneyStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BigMoneyStatus.Location = new System.Drawing.Point(236, 235);
+            this.BigMoneyStatus.Location = new System.Drawing.Point(236, 207);
             this.BigMoneyStatus.Name = "BigMoneyStatus";
             this.BigMoneyStatus.Size = new System.Drawing.Size(0, 20);
             this.BigMoneyStatus.TabIndex = 14;
@@ -192,7 +180,7 @@
             // 
             this.SpeedlunkyStatus.AutoSize = true;
             this.SpeedlunkyStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SpeedlunkyStatus.Location = new System.Drawing.Point(236, 200);
+            this.SpeedlunkyStatus.Location = new System.Drawing.Point(236, 172);
             this.SpeedlunkyStatus.Name = "SpeedlunkyStatus";
             this.SpeedlunkyStatus.Size = new System.Drawing.Size(0, 20);
             this.SpeedlunkyStatus.TabIndex = 15;
@@ -201,7 +189,7 @@
             // 
             this.CharactersStatus.AutoSize = true;
             this.CharactersStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CharactersStatus.Location = new System.Drawing.Point(236, 165);
+            this.CharactersStatus.Location = new System.Drawing.Point(236, 137);
             this.CharactersStatus.Name = "CharactersStatus";
             this.CharactersStatus.Size = new System.Drawing.Size(46, 20);
             this.CharactersStatus.TabIndex = 16;
@@ -211,20 +199,11 @@
             // 
             this.JournalStatus.AutoSize = true;
             this.JournalStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.JournalStatus.Location = new System.Drawing.Point(236, 130);
+            this.JournalStatus.Location = new System.Drawing.Point(236, 102);
             this.JournalStatus.Name = "JournalStatus";
             this.JournalStatus.Size = new System.Drawing.Size(56, 20);
             this.JournalStatus.TabIndex = 17;
             this.JournalStatus.Text = "0/114";
-            // 
-            // HellStatus
-            // 
-            this.HellStatus.AutoSize = true;
-            this.HellStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HellStatus.Location = new System.Drawing.Point(236, 95);
-            this.HellStatus.Name = "HellStatus";
-            this.HellStatus.Size = new System.Drawing.Size(0, 20);
-            this.HellStatus.TabIndex = 18;
             // 
             // MainForm
             // 
@@ -232,8 +211,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(304, 482);
-            this.Controls.Add(this.HellStatus);
+            this.ClientSize = new System.Drawing.Size(304, 446);
             this.Controls.Add(this.JournalStatus);
             this.Controls.Add(this.CharactersStatus);
             this.Controls.Add(this.SpeedlunkyStatus);
@@ -244,7 +222,6 @@
             this.Controls.Add(this.Speedlunky);
             this.Controls.Add(this.Characters);
             this.Controls.Add(this.Journal);
-            this.Controls.Add(this.Hell);
             this.Controls.Add(this.timer);
             this.Controls.Add(this.PublicEnemy);
             this.Controls.Add(this.Casanova);
@@ -273,7 +250,6 @@
         private System.Windows.Forms.Label Casanova;
         private System.Windows.Forms.Label PublicEnemy;
         private System.Windows.Forms.Label timer;
-        private System.Windows.Forms.Label Hell;
         private System.Windows.Forms.Label Journal;
         private System.Windows.Forms.Label Characters;
         private System.Windows.Forms.Label Speedlunky;
@@ -284,7 +260,6 @@
         private System.Windows.Forms.Label SpeedlunkyStatus;
         private System.Windows.Forms.Label CharactersStatus;
         private System.Windows.Forms.Label JournalStatus;
-        private System.Windows.Forms.Label HellStatus;
     }
 }
 

@@ -45,7 +45,7 @@ namespace AchievementsTracker
             }
 
             long time = DateTimeOffset.Now.ToUnixTimeMilliseconds() - this.startTime;
-
+            
             string timerText;
             if (time < 60 * 1000)
             {
@@ -55,12 +55,12 @@ namespace AchievementsTracker
             else if (time < 60 * 60 * 1000)
             {
                 // time < 1 hour
-                timerText = String.Format("{0,6}:{1:00}.{2:00}", time / 60000, (time % 60000) / 1000, (time % 1000) / 10);
+                timerText = String.Format("{0,5}:{1:00}.{2:00}", time / 60000, (time % 60000) / 1000, (time % 1000) / 10);
             }
             else
             {
                 // other
-                timerText = String.Format("{0,2}:{1:00}:{2:00}.{3:00}", time / 3600000, (time % 3600000) / 60000, (time % 60000) / 1000, (time % 1000) / 10);
+                timerText = String.Format("{0,1}:{1:00}:{2:00}.{3:00}", time / 3600000, (time % 3600000) / 60000, (time % 60000) / 1000, (time % 1000) / 10);
             }
 
             timer.Text = timerText;
@@ -74,16 +74,6 @@ namespace AchievementsTracker
                 return;
             }
             runningLabel.Text = value ? "Spelunky is running!" : "Waiting for Spelunky process";
-        }
-
-        public void FinishHell()
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action(FinishHell), new object[] { });
-                return;
-            }
-            HellStatus.Text = "Done";
         }
 
         public void FinishSpeedlunky()

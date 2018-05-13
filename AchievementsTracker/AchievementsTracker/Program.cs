@@ -16,6 +16,12 @@ namespace AchievementsTracker
         [STAThread]
         static void Main()
         {
+            // Global exception handler
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                Log.WriteLine(e.ExceptionObject.ToString());
+            };
+
             // Logging
             string logFolder = "AchievementsTrackerLogs";
             Directory.CreateDirectory(logFolder);
@@ -23,7 +29,6 @@ namespace AchievementsTracker
             StreamWriter logFile = File.CreateText(logName);
             logFile.AutoFlush = true;
             Console.SetOut(logFile);
-            Console.SetError(logFile);
             
             // Initial setup
             Application.EnableVisualStyles();
