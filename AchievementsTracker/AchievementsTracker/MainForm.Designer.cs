@@ -253,10 +253,10 @@
             // Nineteen
             // 
             this.Nineteen.AutoSize = true;
-            this.Nineteen.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Nineteen.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Nineteen.Location = new System.Drawing.Point(12, 370);
             this.Nineteen.Name = "Nineteen";
-            this.Nineteen.Size = new System.Drawing.Size(61, 20);
+            this.Nineteen.Size = new System.Drawing.Size(56, 20);
             this.Nineteen.TabIndex = 22;
             this.Nineteen.Text = "19/20";
             // 

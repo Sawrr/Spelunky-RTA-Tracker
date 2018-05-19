@@ -89,6 +89,7 @@ namespace AchievementsTracker
             }
             if (num == 114)
             {
+                ui.FinishJournal();
                 runManager.FinishAchievement(Achievement.Journal);
             }
         }
@@ -101,6 +102,7 @@ namespace AchievementsTracker
             }
             if (num == 16)
             {
+                ui.FinishCharacters();
                 runManager.FinishAchievement(Achievement.Characters);
             }
         }
@@ -112,6 +114,7 @@ namespace AchievementsTracker
             }
             if (num >= 10)
             {
+                ui.FinishCasanova();
                 runManager.FinishAchievement(Achievement.Casanova);
             }
         }
@@ -124,6 +127,7 @@ namespace AchievementsTracker
             }
             if (num >= 12)
             {
+                ui.FinishPublicEnemy();
                 runManager.FinishAchievement(Achievement.PublicEnemy);
             }
         }
@@ -136,6 +140,7 @@ namespace AchievementsTracker
             }
             if (num >= 1000)
             {
+                ui.FinishAddicted();
                 runManager.FinishAchievement(Achievement.Addicted);
             }
         }
