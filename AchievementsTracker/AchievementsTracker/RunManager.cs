@@ -38,6 +38,7 @@ namespace AchievementsTracker
                 achievements[idx] = true;
                 Log.WriteLine("Achievement finished: " + ach);
                 checkForAllAchievements();
+                checkForNineteenAchievements();
             }
         }
 
@@ -63,6 +64,21 @@ namespace AchievementsTracker
             Log.WriteLine("Achievements run completed");
             state = RunState.Done;
             tracker.RunCompleted();
+        }
+
+        private void checkForNineteenAchievements()
+        {
+            for (int i = 0; i < achievements.Length; i++)
+            {
+                if (!achievements[i] && (Achievement)i != Achievement.Addicted)
+                {
+                    return;
+                }
+            }
+
+            // Run complete
+            Log.WriteLine("19/20 run completed");
+            tracker.NineteenAchieved();
         }
     }
 }

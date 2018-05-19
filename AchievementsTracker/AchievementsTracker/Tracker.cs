@@ -40,6 +40,11 @@ namespace AchievementsTracker
             ui.StopTimer();
         }
 
+        public void NineteenAchieved()
+        {
+            ui.FinishNineteen();
+        }
+
         public void SpeedlunkyAchieved()
         {
             if (!runManager.IsAchievementDone(Achievement.Speedlunky) && runManager.IsRunInProgress())
@@ -120,6 +125,18 @@ namespace AchievementsTracker
             if (num >= 12)
             {
                 runManager.FinishAchievement(Achievement.PublicEnemy);
+            }
+        }
+
+        public void PlaysEvent(int num)
+        {
+            if (!runManager.IsAchievementDone(Achievement.Addicted) && runManager.IsRunInProgress())
+            {
+                ui.SetPlaysCount(num);
+            }
+            if (num >= 1000)
+            {
+                runManager.FinishAchievement(Achievement.Addicted);
             }
         }
 

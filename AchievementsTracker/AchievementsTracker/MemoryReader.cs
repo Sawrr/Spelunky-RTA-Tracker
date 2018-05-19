@@ -24,6 +24,7 @@ namespace AchievementsTracker
         private int[] LEVEL_IDX = { 0x138558, 0x30, 0x280, -0xC0 };
         private int[] SCORE = { 0x138558, 0x30, 0x280, 0x5298 };
         private int[] BOMBS = { 0x138558, 0x30, 0x280, 0x10 };
+        private int[] PLAYS = { 0x1384B4, 0x4459C8 };
 
         private int processHandle;
         private int baseAddress;
@@ -104,6 +105,13 @@ namespace AchievementsTracker
             byte[] buffer = new byte[1];
             ReadMemory(buffer, baseAddress, BOMBS);
             return buffer[0];
+        }
+
+        public int ReadPlays()
+        {
+            byte[] buffer = new byte[4];
+            ReadMemory(buffer, baseAddress, PLAYS);
+            return BitConverter.ToInt32(buffer, 0);
         }
 
         public byte[] ReadCharacters()

@@ -116,6 +116,26 @@ namespace AchievementsTracker
             TeamworkStatus.Text = "Done";
         }
 
+        public void FinishAddicted()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(FinishAddicted), new object[] { });
+                return;
+            }
+            AddictedStatus.Text = "Done";
+        }
+
+        public void FinishNineteen()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(FinishNineteen), new object[] { });
+                return;
+            }
+            NineteenStatus.Text = "Done";
+        }
+
         public void SetJournalStatus(int num)
         {
             if (InvokeRequired)
@@ -179,6 +199,24 @@ namespace AchievementsTracker
             } else
             {
                 PublicEnemyStatus.Text = num + "/12";
+            }
+
+        }
+
+        public void SetPlaysCount(int num)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<int>(SetPlaysCount), new object[] { num });
+                return;
+            }
+            if (num >= 1000)
+            {
+                AddictedStatus.Text = "Done";
+            }
+            else
+            {
+                AddictedStatus.Text = num + "/1000";
             }
 
         }

@@ -13,6 +13,7 @@ namespace AchievementsTracker
         private int shoppieCount;
         private int characters;
         private int journal;
+        private int plays;
 
         private bool runInProgress;
         private bool runIsNoGold;
@@ -65,7 +66,7 @@ namespace AchievementsTracker
         }
 
         public void update()
-        {
+        {            
             // gold check
             int newScore = memoryReader.ReadScore();
             if (newScore != score && state == ScreenState.Running)
@@ -236,6 +237,13 @@ namespace AchievementsTracker
                 tracker.JournalEvent(newJournal);
             }
             journal = newJournal;
+
+            int newPlays = memoryReader.ReadPlays();
+            if (newPlays != plays)
+            {
+                tracker.PlaysEvent(newPlays);
+            }
+            plays = newPlays;
         }
     }
 }
