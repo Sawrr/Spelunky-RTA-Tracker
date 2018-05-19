@@ -11,6 +11,7 @@ namespace AchievementsTracker
         private Tracker tracker;
         private RunState state;
         private bool[] achievements;
+        private bool nineteenDone;
 
         public RunManager(Tracker tracker)
         {
@@ -18,6 +19,7 @@ namespace AchievementsTracker
             state = RunState.Waiting;
             int numAchievements = Enum.GetNames(typeof(Achievement)).Length;
             achievements = new bool[numAchievements];
+            nineteenDone = false;
         }
 
         public bool IsAchievementDone(Achievement ach)
@@ -66,8 +68,15 @@ namespace AchievementsTracker
             tracker.RunCompleted();
         }
 
+        public bool isNineteenDone()
+        {
+            return nineteenDone;
+        }
+
         private void checkForNineteenAchievements()
         {
+            if (nineteenDone) return;
+
             for (int i = 0; i < achievements.Length; i++)
             {
                 if (!achievements[i] && (Achievement)i != Achievement.Addicted)
@@ -78,6 +87,7 @@ namespace AchievementsTracker
 
             // Run complete
             Log.WriteLine("19/20 run completed");
+            nineteenDone = true;
             tracker.NineteenAchieved();
         }
     }
