@@ -53,16 +53,6 @@ namespace AchievementsTracker
                 p1HealthAddr = memoryReader.ReadPlayerOneHealthAddr();
                 p2HealthAddr = memoryReader.ReadPlayerTwoHealthAddr();
             }
-
-            // TEMP
-            tracker.BigMoneyAchieved();
-            tracker.JournalEvent(114);
-            tracker.DamselEvent(10);
-            tracker.ShoppieEvent(12);
-            tracker.SpeedlunkyAchieved();
-            tracker.NoGoldAchieved();
-            tracker.TeamworkAchieved();
-            tracker.CharactersEvent(16);
         }
 
         private void resetRun()
