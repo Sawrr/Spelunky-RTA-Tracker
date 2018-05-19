@@ -106,6 +106,16 @@ namespace AchievementsTracker
             NoGoldStatus.Text = "Done";
         }
 
+        public void FinishTeamwork()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(FinishTeamwork), new object[] { });
+                return;
+            }
+            TeamworkStatus.Text = "Done";
+        }
+
         public void SetJournalStatus(int num)
         {
             if (InvokeRequired)

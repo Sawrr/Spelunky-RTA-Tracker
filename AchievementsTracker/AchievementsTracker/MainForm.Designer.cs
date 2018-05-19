@@ -45,6 +45,8 @@
             this.SpeedlunkyStatus = new System.Windows.Forms.Label();
             this.CharactersStatus = new System.Windows.Forms.Label();
             this.JournalStatus = new System.Windows.Forms.Label();
+            this.Teamwork = new System.Windows.Forms.Label();
+            this.TeamworkStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // runningLabel
@@ -205,6 +207,25 @@
             this.JournalStatus.TabIndex = 17;
             this.JournalStatus.Text = "0/114";
             // 
+            // Teamwork
+            // 
+            this.Teamwork.AutoSize = true;
+            this.Teamwork.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Teamwork.Location = new System.Drawing.Point(12, 347);
+            this.Teamwork.Name = "Teamwork";
+            this.Teamwork.Size = new System.Drawing.Size(92, 20);
+            this.Teamwork.TabIndex = 18;
+            this.Teamwork.Text = "Teamwork";
+            // 
+            // TeamworkStatus
+            // 
+            this.TeamworkStatus.AutoSize = true;
+            this.TeamworkStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TeamworkStatus.Location = new System.Drawing.Point(236, 347);
+            this.TeamworkStatus.Name = "TeamworkStatus";
+            this.TeamworkStatus.Size = new System.Drawing.Size(0, 20);
+            this.TeamworkStatus.TabIndex = 19;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -212,6 +233,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(304, 446);
+            this.Controls.Add(this.TeamworkStatus);
+            this.Controls.Add(this.Teamwork);
             this.Controls.Add(this.JournalStatus);
             this.Controls.Add(this.CharactersStatus);
             this.Controls.Add(this.SpeedlunkyStatus);
@@ -260,6 +283,8 @@
         private System.Windows.Forms.Label SpeedlunkyStatus;
         private System.Windows.Forms.Label CharactersStatus;
         private System.Windows.Forms.Label JournalStatus;
+        private System.Windows.Forms.Label Teamwork;
+        private System.Windows.Forms.Label TeamworkStatus;
     }
 }
 

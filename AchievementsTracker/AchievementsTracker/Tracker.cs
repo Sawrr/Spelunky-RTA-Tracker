@@ -67,6 +67,15 @@ namespace AchievementsTracker
             }
         }
 
+        public void TeamworkAchieved()
+        {
+            if (!runManager.IsAchievementDone(Achievement.Teamwork) && runManager.IsRunInProgress())
+            {
+                ui.FinishTeamwork();
+                runManager.FinishAchievement(Achievement.Teamwork);
+            }
+        }
+
         public void JournalEvent(int num)
         {
             if (!runManager.IsAchievementDone(Achievement.Journal) && runManager.IsRunInProgress())
