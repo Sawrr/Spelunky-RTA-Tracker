@@ -14,12 +14,20 @@ namespace AchievementsTracker
         private int characters;
         private int journal;
 
+        private bool runInProgress;
         private bool runIsNoGold;
         private int score;
+        private int bombs;
         private bool runIsValid;
         private int levelIdx;
         private int runTime;
         private int stageTime;
+
+        private bool runIsTwoPlayer;
+        private int p1Health;
+        private int p2Health;
+        private int p1HealthAddr;
+        private int p2HealthAddr;
 
         public GameManager(Tracker tracker, MemoryReader memoryReader)
         {
@@ -29,15 +37,29 @@ namespace AchievementsTracker
 
         private void startRun()
         {
-            Log.WriteLine("Run started from Level 1");
-            runIsValid = true;
-            runIsNoGold = true;
+            Log.WriteLine("Run started");
+            runInProgress = true;
+            if (levelIdx == 1)
+            {
+                Log.WriteLine("  from Level 1");
+                runIsValid = true;
+                runIsNoGold = true;
+            }
+            if (bombs < 4)
+            {
+                Log.WriteLine("  with multiple players");
+                runIsTwoPlayer = true;
+                p1HealthAddr = memoryReader.ReadPlayerOneHealthAddr();
+                p2HealthAddr = memoryReader.ReadPlayerTwoHealthAddr();
+            }
         }
 
         private void resetRun()
         {
             Log.WriteLine("Run status reset");
+            runInProgress = false;
             runIsValid = false;
+            runIsTwoPlayer = false;
             tracker.DamselEvent(0);
             tracker.ShoppieEvent(0);
         }
@@ -60,6 +82,16 @@ namespace AchievementsTracker
             }
             score = newScore;
 
+            // Bombs
+            bombs = memoryReader.ReadBombs();
+
+            // Two player hp's
+            if (runIsTwoPlayer)
+            {
+                p1Health = memoryReader.ReadExactMemory(p1HealthAddr);
+                p2Health = memoryReader.ReadExactMemory(p2HealthAddr);
+            }
+
             // Times
             int newRunTime = memoryReader.ReadRunTimeInMilliseconds();
             int newStageTime = memoryReader.ReadStageTimeInMilliseconds();
@@ -80,7 +112,7 @@ namespace AchievementsTracker
 
             // Screen state
             ScreenState newState = (ScreenState)memoryReader.ReadScreenState();
-            if (newState == ScreenState.Running && state == ScreenState.Loading2 && levelIdx == 1)
+            if (newState == ScreenState.Running && state == ScreenState.Loading2 && runInProgress == false)
             {
                 // run started
                 startRun();
@@ -117,6 +149,11 @@ namespace AchievementsTracker
                 {
                     tracker.NoGoldAchieved();
                 }
+                // check for good teamwork
+                if (runIsTwoPlayer && p1Health != 0 && p2Health != 0)
+                {
+                    tracker.TeamworkAchieved();
+                }
 
                 resetRun();
             }
@@ -126,7 +163,7 @@ namespace AchievementsTracker
             if (state == ScreenState.ChooseCharacter && charSelect == 0 && newCharSelect != 0)
             {
                 // Start timer
-                Log.WriteLine("Achievements run started!");
+                Log.WriteLine("Character selected!");
                 tracker.RunStarted();
             }
             charSelect = newCharSelect;

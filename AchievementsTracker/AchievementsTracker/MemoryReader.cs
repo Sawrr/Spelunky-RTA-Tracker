@@ -9,6 +9,8 @@ namespace AchievementsTracker
         public static extern bool ReadProcessMemory(int hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
 
         private int[] SCREEN_STATE = { 0x1384B4, 0x58 };
+        private int[] PLAYER_ONE_HEALTH = { 0x138558, 0x30, 0x280, 0 };
+        private int[] PLAYER_TWO_HEALTH = { 0x138558, 0x30, 0x280, 0x14A4 };
         private int[] CHAR_SELECT = { 0x1384B4, 0x4C, 0x122BEC };
         private int[] DAMSEL_COUNT = { 0x138558, 0x30, 0x280, -0x70 };
         private int[] SHOPPIE_COUNT = { 0x138558, 0x30, 0x280, 0x6CB0 };
@@ -21,6 +23,7 @@ namespace AchievementsTracker
         private int[] STAGE_TIME = { 0x138558, 0x30, 0x280, 0x52BC };
         private int[] LEVEL_IDX = { 0x138558, 0x30, 0x280, -0xC0 };
         private int[] SCORE = { 0x138558, 0x30, 0x280, 0x5298 };
+        private int[] BOMBS = { 0x138558, 0x30, 0x280, 0x10 };
 
         private int processHandle;
         private int baseAddress;
@@ -96,6 +99,13 @@ namespace AchievementsTracker
             return buffer[0];
         }
 
+        public int ReadBombs()
+        {
+            byte[] buffer = new byte[1];
+            ReadMemory(buffer, baseAddress, BOMBS);
+            return buffer[0];
+        }
+
         public byte[] ReadCharacters()
         {
             byte[] buffer = new byte[16 * 4];
@@ -126,6 +136,16 @@ namespace AchievementsTracker
             return ReadMemory(buffer, baseAddress, JOURNAL_TRAPS);
         }
 
+        public int ReadPlayerOneHealthAddr()
+        {
+            return LocateMemory(baseAddress, PLAYER_ONE_HEALTH);
+        }
+
+        public int ReadPlayerTwoHealthAddr()
+        {
+            return LocateMemory(baseAddress, PLAYER_TWO_HEALTH);
+        }
+
         private byte[] ReadMemory(byte[] buffer, int addr, int[] offsets)
         {
             int bytesRead = 0;
@@ -146,6 +166,36 @@ namespace AchievementsTracker
             ReadProcessMemory(processHandle, addr, buffer, buffer.Length, ref bytesRead);
 
             return buffer;
+        }
+
+        private int LocateMemory(int addr, int[] offsets)
+        {
+            int bytesRead = 0;
+
+            // Buffer for next pointer
+            byte[] pointer = new byte[4];
+
+            // Traverse pointer path
+            for (int i = 0; i < offsets.Length - 1; i++)
+            {
+                addr += offsets[i];
+                ReadProcessMemory(processHandle, addr, pointer, pointer.Length, ref bytesRead);
+                addr = BitConverter.ToInt32(pointer, 0);
+            }
+
+            // Read value from final address
+            addr += offsets[offsets.Length - 1];
+
+            return addr;
+        }
+
+        public int ReadExactMemory(int addr)
+        {
+            int bytesRead = 0;
+            byte[] buffer = new byte[1];
+            ReadProcessMemory(processHandle, addr, buffer, buffer.Length, ref bytesRead);
+
+            return buffer[0];
         }
     }
 }
