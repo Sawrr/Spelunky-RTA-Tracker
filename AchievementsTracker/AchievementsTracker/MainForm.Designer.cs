@@ -104,12 +104,12 @@
             // timer
             // 
             this.timer.AutoSize = true;
-            this.timer.Font = new System.Drawing.Font("MS Reference Sans Serif", 38F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timer.Font = new System.Drawing.Font("MS Reference Sans Serif", 37F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timer.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.timer.Location = new System.Drawing.Point(-5, 431);
             this.timer.Name = "timer";
             this.timer.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.timer.Size = new System.Drawing.Size(304, 63);
+            this.timer.Size = new System.Drawing.Size(303, 61);
             this.timer.TabIndex = 6;
             this.timer.Text = "         0.00";
             this.timer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

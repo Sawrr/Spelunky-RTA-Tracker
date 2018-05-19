@@ -239,7 +239,7 @@ namespace AchievementsTracker
             journal = newJournal;
 
             int newPlays = memoryReader.ReadPlays();
-            if (newPlays != plays)
+            if (newPlays != plays && newPlays > 0 && newPlays <= 1000)
             {
                 tracker.PlaysEvent(newPlays);
             }

@@ -70,6 +70,9 @@ namespace AchievementsTracker
             SetDamselCount(0);
             SetShoppieCount(0);
             SetPlaysCount(0);
+
+            // Reset timer
+            timer.Text = FormatTime(0);
         }
 
         private void drawList()
@@ -161,7 +164,7 @@ namespace AchievementsTracker
             if (time < 60 * 1000)
             {
                 // time < 1 minute
-                return String.Format("{0,10:0}.{1:00}", time / 1000, (time % 1000) / 10);
+                return String.Format("{0,9:0}.{1:00}", time / 1000, (time % 1000) / 10);
             }
             else if (time < 60 * 60 * 1000)
             {
@@ -184,6 +187,7 @@ namespace AchievementsTracker
             }
             SpeedlunkyStatus.Text = FormatSplitTime();
             SpeedlunkyStatus.Font = new Font(SpeedlunkyStatus.Font, FontStyle.Bold);
+            Speedlunky.Font = new Font(Speedlunky.Font, FontStyle.Bold);
             todoList.Remove(Speedlunky);
             todoStatusList.Remove(SpeedlunkyStatus);
             doneList.Add(Speedlunky);
@@ -201,6 +205,7 @@ namespace AchievementsTracker
             }
             BigMoneyStatus.Text = FormatSplitTime();
             BigMoneyStatus.Font = new Font(BigMoneyStatus.Font, FontStyle.Bold);
+            BigMoney.Font = new Font(BigMoney.Font, FontStyle.Bold);
             todoList.Remove(BigMoney);
             todoStatusList.Remove(BigMoneyStatus);
             doneList.Add(BigMoney);
@@ -218,6 +223,7 @@ namespace AchievementsTracker
             }
             NoGoldStatus.Text = FormatSplitTime();
             NoGoldStatus.Font = new Font(NoGoldStatus.Font, FontStyle.Bold);
+            NoGold.Font = new Font(NoGold.Font, FontStyle.Bold);
             todoList.Remove(NoGold);
             todoStatusList.Remove(NoGoldStatus);
             doneList.Add(NoGold);
@@ -235,6 +241,7 @@ namespace AchievementsTracker
             }
             TeamworkStatus.Text = FormatSplitTime();
             TeamworkStatus.Font = new Font(TeamworkStatus.Font, FontStyle.Bold);
+            Teamwork.Font = new Font(Teamwork.Font, FontStyle.Bold);
             todoList.Remove(Teamwork);
             todoStatusList.Remove(TeamworkStatus);
             doneList.Add(Teamwork);
@@ -252,6 +259,7 @@ namespace AchievementsTracker
             }
             AddictedStatus.Text = FormatSplitTime();
             AddictedStatus.Font = new Font(AddictedStatus.Font, FontStyle.Bold);
+            Addicted.Font = new Font(Addicted.Font, FontStyle.Bold);
             todoList.Remove(Addicted);
             todoStatusList.Remove(AddictedStatus);
             doneList.Add(Addicted);
@@ -269,6 +277,7 @@ namespace AchievementsTracker
             }
             NineteenStatus.Text = FormatSplitTime();
             NineteenStatus.Font = new Font(NineteenStatus.Font, FontStyle.Bold);
+            Nineteen.Font = new Font(Nineteen.Font, FontStyle.Bold);
             todoList.Remove(Nineteen);
             todoStatusList.Remove(NineteenStatus);
             doneList.Add(Nineteen);
@@ -286,6 +295,7 @@ namespace AchievementsTracker
             }
             JournalStatus.Text = FormatSplitTime();
             JournalStatus.Font = new Font(JournalStatus.Font, FontStyle.Bold);
+            Journal.Font = new Font(Journal.Font, FontStyle.Bold);
             todoList.Remove(Journal);
             todoStatusList.Remove(JournalStatus);
             doneList.Add(Journal);
@@ -303,6 +313,7 @@ namespace AchievementsTracker
             }
             CharactersStatus.Text = FormatSplitTime();
             CharactersStatus.Font = new Font(CharactersStatus.Font, FontStyle.Bold);
+            Characters.Font = new Font(Characters.Font, FontStyle.Bold);
             todoList.Remove(Characters);
             todoStatusList.Remove(CharactersStatus);
             doneList.Add(Characters);
@@ -320,6 +331,7 @@ namespace AchievementsTracker
             }
             CasanovaStatus.Text = FormatSplitTime();
             CasanovaStatus.Font = new Font(CasanovaStatus.Font, FontStyle.Bold);
+            Casanova.Font = new Font(Casanova.Font, FontStyle.Bold);
             todoList.Remove(Casanova);
             todoStatusList.Remove(CasanovaStatus);
             doneList.Add(Casanova);
@@ -337,6 +349,7 @@ namespace AchievementsTracker
             }
             PublicEnemyStatus.Text = FormatSplitTime();
             PublicEnemyStatus.Font = new Font(PublicEnemyStatus.Font, FontStyle.Bold);
+            PublicEnemy.Font = new Font(PublicEnemy.Font, FontStyle.Bold);
             todoList.Remove(PublicEnemy);
             todoStatusList.Remove(PublicEnemyStatus);
             doneList.Add(PublicEnemy);

@@ -86,11 +86,11 @@ namespace AchievementsTracker
             if (!runManager.IsAchievementDone(Achievement.Journal) && runManager.IsRunInProgress())
             {
                 ui.SetJournalStatus(num);
-            }
-            if (num == 114)
-            {
-                ui.FinishJournal();
-                runManager.FinishAchievement(Achievement.Journal);
+                if (num == 114)
+                {
+                    ui.FinishJournal();
+                    runManager.FinishAchievement(Achievement.Journal);
+                }
             }
         }
 
@@ -99,11 +99,11 @@ namespace AchievementsTracker
             if (!runManager.IsAchievementDone(Achievement.Characters) && runManager.IsRunInProgress())
             {
                 ui.SetCharactersStatus(num);
-            }
-            if (num == 16)
-            {
-                ui.FinishCharacters();
-                runManager.FinishAchievement(Achievement.Characters);
+                if (num == 16)
+                {
+                    ui.FinishCharacters();
+                    runManager.FinishAchievement(Achievement.Characters);
+                }
             }
         }
 
@@ -111,11 +111,11 @@ namespace AchievementsTracker
         {
             if (!runManager.IsAchievementDone(Achievement.Casanova) && runManager.IsRunInProgress()) {
                 ui.SetDamselCount(num);
-            }
-            if (num >= 10)
-            {
-                ui.FinishCasanova();
-                runManager.FinishAchievement(Achievement.Casanova);
+                if (num >= 10)
+                {
+                    ui.FinishCasanova();
+                    runManager.FinishAchievement(Achievement.Casanova);
+                }
             }
         }
 
@@ -124,11 +124,11 @@ namespace AchievementsTracker
             if (!runManager.IsAchievementDone(Achievement.PublicEnemy) && runManager.IsRunInProgress())
             {
                 ui.SetShoppieCount(num);
-            }
-            if (num >= 12)
-            {
-                ui.FinishPublicEnemy();
-                runManager.FinishAchievement(Achievement.PublicEnemy);
+                if (num >= 12)
+                {
+                    ui.FinishPublicEnemy();
+                    runManager.FinishAchievement(Achievement.PublicEnemy);
+                }
             }
         }
 
@@ -137,11 +137,11 @@ namespace AchievementsTracker
             if (!runManager.IsAchievementDone(Achievement.Addicted) && runManager.IsRunInProgress())
             {
                 ui.SetPlaysCount(num);
-            }
-            if (num >= 1000)
-            {
-                ui.FinishAddicted();
-                runManager.FinishAchievement(Achievement.Addicted);
+                if (num >= 1000)
+                {
+                    ui.FinishAddicted();
+                    runManager.FinishAchievement(Achievement.Addicted);
+                }
             }
         }
 
