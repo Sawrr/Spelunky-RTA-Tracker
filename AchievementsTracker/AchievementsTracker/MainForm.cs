@@ -42,24 +42,24 @@ namespace AchievementsTracker
             todoList.Add(Speedlunky);
             todoList.Add(BigMoney);
             todoList.Add(NoGold);
+            todoList.Add(Teamwork);
             todoList.Add(Journal);
             todoList.Add(Characters);
             todoList.Add(Casanova);
             todoList.Add(PublicEnemy);
-            todoList.Add(Teamwork);
-            todoList.Add(Nineteen);
             todoList.Add(Addicted);
+            todoList.Add(Nineteen);
 
             todoStatusList.Add(SpeedlunkyStatus);
             todoStatusList.Add(BigMoneyStatus);
             todoStatusList.Add(NoGoldStatus);
+            todoStatusList.Add(TeamworkStatus);
             todoStatusList.Add(JournalStatus);
             todoStatusList.Add(CharactersStatus);
             todoStatusList.Add(CasanovaStatus);
             todoStatusList.Add(PublicEnemyStatus);
-            todoStatusList.Add(TeamworkStatus);
-            todoStatusList.Add(NineteenStatus);
             todoStatusList.Add(AddictedStatus);
+            todoStatusList.Add(NineteenStatus);
 
             drawList();
             drawStatusList();
@@ -78,7 +78,7 @@ namespace AchievementsTracker
         private void drawList()
         {
             int x = 12;
-            int y = 55;
+            int y = 70;
             int dy = 35;
 
             foreach (Label l in doneList)
@@ -99,7 +99,7 @@ namespace AchievementsTracker
         private void drawStatusList()
         {
             int x = 180;
-            int y = 55;
+            int y = 70;
             int dy = 35;
 
             foreach (Label l in doneStatusList)

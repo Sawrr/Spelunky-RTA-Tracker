@@ -56,7 +56,7 @@
             // runningLabel
             // 
             this.runningLabel.AutoSize = true;
-            this.runningLabel.Location = new System.Drawing.Point(60, 36);
+            this.runningLabel.Location = new System.Drawing.Point(60, 27);
             this.runningLabel.Name = "runningLabel";
             this.runningLabel.Size = new System.Drawing.Size(0, 15);
             this.runningLabel.TabIndex = 0;
