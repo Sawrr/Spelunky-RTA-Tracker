@@ -48,7 +48,6 @@ namespace AchievementsTracker
             todoList.Add(Casanova);
             todoList.Add(PublicEnemy);
             todoList.Add(Addicted);
-            todoList.Add(Nineteen);
 
             todoStatusList.Add(SpeedlunkyStatus);
             todoStatusList.Add(BigMoneyStatus);
@@ -59,7 +58,6 @@ namespace AchievementsTracker
             todoStatusList.Add(CasanovaStatus);
             todoStatusList.Add(PublicEnemyStatus);
             todoStatusList.Add(AddictedStatus);
-            todoStatusList.Add(NineteenStatus);
 
             drawList();
             drawStatusList();
@@ -125,9 +123,20 @@ namespace AchievementsTracker
             }
         }
 
-        public void StopTimer()
+        public void StopTimer(long time)
         {
             runTimer.Stop();
+            FinalizeTimer(time);
+        }
+
+        public void FinalizeTimer(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinalizeTimer(time)));
+                return;
+            }
+            timer.Text = FormatTime(time - startTime);
         }
 
         public void UpdateTimer(object sender, EventArgs e)
@@ -137,7 +146,7 @@ namespace AchievementsTracker
                 return;
             }
 
-            long time = DateTimeOffset.Now.ToUnixTimeMilliseconds() - this.startTime;
+            long time = DateTimeOffset.Now.ToUnixTimeMilliseconds() - startTime;
 
             timer.Text = FormatTime(time);
         }
@@ -152,10 +161,9 @@ namespace AchievementsTracker
             runningLabel.Text = value ? "Spelunky is running!" : "Waiting for Spelunky process";
         }
 
-        private string FormatSplitTime()
+        private string FormatSplitTime(long time)
         {
-            long finishTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-            long splitTime = finishTime - startTime;
+            long splitTime = time - startTime;
             return FormatTime(splitTime);
         }
 
@@ -178,14 +186,14 @@ namespace AchievementsTracker
             }
         }
 
-        public void FinishSpeedlunky()
+        public void FinishSpeedlunky(long time)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(FinishSpeedlunky), new object[] { });
+                Invoke(new Action(() => FinishSpeedlunky(time)));
                 return;
             }
-            SpeedlunkyStatus.Text = FormatSplitTime();
+            SpeedlunkyStatus.Text = FormatSplitTime(time);
             SpeedlunkyStatus.Font = new Font(SpeedlunkyStatus.Font, FontStyle.Bold);
             Speedlunky.Font = new Font(Speedlunky.Font, FontStyle.Bold);
             todoList.Remove(Speedlunky);
@@ -196,14 +204,14 @@ namespace AchievementsTracker
             drawStatusList();
         }
 
-        public void FinishBigMoney()
+        public void FinishBigMoney(long time)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(FinishBigMoney), new object[] { });
+                Invoke(new Action(() => FinishBigMoney(time)));
                 return;
             }
-            BigMoneyStatus.Text = FormatSplitTime();
+            BigMoneyStatus.Text = FormatSplitTime(time);
             BigMoneyStatus.Font = new Font(BigMoneyStatus.Font, FontStyle.Bold);
             BigMoney.Font = new Font(BigMoney.Font, FontStyle.Bold);
             todoList.Remove(BigMoney);
@@ -214,14 +222,14 @@ namespace AchievementsTracker
             drawStatusList();
         }
 
-        public void FinishNoGold()
+        public void FinishNoGold(long time)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(FinishNoGold), new object[] { });
+                Invoke(new Action(() => FinishNoGold(time)));
                 return;
             }
-            NoGoldStatus.Text = FormatSplitTime();
+            NoGoldStatus.Text = FormatSplitTime(time);
             NoGoldStatus.Font = new Font(NoGoldStatus.Font, FontStyle.Bold);
             NoGold.Font = new Font(NoGold.Font, FontStyle.Bold);
             todoList.Remove(NoGold);
@@ -232,14 +240,14 @@ namespace AchievementsTracker
             drawStatusList();
         }
 
-        public void FinishTeamwork()
+        public void FinishTeamwork(long time)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(FinishTeamwork), new object[] { });
+                Invoke(new Action(() => FinishTeamwork(time)));
                 return;
             }
-            TeamworkStatus.Text = FormatSplitTime();
+            TeamworkStatus.Text = FormatSplitTime(time);
             TeamworkStatus.Font = new Font(TeamworkStatus.Font, FontStyle.Bold);
             Teamwork.Font = new Font(Teamwork.Font, FontStyle.Bold);
             todoList.Remove(Teamwork);
@@ -250,14 +258,14 @@ namespace AchievementsTracker
             drawStatusList();
         }
 
-        public void FinishAddicted()
+        public void FinishAddicted(long time)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(FinishAddicted), new object[] { });
+                Invoke(new Action(() => FinishAddicted(time)));
                 return;
             }
-            AddictedStatus.Text = FormatSplitTime();
+            AddictedStatus.Text = FormatSplitTime(time);
             AddictedStatus.Font = new Font(AddictedStatus.Font, FontStyle.Bold);
             Addicted.Font = new Font(Addicted.Font, FontStyle.Bold);
             todoList.Remove(Addicted);
@@ -268,32 +276,30 @@ namespace AchievementsTracker
             drawStatusList();
         }
 
-        public void FinishNineteen()
+        public void FinishNineteen(long time, int plays)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(FinishNineteen), new object[] { });
+                Invoke(new Action(() => FinishNineteen(time, plays)));
                 return;
             }
-            NineteenStatus.Text = FormatSplitTime();
-            NineteenStatus.Font = new Font(NineteenStatus.Font, FontStyle.Bold);
-            Nineteen.Font = new Font(Nineteen.Font, FontStyle.Bold);
-            todoList.Remove(Nineteen);
-            todoStatusList.Remove(NineteenStatus);
-            doneList.Add(Nineteen);
-            doneStatusList.Add(NineteenStatus);
-            drawList();
-            drawStatusList();
+
+            int numDeaths = 1000 - plays;
+            int numSeconds = numDeaths * 6;
+
+            long predictedTime = time - startTime + numSeconds * 1000;
+
+            NineteenStatus.Text = FormatTime(predictedTime);
         }
 
-        public void FinishJournal()
+        public void FinishJournal(long time)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(FinishJournal), new object[] { });
+                Invoke(new Action(() => FinishJournal(time)));
                 return;
             }
-            JournalStatus.Text = FormatSplitTime();
+            JournalStatus.Text = FormatSplitTime(time);
             JournalStatus.Font = new Font(JournalStatus.Font, FontStyle.Bold);
             Journal.Font = new Font(Journal.Font, FontStyle.Bold);
             todoList.Remove(Journal);
@@ -304,14 +310,14 @@ namespace AchievementsTracker
             drawStatusList();
         }
 
-        public void FinishCharacters()
+        public void FinishCharacters(long time)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(FinishCharacters), new object[] { });
+                Invoke(new Action(() => FinishCharacters(time)));
                 return;
             }
-            CharactersStatus.Text = FormatSplitTime();
+            CharactersStatus.Text = FormatSplitTime(time);
             CharactersStatus.Font = new Font(CharactersStatus.Font, FontStyle.Bold);
             Characters.Font = new Font(Characters.Font, FontStyle.Bold);
             todoList.Remove(Characters);
@@ -322,14 +328,14 @@ namespace AchievementsTracker
             drawStatusList();
         }
 
-        public void FinishCasanova()
+        public void FinishCasanova(long time)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(FinishCasanova), new object[] { });
+                Invoke(new Action(() => FinishCasanova(time)));
                 return;
             }
-            CasanovaStatus.Text = FormatSplitTime();
+            CasanovaStatus.Text = FormatSplitTime(time);
             CasanovaStatus.Font = new Font(CasanovaStatus.Font, FontStyle.Bold);
             Casanova.Font = new Font(Casanova.Font, FontStyle.Bold);
             todoList.Remove(Casanova);
@@ -340,14 +346,14 @@ namespace AchievementsTracker
             drawStatusList();
         }
 
-        public void FinishPublicEnemy()
+        public void FinishPublicEnemy(long time)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(FinishPublicEnemy), new object[] { });
+                Invoke(new Action(() => FinishPublicEnemy(time)));
                 return;
             }
-            PublicEnemyStatus.Text = FormatSplitTime();
+            PublicEnemyStatus.Text = FormatSplitTime(time);
             PublicEnemyStatus.Font = new Font(PublicEnemyStatus.Font, FontStyle.Bold);
             PublicEnemy.Font = new Font(PublicEnemy.Font, FontStyle.Bold);
             todoList.Remove(PublicEnemy);

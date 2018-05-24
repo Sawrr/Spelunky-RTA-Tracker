@@ -32,15 +32,15 @@ namespace AchievementsTracker
             return state == RunState.InProgress;
         }
 
-        public void FinishAchievement(Achievement ach)
+        public void FinishAchievement(Achievement ach, long time, int plays)
         {
             int idx = (int)ach;
             if (!achievements[idx])
             {
                 achievements[idx] = true;
                 Log.WriteLine("Achievement finished: " + ach);
-                checkForAllAchievements();
-                checkForNineteenAchievements();
+                checkForAllAchievements(time);
+                checkForNineteenAchievements(time, plays);
             }
         }
 
@@ -52,7 +52,7 @@ namespace AchievementsTracker
             }
         }
 
-        private void checkForAllAchievements()
+        private void checkForAllAchievements(long time)
         {
             for (int i = 0; i < achievements.Length; i++)
             {
@@ -65,7 +65,7 @@ namespace AchievementsTracker
             // Run complete
             Log.WriteLine("Achievements run completed");
             state = RunState.Done;
-            tracker.RunCompleted();
+            tracker.RunCompleted(time);
         }
 
         public bool isNineteenDone()
@@ -73,7 +73,7 @@ namespace AchievementsTracker
             return nineteenDone;
         }
 
-        private void checkForNineteenAchievements()
+        private void checkForNineteenAchievements(long time, int plays)
         {
             if (nineteenDone) return;
 
@@ -88,7 +88,7 @@ namespace AchievementsTracker
             // Run complete
             Log.WriteLine("19/20 run completed");
             nineteenDone = true;
-            tracker.NineteenAchieved();
+            tracker.NineteenAchieved(time, plays);
         }
     }
 }

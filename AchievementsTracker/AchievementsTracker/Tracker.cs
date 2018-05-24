@@ -35,112 +35,112 @@ namespace AchievementsTracker
             runManager.StartRun();
         }
 
-        public void RunCompleted()
+        public void RunCompleted(long time)
         {
-            ui.StopTimer();
+            ui.StopTimer(time);
         }
 
-        public void NineteenAchieved()
+        public void NineteenAchieved(long time, int plays)
         {
-                ui.FinishNineteen();
+                ui.FinishNineteen(time, plays);
         }
 
-        public void SpeedlunkyAchieved()
+        public void SpeedlunkyAchieved(long time, int plays)
         {
             if (!runManager.IsAchievementDone(Achievement.Speedlunky) && runManager.IsRunInProgress())
             {
-                ui.FinishSpeedlunky();
-                runManager.FinishAchievement(Achievement.Speedlunky);
+                ui.FinishSpeedlunky(time);
+                runManager.FinishAchievement(Achievement.Speedlunky, time, plays);
             }
         }
 
-        public void BigMoneyAchieved()
+        public void BigMoneyAchieved(long time, int plays)
         {
             if (!runManager.IsAchievementDone(Achievement.BigMoney) && runManager.IsRunInProgress())
             {
-                ui.FinishBigMoney();
-                runManager.FinishAchievement(Achievement.BigMoney);
+                ui.FinishBigMoney(time);
+                runManager.FinishAchievement(Achievement.BigMoney, time, plays);
             }
         }
 
-        public void NoGoldAchieved()
+        public void NoGoldAchieved(long time, int plays)
         {
             if (!runManager.IsAchievementDone(Achievement.NoGold) && runManager.IsRunInProgress())
             {
-                ui.FinishNoGold();
-                runManager.FinishAchievement(Achievement.NoGold);
+                ui.FinishNoGold(time);
+                runManager.FinishAchievement(Achievement.NoGold, time, plays);
             }
         }
 
-        public void TeamworkAchieved()
+        public void TeamworkAchieved(long time, int plays)
         {
             if (!runManager.IsAchievementDone(Achievement.Teamwork) && runManager.IsRunInProgress())
             {
-                ui.FinishTeamwork();
-                runManager.FinishAchievement(Achievement.Teamwork);
+                ui.FinishTeamwork(time);
+                runManager.FinishAchievement(Achievement.Teamwork, time, plays);
             }
         }
 
-        public void JournalEvent(int num)
+        public void JournalEvent(int num, long time, int plays)
         {
             if (!runManager.IsAchievementDone(Achievement.Journal) && runManager.IsRunInProgress())
             {
                 ui.SetJournalStatus(num);
                 if (num == 114)
                 {
-                    ui.FinishJournal();
-                    runManager.FinishAchievement(Achievement.Journal);
+                    ui.FinishJournal(time);
+                    runManager.FinishAchievement(Achievement.Journal, time, plays);
                 }
             }
         }
 
-        public void CharactersEvent(int num)
+        public void CharactersEvent(int num, long time, int plays)
         {
             if (!runManager.IsAchievementDone(Achievement.Characters) && runManager.IsRunInProgress())
             {
                 ui.SetCharactersStatus(num);
                 if (num == 16)
                 {
-                    ui.FinishCharacters();
-                    runManager.FinishAchievement(Achievement.Characters);
+                    ui.FinishCharacters(time);
+                    runManager.FinishAchievement(Achievement.Characters, time, plays);
                 }
             }
         }
 
-        public void DamselEvent(int num)
+        public void DamselEvent(int num, long time, int plays)
         {
             if (!runManager.IsAchievementDone(Achievement.Casanova) && runManager.IsRunInProgress()) {
                 ui.SetDamselCount(num);
                 if (num >= 10)
                 {
-                    ui.FinishCasanova();
-                    runManager.FinishAchievement(Achievement.Casanova);
+                    ui.FinishCasanova(time);
+                    runManager.FinishAchievement(Achievement.Casanova, time, plays);
                 }
             }
         }
 
-        public void ShoppieEvent(int num)
+        public void ShoppieEvent(int num, long time, int plays)
         {
             if (!runManager.IsAchievementDone(Achievement.PublicEnemy) && runManager.IsRunInProgress())
             {
                 ui.SetShoppieCount(num);
                 if (num >= 12)
                 {
-                    ui.FinishPublicEnemy();
-                    runManager.FinishAchievement(Achievement.PublicEnemy);
+                    ui.FinishPublicEnemy(time);
+                    runManager.FinishAchievement(Achievement.PublicEnemy, time, plays);
                 }
             }
         }
 
-        public void PlaysEvent(int num)
+        public void PlaysEvent(int num, long time)
         {
             if (!runManager.IsAchievementDone(Achievement.Addicted) && runManager.IsRunInProgress())
             {
                 ui.SetPlaysCount(num);
                 if (num >= 1000)
                 {
-                    ui.FinishAddicted();
-                    runManager.FinishAchievement(Achievement.Addicted);
+                    ui.FinishAddicted(time);
+                    runManager.FinishAchievement(Achievement.Addicted, time, num);
                 }
             }
         }

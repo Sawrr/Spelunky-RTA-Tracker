@@ -254,17 +254,17 @@
             // 
             this.Nineteen.AutoSize = true;
             this.Nineteen.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Nineteen.Location = new System.Drawing.Point(12, 370);
+            this.Nineteen.Location = new System.Drawing.Point(12, 385);
             this.Nineteen.Name = "Nineteen";
-            this.Nineteen.Size = new System.Drawing.Size(56, 20);
+            this.Nineteen.Size = new System.Drawing.Size(159, 20);
             this.Nineteen.TabIndex = 22;
-            this.Nineteen.Text = "19/20";
+            this.Nineteen.Text = "Extrapolated Time";
             // 
             // NineteenStatus
             // 
             this.NineteenStatus.AutoSize = true;
             this.NineteenStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NineteenStatus.Location = new System.Drawing.Point(218, 370);
+            this.NineteenStatus.Location = new System.Drawing.Point(190, 385);
             this.NineteenStatus.Name = "NineteenStatus";
             this.NineteenStatus.Size = new System.Drawing.Size(0, 20);
             this.NineteenStatus.TabIndex = 23;

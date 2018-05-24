@@ -61,12 +61,14 @@ namespace AchievementsTracker
             runInProgress = false;
             runIsValid = false;
             runIsTwoPlayer = false;
-            tracker.DamselEvent(0);
-            tracker.ShoppieEvent(0);
+            tracker.DamselEvent(0, 0, 0);
+            tracker.ShoppieEvent(0, 0, 0);
         }
 
         public void update()
-        {            
+        {
+            long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            
             // gold check
             int newScore = memoryReader.ReadScore();
             if (newScore != score && state == ScreenState.Running)
@@ -78,7 +80,7 @@ namespace AchievementsTracker
                 }
                 if (newScore > 500000)
                 {
-                    tracker.BigMoneyAchieved();
+                    tracker.BigMoneyAchieved(time, plays);
                 }
             }
             score = newScore;
@@ -138,22 +140,22 @@ namespace AchievementsTracker
                 // check for speedlunky
                 if (runIsValid && runTime < 8 * 60 * 1000)
                 {
-                    tracker.SpeedlunkyAchieved();
+                    tracker.SpeedlunkyAchieved(time, plays);
                 }
                 // check for big money
                 if (score >= 500000)
                 {
-                    tracker.BigMoneyAchieved();
+                    tracker.BigMoneyAchieved(time, plays);
                 }
                 // check for no gold
                 if (runIsValid && runIsNoGold)
                 {
-                    tracker.NoGoldAchieved();
+                    tracker.NoGoldAchieved(time, plays);
                 }
                 // check for good teamwork
-                if (runIsTwoPlayer && p1Health != 0 && p2Health != 0)
+                if (runIsValid && runIsTwoPlayer && p1Health != 0 && p2Health != 0)
                 {
-                    tracker.TeamworkAchieved();
+                    tracker.TeamworkAchieved(time, plays);
                 }
 
                 resetRun();
@@ -172,14 +174,14 @@ namespace AchievementsTracker
             int newDamsels = memoryReader.ReadDamselCount();
             if (newDamsels != damselCount && state == ScreenState.Running)
             {
-                tracker.DamselEvent(newDamsels);
+                tracker.DamselEvent(newDamsels, time, plays);
             }
             damselCount = newDamsels;
 
             int newShoppies = memoryReader.ReadShoppieCount();
             if (newShoppies != shoppieCount && state == ScreenState.Running)
             {
-                tracker.ShoppieEvent(newShoppies);
+                tracker.ShoppieEvent(newShoppies, time, plays);
             }
             shoppieCount = newShoppies;
 
@@ -194,7 +196,7 @@ namespace AchievementsTracker
             }
             if (newChars != characters && newChars > 0 && newChars <= 16)
             {
-                tracker.CharactersEvent(newChars);
+                tracker.CharactersEvent(newChars, time, plays);
             }
             characters = newChars;
 
@@ -234,14 +236,14 @@ namespace AchievementsTracker
 
             if (newJournal != journal && newJournal > 0 && newJournal <= 144)
             {
-                tracker.JournalEvent(newJournal);
+                tracker.JournalEvent(newJournal, time, plays);
             }
             journal = newJournal;
 
             int newPlays = memoryReader.ReadPlays();
             if (newPlays != plays && newPlays > 0 && newPlays <= 1000)
             {
-                tracker.PlaysEvent(newPlays);
+                tracker.PlaysEvent(newPlays, time);
             }
             plays = newPlays;
         }
