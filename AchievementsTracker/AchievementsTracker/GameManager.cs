@@ -103,8 +103,12 @@ namespace AchievementsTracker
                 // Filter out beginning of olmec, yama cutscenes
                 if (!((levelIdx == 20 || levelIdx == 16) && stageTime < 500))
                 {
-                    // Insta death
-                    resetRun();
+                    // Filter out death of P1 in two player games
+                    if (!(runIsTwoPlayer && p2Health > 0))
+                    {
+                        // Insta death
+                        resetRun();
+                    }
                 }
             }
             runTime = newRunTime;
@@ -172,14 +176,14 @@ namespace AchievementsTracker
             charSelect = newCharSelect;
 
             int newDamsels = memoryReader.ReadDamselCount();
-            if (newDamsels != damselCount && state == ScreenState.Running)
+            if (newDamsels != damselCount && newDamsels != 0 && state == ScreenState.Running)
             {
                 tracker.DamselEvent(newDamsels, time, plays);
             }
             damselCount = newDamsels;
 
             int newShoppies = memoryReader.ReadShoppieCount();
-            if (newShoppies != shoppieCount && state == ScreenState.Running)
+            if (newShoppies != shoppieCount && newShoppies != 0 && state == ScreenState.Running)
             {
                 tracker.ShoppieEvent(newShoppies, time, plays);
             }
