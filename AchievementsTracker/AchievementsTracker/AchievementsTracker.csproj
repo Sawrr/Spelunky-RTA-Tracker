@@ -66,6 +66,12 @@
   <ItemGroup>
     <Compile Include="Achievement.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="ImgForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImgForm.Designer.cs">
+      <DependentUpon>ImgForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Log.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -81,6 +87,9 @@
     <Compile Include="ScreenState.cs" />
     <Compile Include="SpelunkyProcessListener.cs" />
     <Compile Include="Tracker.cs" />
+    <EmbeddedResource Include="ImgForm.resx">
+      <DependentUpon>ImgForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +118,128 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="images\traps\Trap_13.png" />
+    <None Include="images\traps\Trap_12.png" />
+    <None Include="images\traps\Trap_11.png" />
+    <None Include="images\traps\Trap_10.png" />
+    <None Include="images\traps\Trap_9.png" />
+    <None Include="images\traps\Trap_8.png" />
+    <None Include="images\traps\Trap_7.png" />
+    <None Include="images\traps\Trap_6.png" />
+    <None Include="images\traps\Trap_5.png" />
+    <None Include="images\traps\Trap_4.png" />
+    <None Include="images\traps\Trap_3.png" />
+    <None Include="images\traps\Trap_2.png" />
+    <None Include="images\traps\Trap_1.png" />
+    <None Include="images\traps\Trap_0.png" />
+    <None Include="images\monsters\Mon_55.png" />
+    <None Include="images\monsters\Mon_54.png" />
+    <None Include="images\monsters\Mon_53.png" />
+    <None Include="images\monsters\Mon_52.png" />
+    <None Include="images\monsters\Mon_51.png" />
+    <None Include="images\monsters\Mon_50.png" />
+    <None Include="images\monsters\Mon_49.png" />
+    <None Include="images\monsters\Mon_48.png" />
+    <None Include="images\monsters\Mon_47.png" />
+    <None Include="images\monsters\Mon_46.png" />
+    <None Include="images\monsters\Mon_45.png" />
+    <None Include="images\monsters\Mon_44.png" />
+    <None Include="images\monsters\Mon_43.png" />
+    <None Include="images\monsters\Mon_42.png" />
+    <None Include="images\monsters\Mon_41.png" />
+    <None Include="images\monsters\Mon_40.png" />
+    <None Include="images\monsters\Mon_39.png" />
+    <None Include="images\monsters\Mon_38.png" />
+    <None Include="images\monsters\Mon_37.png" />
+    <None Include="images\monsters\Mon_36.png" />
+    <None Include="images\monsters\Mon_35.png" />
+    <None Include="images\monsters\Mon_34.png" />
+    <None Include="images\monsters\Mon_33.png" />
+    <None Include="images\monsters\Mon_32.png" />
+    <None Include="images\monsters\Mon_31.png" />
+    <None Include="images\monsters\Mon_30.png" />
+    <None Include="images\monsters\Mon_29.png" />
+    <None Include="images\monsters\Mon_28.png" />
+    <None Include="images\monsters\Mon_27.png" />
+    <None Include="images\monsters\Mon_26.png" />
+    <None Include="images\monsters\Mon_25.png" />
+    <None Include="images\monsters\Mon_24.png" />
+    <None Include="images\monsters\Mon_23.png" />
+    <None Include="images\monsters\Mon_22.png" />
+    <None Include="images\monsters\Mon_21.png" />
+    <None Include="images\monsters\Mon_20.png" />
+    <None Include="images\monsters\Mon_19.png" />
+    <None Include="images\monsters\Mon_18.png" />
+    <None Include="images\monsters\Mon_17.png" />
+    <None Include="images\monsters\Mon_16.png" />
+    <None Include="images\monsters\Mon_15.png" />
+    <None Include="images\monsters\Mon_14.png" />
+    <None Include="images\monsters\Mon_13.png" />
+    <None Include="images\monsters\Mon_12.png" />
+    <None Include="images\monsters\Mon_11.png" />
+    <None Include="images\monsters\Mon_10.png" />
+    <None Include="images\monsters\Mon_9.png" />
+    <None Include="images\monsters\Mon_8.png" />
+    <None Include="images\monsters\Mon_7.png" />
+    <None Include="images\monsters\Mon_6.png" />
+    <None Include="images\monsters\Mon_5.png" />
+    <None Include="images\monsters\Mon_4.png" />
+    <None Include="images\monsters\Mon_3.png" />
+    <None Include="images\monsters\Mon_2.png" />
+    <None Include="images\monsters\Mon_1.png" />
+    <None Include="images\monsters\Mon_0.png" />
+    <None Include="images\items\Item_33.png" />
+    <None Include="images\items\Item_32.png" />
+    <None Include="images\items\Item_31.png" />
+    <None Include="images\items\Item_30.png" />
+    <None Include="images\items\Item_29.png" />
+    <None Include="images\items\Item_28.png" />
+    <None Include="images\items\Item_27.png" />
+    <None Include="images\items\Item_26.png" />
+    <None Include="images\items\Item_25.png" />
+    <None Include="images\items\Item_24.png" />
+    <None Include="images\items\Item_23.png" />
+    <None Include="images\items\Item_22.png" />
+    <None Include="images\items\Item_21.png" />
+    <None Include="images\items\Item_20.png" />
+    <None Include="images\items\Item_19.png" />
+    <None Include="images\items\Item_18.png" />
+    <None Include="images\items\Item_17.png" />
+    <None Include="images\items\Item_16.png" />
+    <None Include="images\items\Item_15.png" />
+    <None Include="images\items\Item_14.png" />
+    <None Include="images\items\Item_13.png" />
+    <None Include="images\items\Item_12.png" />
+    <None Include="images\items\Item_11.png" />
+    <None Include="images\items\Item_10.png" />
+    <None Include="images\items\Item_9.png" />
+    <None Include="images\items\Item_8.png" />
+    <None Include="images\items\Item_7.png" />
+    <None Include="images\items\Item_6.png" />
+    <None Include="images\items\Item_5.png" />
+    <None Include="images\items\Item_4.png" />
+    <None Include="images\items\Item_3.png" />
+    <None Include="images\items\Item_2.png" />
+    <None Include="images\items\Item_1.png" />
+    <None Include="images\items\Item_0.png" />
+    <None Include="Resources\0.bmp" />
+    <None Include="images\journal\0.png" />
+    <None Include="images\characters\Char_15.png" />
+    <None Include="images\characters\Char_14.png" />
+    <None Include="images\characters\Char_13.png" />
+    <None Include="images\characters\Char_12.png" />
+    <None Include="images\characters\Char_11.png" />
+    <None Include="images\characters\Char_10.png" />
+    <None Include="images\characters\Char_9.png" />
+    <None Include="images\characters\Char_8.png" />
+    <None Include="images\characters\Char_7.png" />
+    <None Include="images\characters\Char_6.png" />
+    <None Include="images\characters\Char_5.png" />
+    <None Include="images\characters\Char_4.png" />
+    <None Include="images\characters\Char_3.png" />
+    <None Include="images\characters\Char_2.png" />
+    <None Include="images\characters\Char_1.png" />
+    <None Include="images\characters\Char_0.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

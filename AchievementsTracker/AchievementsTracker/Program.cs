@@ -34,13 +34,18 @@ namespace AchievementsTracker
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Create form
+            // Create forms
             MainForm form = new MainForm();
-            
+            ImgForm imageForm = new ImgForm();
+
             // Create tracker thread
             Thread trackerThread = new Thread(() => new Tracker(form).Main());
             trackerThread.IsBackground = true;
             trackerThread.Start();
+
+            // Create image thread
+            Thread imageThread = new Thread(() => Application.Run(imageForm));
+            imageThread.Start();
 
             Application.Run(form);
         }
