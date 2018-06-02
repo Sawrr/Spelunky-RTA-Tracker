@@ -17,13 +17,15 @@ namespace AchievementsTracker
         private static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
         private MainForm ui;
+        private ImgForm unlockables;
         private Process spelunky;
         private bool running;
         private RunManager runManager;
 
-        public Tracker(MainForm form)
+        public Tracker(MainForm form, ImgForm imgForm)
         {
             ui = form;
+            unlockables = imgForm;
 
             // create run manager
             runManager = new RunManager(this);
@@ -94,11 +96,12 @@ namespace AchievementsTracker
             }
         }
 
-        public void CharactersEvent(int num, long time, int plays)
+        public void CharactersEvent(int num, long time, int plays, byte[] chars)
         {
             if (!runManager.IsAchievementDone(Achievement.Characters) && runManager.IsRunInProgress())
             {
                 ui.SetCharactersStatus(num);
+                unlockables.UpdateCharacters(chars);
                 if (num == 16)
                 {
                     ui.FinishCharacters(time);

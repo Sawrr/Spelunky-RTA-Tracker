@@ -202,7 +202,7 @@ namespace AchievementsTracker
             }
             if (newChars != characters && newChars > 0 && newChars <= 16)
             {
-                tracker.CharactersEvent(newChars, time, plays);
+                tracker.CharactersEvent(newChars, time, plays, chars);
             }
             characters = newChars;
 

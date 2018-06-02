@@ -36,15 +36,15 @@ namespace AchievementsTracker
 
             // Create forms
             MainForm form = new MainForm();
-            ImgForm imageForm = new ImgForm();
+            ImgForm imgForm = new ImgForm();
 
             // Create tracker thread
-            Thread trackerThread = new Thread(() => new Tracker(form).Main());
+            Thread trackerThread = new Thread(() => new Tracker(form, imgForm).Main());
             trackerThread.IsBackground = true;
             trackerThread.Start();
 
             // Create image thread
-            Thread imageThread = new Thread(() => Application.Run(imageForm));
+            Thread imageThread = new Thread(() => Application.Run(imgForm));
             imageThread.Start();
 
             Application.Run(form);

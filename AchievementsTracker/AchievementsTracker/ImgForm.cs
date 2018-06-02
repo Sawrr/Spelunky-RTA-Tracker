@@ -16,5 +16,25 @@ namespace AchievementsTracker
         {
             InitializeComponent();
         }
+
+        public void UpdateCharacters(byte[] chars)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => UpdateCharacters(chars)));
+                return;
+            }
+            
+            // TODO
+            for (int i = 0; i < 16; i++)
+            {
+                if (chars[4 * i] == 1)
+                {
+                    string controlName = "c" + i;
+                    Control picBox = Controls.Find(controlName, false)[0];
+                    picBox.Hide();
+                }
+            }
+        }
     }
 }
