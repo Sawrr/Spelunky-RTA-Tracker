@@ -145,6 +145,11 @@ namespace AchievementsTracker
             }
         }
 
+        public void TunnelManEvent(string status)
+        {
+            ui.SetTunnelManStatus(status);
+        }
+
         public void Main()
         {
             ui.SetSpelunkyRunning(false);

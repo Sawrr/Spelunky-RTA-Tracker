@@ -30,6 +30,8 @@ namespace AchievementsTracker
         private int p1HealthAddr;
         private int p2HealthAddr;
 
+        private int tunnelManRemaining;
+
         public GameManager(Tracker tracker, MemoryReader memoryReader)
         {
             this.tracker = tracker;
@@ -68,7 +70,7 @@ namespace AchievementsTracker
         public void update()
         {
             long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-            
+
             // gold check
             int newScore = memoryReader.ReadScore();
             if (newScore != score && state == ScreenState.Running)
@@ -250,6 +252,69 @@ namespace AchievementsTracker
                 tracker.PlaysEvent(newPlays, time);
             }
             plays = newPlays;
+
+            // Tunnel man progress
+            int chapter = memoryReader.ReadTunnelChapter();
+            int newRemaining = memoryReader.ReadTunnelRemaining();
+            if (newRemaining != tunnelManRemaining)
+            {
+                // Determine which deliverable is next
+                if (chapter == 1)
+                {
+                    if (newRemaining == 2)
+                    {
+                        // rope
+                        tracker.TunnelManEvent("1 Rope");
+                    }
+                    else if (newRemaining == 1)
+                    {
+                        // 10k
+                        tracker.TunnelManEvent("10k");
+                    }
+                }
+                else if (chapter == 2)
+                {
+                    // 2 bombs
+                    tracker.TunnelManEvent("2 Bombs");
+                }
+                else if (chapter == 3)
+                {
+                    if (newRemaining == 2)
+                    {
+                        // 2 ropes
+                        tracker.TunnelManEvent("2 Ropes");
+                    }
+                    else if (newRemaining == 1)
+                    {
+                        // shotgun
+                        tracker.TunnelManEvent("Shotgun");
+                    }
+                }
+                else if (chapter == 4)
+                {
+                    // 3 bombs
+                    tracker.TunnelManEvent("3 Bombs");
+                }
+                else if (chapter == 5)
+                {
+                    if (newRemaining == 2)
+                    {
+                        // 3 ropes
+                        tracker.TunnelManEvent("3 Ropes");
+                    }
+                    else if (newRemaining == 1)
+                    {
+                        // key
+                        tracker.TunnelManEvent("Key");
+                    }
+                }
+                else if (chapter == 6)
+                {
+                    // done
+                    tracker.TunnelManEvent("Done");
+                }
+            }
+            tunnelManRemaining = newRemaining;
         }
     }
 }

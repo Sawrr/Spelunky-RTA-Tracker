@@ -51,12 +51,14 @@
             this.AddictedStatus = new System.Windows.Forms.Label();
             this.Nineteen = new System.Windows.Forms.Label();
             this.NineteenStatus = new System.Windows.Forms.Label();
+            this.TunnelManStatus = new System.Windows.Forms.Label();
+            this.Next = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // runningLabel
             // 
             this.runningLabel.AutoSize = true;
-            this.runningLabel.Location = new System.Drawing.Point(60, 27);
+            this.runningLabel.Location = new System.Drawing.Point(151, 9);
             this.runningLabel.Name = "runningLabel";
             this.runningLabel.Size = new System.Drawing.Size(0, 15);
             this.runningLabel.TabIndex = 0;
@@ -269,6 +271,24 @@
             this.NineteenStatus.Size = new System.Drawing.Size(0, 20);
             this.NineteenStatus.TabIndex = 23;
             // 
+            // TunnelManStatus
+            // 
+            this.TunnelManStatus.AutoSize = true;
+            this.TunnelManStatus.Location = new System.Drawing.Point(63, 9);
+            this.TunnelManStatus.Name = "TunnelManStatus";
+            this.TunnelManStatus.Size = new System.Drawing.Size(51, 15);
+            this.TunnelManStatus.TabIndex = 24;
+            this.TunnelManStatus.Text = "1 Bomb";
+            // 
+            // Next
+            // 
+            this.Next.AutoSize = true;
+            this.Next.Location = new System.Drawing.Point(12, 9);
+            this.Next.Name = "Next";
+            this.Next.Size = new System.Drawing.Size(38, 15);
+            this.Next.TabIndex = 25;
+            this.Next.Text = "Next:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -276,6 +296,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(304, 497);
+            this.Controls.Add(this.Next);
+            this.Controls.Add(this.TunnelManStatus);
             this.Controls.Add(this.NineteenStatus);
             this.Controls.Add(this.Nineteen);
             this.Controls.Add(this.AddictedStatus);
@@ -336,6 +358,8 @@
         private System.Windows.Forms.Label AddictedStatus;
         private System.Windows.Forms.Label Nineteen;
         private System.Windows.Forms.Label NineteenStatus;
+        private System.Windows.Forms.Label TunnelManStatus;
+        private System.Windows.Forms.Label Next;
     }
 }
 

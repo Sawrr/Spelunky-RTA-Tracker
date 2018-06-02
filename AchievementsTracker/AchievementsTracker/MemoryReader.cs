@@ -25,6 +25,8 @@ namespace AchievementsTracker
         private int[] SCORE = { 0x138558, 0x30, 0x280, 0x5298 };
         private int[] BOMBS = { 0x138558, 0x30, 0x280, 0x10 };
         private int[] PLAYS = { 0x1384B4, 0x4459C8 };
+        private int[] TUNNEL_CHAPTER = { 0x1384B4, 0x445BE4 };
+        private int[] TUNNEL_REMAINING = { 0x1384B4, 0x445BE8 };
 
         private int processHandle;
         private int baseAddress;
@@ -33,6 +35,20 @@ namespace AchievementsTracker
         {
             this.processHandle = processHandle;
             this.baseAddress = baseAddress;
+        }
+
+        public int ReadTunnelChapter()
+        {
+            byte[] buffer = new byte[1];
+            ReadMemory(buffer, baseAddress, TUNNEL_CHAPTER);
+            return buffer[0];
+        }
+
+        public int ReadTunnelRemaining()
+        {
+            byte[] buffer = new byte[1];
+            ReadMemory(buffer, baseAddress, TUNNEL_REMAINING);
+            return buffer[0];
         }
 
         public int ReadLevelIndex()

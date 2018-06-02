@@ -158,7 +158,7 @@ namespace AchievementsTracker
                 Invoke(new Action<bool>(SetSpelunkyRunning), new object[] { value });
                 return;
             }
-            runningLabel.Text = value ? "Spelunky is running!" : "Waiting for Spelunky process";
+            runningLabel.Text = value ? "Running" : "Waiting for game";
         }
 
         private string FormatSplitTime(long time)
@@ -414,6 +414,16 @@ namespace AchievementsTracker
                 return;
             }
             AddictedStatus.Text = String.Format("{0,5} {1}", num, "/ 1000");
+        }
+
+        public void SetTunnelManStatus(string status)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<string>(SetTunnelManStatus), new object[] { status });
+                return;
+            }
+            TunnelManStatus.Text = status;
         }
     }
 }
