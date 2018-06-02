@@ -4,6 +4,8 @@
 
 The AA run has been largely inaccessible until now due to the need for a fresh steam account as well as a tedious death grind. This tracker removes the need for a fresh steam account and provides an option to avoid unnecessary death grinding by extrapolating the time you would finish the run.
 
+<img src="https://github.com/Sawrr/Spelunky-AllAchievements/blob/master/tracker.PNG" width=250px>
+
 ## Achievements
 The 20 achievements can be covered by a subset of 9:
 1. Speedlunky
@@ -21,8 +23,6 @@ The tracker displays the progress toward these achievements, and timestamps them
 ## Extrapolation
 The Addicted achievement is the most time-consuming achievement and some runners may not wish to death grind for up to 90 minutes. As an alternative, when every achievement except Addicted is unlocked the tracker will extrapolate the run completion time using a rate of 6 seconds per death. `extrapolated time = current time + 6 * (1000 - plays)`
 
-This time can be submitted on mossranking as a completed run, so long as it is not a world record.
-
 ## Note about Good Teamwork
 The tracker only observes the health of Players 1 and 2 for the Good Teamwork achievement. Using more than one extra spelunker may cause the tracker to not consider the achievement completed if either P1 or P2 is dead when the run ends. Use only two spelunkers for the achievement to be properly tracked.
 
@@ -32,4 +32,4 @@ The tracker only observes the health of Players 1 and 2 for the Good Teamwork ac
 - Download here if you need it: https://www.microsoft.com/net/download/dotnet-framework-runtime
 
 ## Download
-[Download the beta](https://github.com/Sawrr/Spelunky-AllAchievements/releases/download/1.3.0/AchievementsTracker.exe) or check the Releases tab
+[Download the beta](https://github.com/Sawrr/Spelunky-AllAchievements/releases/download/1.3.1/AchievementsTracker.exe) or check the Releases tab
