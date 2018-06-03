@@ -45,6 +45,7 @@ namespace AchievementsTracker
 
             // Create image thread
             Thread imageThread = new Thread(() => Application.Run(imgForm));
+            imageThread.IsBackground = true;
             imageThread.Start();
 
             Application.Run(form);
