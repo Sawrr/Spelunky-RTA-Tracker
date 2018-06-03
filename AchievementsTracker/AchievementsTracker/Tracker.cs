@@ -83,11 +83,14 @@ namespace AchievementsTracker
             }
         }
 
-        public void JournalEvent(int num, long time, int plays)
+        public void JournalEvent(int num, long time, int plays, byte[] mons, byte[] items, byte[] traps)
         {
             if (!runManager.IsAchievementDone(Achievement.Journal) && runManager.IsRunInProgress())
             {
                 ui.SetJournalStatus(num);
+                unlockables.UpdateMonsters(mons);
+                unlockables.UpdateItems(items);
+                unlockables.UpdateTraps(traps);
                 if (num == 114)
                 {
                     ui.FinishJournal(time);

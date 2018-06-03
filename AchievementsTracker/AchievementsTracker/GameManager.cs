@@ -242,7 +242,7 @@ namespace AchievementsTracker
 
             if (newJournal != journal && newJournal > 0 && newJournal <= 144)
             {
-                tracker.JournalEvent(newJournal, time, plays);
+                tracker.JournalEvent(newJournal, time, plays, journalMonsters, journalItems, journalTraps);
             }
             journal = newJournal;
 
