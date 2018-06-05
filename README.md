@@ -23,6 +23,9 @@ The tracker displays the progress toward these achievements, and timestamps them
 ## Extrapolation
 The Addicted achievement is the most time-consuming achievement and some runners may not wish to death grind for up to 90 minutes. As an alternative, when every achievement except Addicted is unlocked the tracker will extrapolate the run completion time using a rate of 6 seconds per death. `extrapolated time = current time + 6 * (1000 - plays)`
 
+## Visual Tracker
+The tracker includes a window with icons for all of the characters and journal entries, which disappear upon being unlocked. The purpose of the included visual is to eliminate the need to run separate programs to have visual tracking aids.
+
 ## Note about Good Teamwork
 The tracker only observes the health of Players 1 and 2 for the Good Teamwork achievement. Using more than one extra spelunker may cause the tracker to not consider the achievement completed if either P1 or P2 is dead when the run ends. Use only two spelunkers for the achievement to be properly tracked.
 
@@ -32,4 +35,4 @@ The tracker only observes the health of Players 1 and 2 for the Good Teamwork ac
 - Download here if you need it: https://www.microsoft.com/net/download/dotnet-framework-runtime
 
 ## Download
-[Download the beta](https://github.com/Sawrr/Spelunky-AllAchievements/releases/download/1.4.0/AchievementsTracker.exe) or check the Releases tab
+[Download the beta](https://github.com/Sawrr/Spelunky-AllAchievements/releases/download/1.5.0/AchievementsTracker.exe) or check the Releases tab
