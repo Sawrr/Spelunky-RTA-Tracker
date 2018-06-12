@@ -25,7 +25,18 @@ namespace AchievementsTracker
         {
             InitializeComponent();
 
+            Reset();
+        }
+
+        public void Reset()
+        {
+            startTime = 0;
+            
             // Init timer
+            if (runTimer != null)
+            {
+                runTimer.Stop();
+            }
             runTimer = new Timer();
             runTimer.Tick += new EventHandler(UpdateTimer);
             runTimer.Interval = 50;
@@ -62,12 +73,32 @@ namespace AchievementsTracker
             drawList();
             drawStatusList();
 
+            // Refresh labels
+            Journal.Font = new Font(Journal.Font, FontStyle.Regular);
+            Characters.Font = new Font(Characters.Font, FontStyle.Regular);
+            Speedlunky.Font = new Font(Speedlunky.Font, FontStyle.Regular);
+            BigMoney.Font = new Font(BigMoney.Font, FontStyle.Regular);
+            NoGold.Font = new Font(NoGold.Font, FontStyle.Regular);
+            Casanova.Font = new Font(Casanova.Font, FontStyle.Regular);
+            PublicEnemy.Font = new Font(PublicEnemy.Font, FontStyle.Regular);
+            Teamwork.Font = new Font(Teamwork.Font, FontStyle.Regular);
+            Addicted.Font = new Font(Addicted.Font, FontStyle.Regular);
+
             // Refresh statuses
             SetJournalStatus(0);
             SetCharactersStatus(0);
             SetDamselCount(0);
             SetShoppieCount(0);
             SetPlaysCount(0);
+            SpeedlunkyStatus.Text = "";
+            BigMoneyStatus.Text = "";
+            NoGoldStatus.Text = "";
+            TeamworkStatus.Text = "";
+            ExtrapolatedTimeStatus.Text = "";
+
+
+            // Reset tunnel man status
+            TunnelManStatus.Text = "1 Bomb";
 
             // Reset timer
             timer.Text = FormatTime(0);
@@ -289,7 +320,7 @@ namespace AchievementsTracker
 
             long predictedTime = time - startTime + numSeconds * 1000;
 
-            NineteenStatus.Text = FormatTime(predictedTime);
+            ExtrapolatedTimeStatus.Text = FormatTime(predictedTime);
         }
 
         public void FinishJournal(long time)

@@ -15,6 +15,7 @@ namespace AchievementsTracker
 
         public RunManager(Tracker tracker)
         {
+            Log.WriteLine("AA run intialized");
             this.tracker = tracker;
             state = RunState.Waiting;
             int numAchievements = Enum.GetNames(typeof(Achievement)).Length;

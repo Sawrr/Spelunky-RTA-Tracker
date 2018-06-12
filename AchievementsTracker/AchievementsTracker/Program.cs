@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO;
+using AchievementsTracker.Properties;
 
 namespace AchievementsTracker
 {
@@ -34,21 +35,76 @@ namespace AchievementsTracker
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Create forms
-            MainForm form = new MainForm();
-            ImgForm imgForm = new ImgForm();
+            Application.Run(new TrayApplicationContext());
+        }
 
-            // Create tracker thread
-            Thread trackerThread = new Thread(() => new Tracker(form, imgForm).Main());
-            trackerThread.IsBackground = true;
-            trackerThread.Start();
+        public class TrayApplicationContext : ApplicationContext
+        {
+            private NotifyIcon trayIcon;
 
-            // Create image thread
-            Thread imageThread = new Thread(() => Application.Run(imgForm));
-            imageThread.IsBackground = true;
-            imageThread.Start();
+            private MainForm form;
+            private ImgForm imgForm;
+            private Thread trackerThread;
 
-            Application.Run(form);
+            public TrayApplicationContext()
+            {
+                // Create forms
+                form = new MainForm();
+                imgForm = new ImgForm();
+
+                // Create tray icon
+                trayIcon = new NotifyIcon()
+                {
+                    Icon = Resources.icon,
+                    ContextMenu = new ContextMenu(new MenuItem[] {
+                        new MenuItem("Reset", Reset),
+                        new MenuItem("Settings", OpenSettings),
+                        new MenuItem("Exit", Exit)
+                    }),
+                    Visible = true
+                };
+
+                // Set main form to terminate application on close
+                form.FormClosing += (s, e) =>
+                {
+                    Exit(s, e);
+                };
+
+                // Display both forms
+                form.Show();
+                imgForm.Show();
+
+                // Get started!
+                Reset(null, null);
+            }
+
+            void Exit(object sender, EventArgs e)
+            {
+                trayIcon.Visible = false;
+
+                Application.Exit();
+            }
+
+            void OpenSettings(object sender, EventArgs e)
+            {
+                SettingsForm settings = new SettingsForm();
+                settings.Show();
+            }
+
+            void Reset(object sender, EventArgs e)
+            {
+                form.Reset();
+                imgForm.Reset();
+
+                // Create tracker thread
+                if (trackerThread != null)
+                {
+                    trackerThread.Abort();
+                }
+                trackerThread = new Thread(() => new Tracker(form, imgForm).Main());
+                trackerThread.IsBackground = true;
+                trackerThread.Start();
+            }
         }
     }
 }

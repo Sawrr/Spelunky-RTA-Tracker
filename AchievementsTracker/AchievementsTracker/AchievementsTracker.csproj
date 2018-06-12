@@ -85,6 +85,12 @@
     <Compile Include="RunManager.cs" />
     <Compile Include="RunState.cs" />
     <Compile Include="ScreenState.cs" />
+    <Compile Include="SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SpelunkyProcessListener.cs" />
     <Compile Include="Tracker.cs" />
     <EmbeddedResource Include="ImgForm.resx">
@@ -103,6 +109,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -222,7 +231,6 @@
     <None Include="images\items\Item_2.png" />
     <None Include="images\items\Item_1.png" />
     <None Include="images\items\Item_0.png" />
-    <None Include="Resources\0.bmp" />
     <None Include="images\journal\0.png" />
     <None Include="images\characters\Char_15.png" />
     <None Include="images\characters\Char_14.png" />
@@ -252,6 +260,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

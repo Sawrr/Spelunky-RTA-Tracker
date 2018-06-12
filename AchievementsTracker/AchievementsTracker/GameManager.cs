@@ -80,7 +80,7 @@ namespace AchievementsTracker
                     runIsNoGold = false;
                     Log.WriteLine("No gold lost");
                 }
-                if (newScore > 500000)
+                if (newScore >= 500000)
                 {
                     tracker.BigMoneyAchieved(time, plays);
                 }
