@@ -49,8 +49,8 @@
             this.TeamworkStatus = new System.Windows.Forms.Label();
             this.Addicted = new System.Windows.Forms.Label();
             this.AddictedStatus = new System.Windows.Forms.Label();
-            this.Nineteen = new System.Windows.Forms.Label();
-            this.NineteenStatus = new System.Windows.Forms.Label();
+            this.ExtrapolatedTime = new System.Windows.Forms.Label();
+            this.ExtrapolatedTimeStatus = new System.Windows.Forms.Label();
             this.TunnelManStatus = new System.Windows.Forms.Label();
             this.Next = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -252,24 +252,24 @@
             this.AddictedStatus.TabIndex = 21;
             this.AddictedStatus.Text = "0/1000";
             // 
-            // Nineteen
+            // ExtrapolatedTime
             // 
-            this.Nineteen.AutoSize = true;
-            this.Nineteen.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Nineteen.Location = new System.Drawing.Point(12, 385);
-            this.Nineteen.Name = "Nineteen";
-            this.Nineteen.Size = new System.Drawing.Size(159, 20);
-            this.Nineteen.TabIndex = 22;
-            this.Nineteen.Text = "Extrapolated Time";
+            this.ExtrapolatedTime.AutoSize = true;
+            this.ExtrapolatedTime.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExtrapolatedTime.Location = new System.Drawing.Point(12, 385);
+            this.ExtrapolatedTime.Name = "ExtrapolatedTime";
+            this.ExtrapolatedTime.Size = new System.Drawing.Size(159, 20);
+            this.ExtrapolatedTime.TabIndex = 22;
+            this.ExtrapolatedTime.Text = "Extrapolated Time";
             // 
-            // NineteenStatus
+            // ExtrapolatedTimeStatus
             // 
-            this.NineteenStatus.AutoSize = true;
-            this.NineteenStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NineteenStatus.Location = new System.Drawing.Point(190, 385);
-            this.NineteenStatus.Name = "NineteenStatus";
-            this.NineteenStatus.Size = new System.Drawing.Size(0, 20);
-            this.NineteenStatus.TabIndex = 23;
+            this.ExtrapolatedTimeStatus.AutoSize = true;
+            this.ExtrapolatedTimeStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExtrapolatedTimeStatus.Location = new System.Drawing.Point(190, 385);
+            this.ExtrapolatedTimeStatus.Name = "ExtrapolatedTimeStatus";
+            this.ExtrapolatedTimeStatus.Size = new System.Drawing.Size(0, 20);
+            this.ExtrapolatedTimeStatus.TabIndex = 23;
             // 
             // TunnelManStatus
             // 
@@ -298,8 +298,8 @@
             this.ClientSize = new System.Drawing.Size(304, 497);
             this.Controls.Add(this.Next);
             this.Controls.Add(this.TunnelManStatus);
-            this.Controls.Add(this.NineteenStatus);
-            this.Controls.Add(this.Nineteen);
+            this.Controls.Add(this.ExtrapolatedTimeStatus);
+            this.Controls.Add(this.ExtrapolatedTime);
             this.Controls.Add(this.AddictedStatus);
             this.Controls.Add(this.Addicted);
             this.Controls.Add(this.TeamworkStatus);
@@ -356,8 +356,8 @@
         private System.Windows.Forms.Label TeamworkStatus;
         private System.Windows.Forms.Label Addicted;
         private System.Windows.Forms.Label AddictedStatus;
-        private System.Windows.Forms.Label Nineteen;
-        private System.Windows.Forms.Label NineteenStatus;
+        private System.Windows.Forms.Label ExtrapolatedTime;
+        private System.Windows.Forms.Label ExtrapolatedTimeStatus;
         private System.Windows.Forms.Label TunnelManStatus;
         private System.Windows.Forms.Label Next;
     }

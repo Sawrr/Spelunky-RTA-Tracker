@@ -15,6 +15,16 @@ namespace AchievementsTracker
         public ImgForm()
         {
             InitializeComponent();
+
+            Reset();
+        }
+
+        public void Reset()
+        {
+            foreach(Control c in Controls)
+            {
+                c.Show();
+            }
         }
 
         public void UpdateCharacters(byte[] chars)
