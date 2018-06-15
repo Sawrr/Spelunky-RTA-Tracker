@@ -4,7 +4,7 @@
 
 The AA run has been largely inaccessible until now due to the need for a fresh steam account as well as a tedious death grind. This tracker removes the need for a fresh steam account and provides an option to avoid unnecessary death grinding by extrapolating the time you would finish the run.
 
-<img src="https://github.com/Sawrr/Spelunky-AllAchievements/blob/master/tracker-windows.PNG">
+<img src="https://github.com/Sawrr/Spelunky-AllAchievements/blob/master/tracker-windows.PNG?">
 
 ## Achievements
 The 20 achievements can be covered by a subset of 9:
