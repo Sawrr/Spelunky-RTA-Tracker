@@ -6,10 +6,11 @@ using System.Windows.Forms;
 using System.Threading;
 using System.IO;
 using AchievementsTracker.Properties;
+using System.Drawing;
 
 namespace AchievementsTracker
 {
-    static class Program
+    static public class Program
     {     
         /// <summary>
         /// The main entry point for the application.
@@ -44,13 +45,15 @@ namespace AchievementsTracker
 
             private MainForm form;
             private ImgForm imgForm;
+            private SettingsForm settings;
             private Tracker tracker;
 
             public TrayApplicationContext()
-            {
+            {                
                 // Create forms
-                form = new MainForm();
+                form = new MainForm(this);
                 imgForm = new ImgForm();
+                settings = new SettingsForm(this, form);
 
                 // Create tracker thread
                 tracker = new Tracker(form, imgForm);
@@ -93,11 +96,24 @@ namespace AchievementsTracker
 
             void OpenSettings(object sender, EventArgs e)
             {
-                SettingsForm settings = new SettingsForm();
                 settings.Show();
             }
 
-            void Reset(object sender, EventArgs e)
+            public void SetBackgroundColor(Color color)
+            {
+                form.BackColor = color;
+                imgForm.BackColor = color;
+                settings.BackColor = color;
+            }
+
+            public void SetTextColor(Color color)
+            {
+                form.ForeColor = color;
+                imgForm.ForeColor = color;
+                settings.ForeColor = color;
+            }
+
+            public void Reset(object sender, EventArgs e)
             {
                 form.Reset();
                 imgForm.Reset();

@@ -4,14 +4,24 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AchievementsTracker.Program;
 
 namespace AchievementsTracker
 {
     public partial class MainForm : Form
     {
+
+        const int RESET_HOTKEY_ID = 0;
+
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        [DllImport("user32.dll")]
+        public static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
         private Timer runTimer;
         private long startTime;
 
@@ -21,11 +31,33 @@ namespace AchievementsTracker
         private List<Label> todoStatusList;
         private List<Label> doneStatusList;
 
-        public MainForm()
+        private TrayApplicationContext context;
+
+        public MainForm(TrayApplicationContext ctx)
         {
+            context = ctx;
+
             InitializeComponent();
 
             Reset();
+        }
+
+        public void SetResetHotKey(int modifiers, Keys key)
+        {
+            Log.WriteLine("Set reset hotkey. Mods: " + modifiers + " Key: " + key);
+            UnregisterHotKey(Handle, RESET_HOTKEY_ID);
+            RegisterHotKey(Handle, RESET_HOTKEY_ID, modifiers, (int)key);
+        }
+        
+        // Hotkey
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0312 && m.WParam.ToInt32() == RESET_HOTKEY_ID)
+            {
+                context.Reset(null, null);
+                Log.WriteLine("Reset hotkey triggered");
+            }
+            base.WndProc(ref m);
         }
 
         public void Reset()
