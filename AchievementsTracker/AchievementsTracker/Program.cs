@@ -44,13 +44,19 @@ namespace AchievementsTracker
 
             private MainForm form;
             private ImgForm imgForm;
-            private Thread trackerThread;
+            private Tracker tracker;
 
             public TrayApplicationContext()
             {
                 // Create forms
                 form = new MainForm();
                 imgForm = new ImgForm();
+
+                // Create tracker thread
+                tracker = new Tracker(form, imgForm);
+                Thread trackerThread = new Thread(() => tracker.Main());
+                trackerThread.IsBackground = true;
+                trackerThread.Start();
 
                 // Create tray icon
                 trayIcon = new NotifyIcon()
@@ -95,15 +101,7 @@ namespace AchievementsTracker
             {
                 form.Reset();
                 imgForm.Reset();
-
-                // Create tracker thread
-                if (trackerThread != null)
-                {
-                    trackerThread.Abort();
-                }
-                trackerThread = new Thread(() => new Tracker(form, imgForm).Main());
-                trackerThread.IsBackground = true;
-                trackerThread.Start();
+                tracker.Reset();
             }
         }
     }

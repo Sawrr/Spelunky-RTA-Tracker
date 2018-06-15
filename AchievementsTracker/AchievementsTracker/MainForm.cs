@@ -90,12 +90,16 @@ namespace AchievementsTracker
             SetDamselCount(0);
             SetShoppieCount(0);
             SetPlaysCount(0);
+            JournalStatus.Font = new Font(JournalStatus.Font, FontStyle.Regular);
+            CharactersStatus.Font = new Font(CharactersStatus.Font, FontStyle.Regular);
+            CasanovaStatus.Font = new Font(CasanovaStatus.Font, FontStyle.Regular);
+            PublicEnemyStatus.Font = new Font(PublicEnemyStatus.Font, FontStyle.Regular);
+            AddictedStatus.Font = new Font(AddictedStatus.Font, FontStyle.Regular);
             SpeedlunkyStatus.Text = "";
             BigMoneyStatus.Text = "";
             NoGoldStatus.Text = "";
             TeamworkStatus.Text = "";
             ExtrapolatedTimeStatus.Text = "";
-
 
             // Reset tunnel man status
             TunnelManStatus.Text = "1 Bomb";

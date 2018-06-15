@@ -16,6 +16,9 @@ namespace AchievementsTracker
         [DllImport("kernel32.dll")]
         private static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
+        // Lock for resetting run manager
+        private readonly object _runManagerLock = new Object();
+
         private MainForm ui;
         private ImgForm unlockables;
         private Process spelunky;
@@ -29,6 +32,14 @@ namespace AchievementsTracker
 
             // create run manager
             runManager = new RunManager(this);
+        }
+
+        public void Reset()
+        {
+            lock(_runManagerLock)
+            {
+                runManager = new RunManager(this);
+            }
         }
 
         public void RunStarted()
@@ -158,70 +169,63 @@ namespace AchievementsTracker
 
         public void Main()
         {
+            ui.SetSpelunkyRunning(false);
+            running = false;
+
+            // Listen for Spelunky Process
+            int processHandle = 0;
+            int baseAddress = 0;
             try
             {
-                ui.SetSpelunkyRunning(false);
-                running = false;
-
-                // Listen for Spelunky Process
-                int processHandle = 0;
-                int baseAddress = 0;
-                try
-                {
-                    spelunky = SpelunkyProcessListener.listenForSpelunkyProcess();
-                    Log.WriteLine("Spelunky process detected");
-                    ui.SetSpelunkyRunning(true);
-                    processHandle = (int)OpenProcess(PROCESS_WM_READ, false, spelunky.Id);
-                    baseAddress = spelunky.MainModule.BaseAddress.ToInt32();
-                }
-                catch (Exception e)
-                {
-                    if (!(e is ThreadAbortException))
-                    {
-                        Log.WriteLine("Error encountered listening for or opening the process");
-                        Log.WriteLine(e.ToString());
-                    }
-                    throw e;
-                }
-
-                // Listen for process terminating
-                spelunky.EnableRaisingEvents = true;
-                spelunky.Exited += new EventHandler((s, e) =>
-                {
-                    Log.WriteLine("Spelunky process exited");
-
-                    // Now start over
-                    Main();
-                });
-
-                // Create game manager
-                GameManager gameManager = new GameManager(this, new MemoryReader(processHandle, baseAddress));
-
-                // main game loop
-                running = true;
-                long time;
-                while (running)
-                {
-                    time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                    long wakeUpTime = time + 16;
-
-                    gameManager.update();
-
-                    long currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                    long sleepTime = wakeUpTime - currentTime;
-                    if (sleepTime > 0)
-                    {
-                        Thread.Sleep((int)sleepTime);
-                    }
-                    else
-                    {
-                        Log.WriteLine("This tick took longer than 16 ms");
-                    }
-                }
-            } catch (ThreadAbortException e)
+                spelunky = SpelunkyProcessListener.listenForSpelunkyProcess();
+                Log.WriteLine("Spelunky process detected");
+                ui.SetSpelunkyRunning(true);
+                processHandle = (int)OpenProcess(PROCESS_WM_READ, false, spelunky.Id);
+                baseAddress = spelunky.MainModule.BaseAddress.ToInt32();
+            }
+            catch (Exception e)
             {
-                // Thread terminated
-                Log.WriteLine("Tracker thread terminated");
+                Log.WriteLine("Error encountered listening for or opening the process");
+                Log.WriteLine(e.ToString());
+            }
+
+            // Listen for process terminating
+            spelunky.EnableRaisingEvents = true;
+            spelunky.Exited += new EventHandler((s, e) =>
+            {
+                Log.WriteLine("Spelunky process exited");
+
+                // Now start over
+                Main();
+            });
+
+            // Create game manager
+            GameManager gameManager = new GameManager(this, new MemoryReader(processHandle, baseAddress));
+
+            // main game loop
+            running = true;
+            long time;
+            while (running)
+            {
+                time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                long wakeUpTime = time + 16;
+
+                // Acquire lock to prevent reset during updates
+                lock(_runManagerLock)
+                {
+                    gameManager.update();
+                }
+
+                long currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                long sleepTime = wakeUpTime - currentTime;
+                if (sleepTime > 0)
+                {
+                    Thread.Sleep((int)sleepTime);
+                }
+                else
+                {
+                    Log.WriteLine("This tick took longer than 16 ms");
+                }
             }
         }
     }
