@@ -82,7 +82,11 @@ namespace AchievementsTracker
                 }
                 if (newScore >= 500000)
                 {
-                    tracker.BigMoneyAchieved(time, plays);
+                    // Filter out olmec, yama cutscenes
+                    if (!((levelIdx == 20 || levelIdx == 16) && stageTime < 500))
+                    {
+                        tracker.BigMoneyAchieved(time, plays);
+                    }
                 }
             }
             score = newScore;
