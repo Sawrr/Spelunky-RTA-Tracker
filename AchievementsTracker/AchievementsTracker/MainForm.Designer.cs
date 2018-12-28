@@ -51,8 +51,8 @@
             this.AddictedStatus = new System.Windows.Forms.Label();
             this.ExtrapolatedTime = new System.Windows.Forms.Label();
             this.ExtrapolatedTimeStatus = new System.Windows.Forms.Label();
-            this.TunnelManStatus = new System.Windows.Forms.Label();
-            this.Next = new System.Windows.Forms.Label();
+            this.ASOStatus = new System.Windows.Forms.Label();
+            this.ASO = new System.Windows.Forms.Label();
             this.Tutorial = new System.Windows.Forms.Label();
             this.TutorialStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -273,23 +273,23 @@
             this.ExtrapolatedTimeStatus.Size = new System.Drawing.Size(0, 20);
             this.ExtrapolatedTimeStatus.TabIndex = 23;
             // 
-            // TunnelManStatus
+            // ASOStatus
             // 
-            this.TunnelManStatus.AutoSize = true;
-            this.TunnelManStatus.Location = new System.Drawing.Point(63, 9);
-            this.TunnelManStatus.Name = "TunnelManStatus";
-            this.TunnelManStatus.Size = new System.Drawing.Size(51, 15);
-            this.TunnelManStatus.TabIndex = 24;
-            this.TunnelManStatus.Text = "1 Bomb";
+            this.ASOStatus.AutoSize = true;
+            this.ASOStatus.Location = new System.Drawing.Point(63, 9);
+            this.ASOStatus.Name = "ASOStatus";
+            this.ASOStatus.Size = new System.Drawing.Size(51, 15);
+            this.ASOStatus.TabIndex = 24;
+            this.ASOStatus.Text = "1 Bomb";
             // 
-            // Next
+            // ASO
             // 
-            this.Next.AutoSize = true;
-            this.Next.Location = new System.Drawing.Point(12, 9);
-            this.Next.Name = "Next";
-            this.Next.Size = new System.Drawing.Size(38, 15);
-            this.Next.TabIndex = 25;
-            this.Next.Text = "Next:";
+            this.ASO.AutoSize = true;
+            this.ASO.Location = new System.Drawing.Point(12, 9);
+            this.ASO.Name = "ASO";
+            this.ASO.Size = new System.Drawing.Size(46, 15);
+            this.ASO.TabIndex = 25;
+            this.ASO.Text = "AS+O:";
             // 
             // Tutorial
             // 
@@ -319,8 +319,8 @@
             this.ClientSize = new System.Drawing.Size(304, 532);
             this.Controls.Add(this.TutorialStatus);
             this.Controls.Add(this.Tutorial);
-            this.Controls.Add(this.Next);
-            this.Controls.Add(this.TunnelManStatus);
+            this.Controls.Add(this.ASO);
+            this.Controls.Add(this.ASOStatus);
             this.Controls.Add(this.ExtrapolatedTimeStatus);
             this.Controls.Add(this.ExtrapolatedTime);
             this.Controls.Add(this.AddictedStatus);
@@ -381,8 +381,8 @@
         private System.Windows.Forms.Label AddictedStatus;
         private System.Windows.Forms.Label ExtrapolatedTime;
         private System.Windows.Forms.Label ExtrapolatedTimeStatus;
-        private System.Windows.Forms.Label TunnelManStatus;
-        private System.Windows.Forms.Label Next;
+        private System.Windows.Forms.Label ASOStatus;
+        private System.Windows.Forms.Label ASO;
         private System.Windows.Forms.Label Tutorial;
         private System.Windows.Forms.Label TutorialStatus;
     }

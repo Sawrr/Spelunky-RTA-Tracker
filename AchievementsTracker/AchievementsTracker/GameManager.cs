@@ -31,7 +31,7 @@ namespace AchievementsTracker
         private int p2HealthAddr;
 
         private TutorialState tutState;
-
+        private int tunnelManChapter;
         private int tunnelManRemaining;
 
         public GameManager(Tracker tracker, MemoryReader memoryReader)
@@ -177,6 +177,11 @@ namespace AchievementsTracker
                 {
                     tracker.TeamworkAchieved(time, plays);
                 }
+                // check for AS+O
+                if (tunnelManChapter == 6)
+                {
+                    tracker.ASODone(time);
+                }
 
                 resetRun();
             }
@@ -268,12 +273,12 @@ namespace AchievementsTracker
             plays = newPlays;
 
             // Tunnel man progress
-            int chapter = memoryReader.ReadTunnelChapter();
+            tunnelManChapter = memoryReader.ReadTunnelChapter();
             int newRemaining = memoryReader.ReadTunnelRemaining();
             if (newRemaining != tunnelManRemaining)
             {
                 // Determine which deliverable is next
-                if (chapter == 1)
+                if (tunnelManChapter == 1)
                 {
                     if (newRemaining == 2)
                     {
@@ -286,12 +291,12 @@ namespace AchievementsTracker
                         tracker.TunnelManEvent("10k");
                     }
                 }
-                else if (chapter == 2)
+                else if (tunnelManChapter == 2)
                 {
                     // 2 bombs
                     tracker.TunnelManEvent("2 Bombs");
                 }
-                else if (chapter == 3)
+                else if (tunnelManChapter == 3)
                 {
                     if (newRemaining == 2)
                     {
@@ -304,12 +309,12 @@ namespace AchievementsTracker
                         tracker.TunnelManEvent("Shotgun");
                     }
                 }
-                else if (chapter == 4)
+                else if (tunnelManChapter == 4)
                 {
                     // 3 bombs
                     tracker.TunnelManEvent("3 Bombs");
                 }
-                else if (chapter == 5)
+                else if (tunnelManChapter == 5)
                 {
                     if (newRemaining == 2)
                     {
@@ -322,10 +327,10 @@ namespace AchievementsTracker
                         tracker.TunnelManEvent("Key");
                     }
                 }
-                else if (chapter == 6)
+                else if (tunnelManChapter == 6)
                 {
-                    // done
-                    tracker.TunnelManEvent("Done");
+                    // done, except for Olmec
+                    tracker.TunnelManEvent("Olmec");
                 }
             }
             tunnelManRemaining = newRemaining;

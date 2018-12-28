@@ -108,6 +108,7 @@ namespace AchievementsTracker
             drawStatusList();
 
             // Refresh labels
+            Tutorial.Font = new Font(Tutorial.Font, FontStyle.Regular);
             Journal.Font = new Font(Journal.Font, FontStyle.Regular);
             Characters.Font = new Font(Characters.Font, FontStyle.Regular);
             Speedlunky.Font = new Font(Speedlunky.Font, FontStyle.Regular);
@@ -117,6 +118,7 @@ namespace AchievementsTracker
             PublicEnemy.Font = new Font(PublicEnemy.Font, FontStyle.Regular);
             Teamwork.Font = new Font(Teamwork.Font, FontStyle.Regular);
             Addicted.Font = new Font(Addicted.Font, FontStyle.Regular);
+            ASO.Font = new Font(ASO.Font, FontStyle.Regular);
 
             // Refresh statuses
             SetJournalStatus(0);
@@ -124,19 +126,20 @@ namespace AchievementsTracker
             SetDamselCount(0);
             SetShoppieCount(0);
             SetPlaysCount(0);
+            TutorialStatus.Font = new Font(TutorialStatus.Font, FontStyle.Regular);
             JournalStatus.Font = new Font(JournalStatus.Font, FontStyle.Regular);
             CharactersStatus.Font = new Font(CharactersStatus.Font, FontStyle.Regular);
             CasanovaStatus.Font = new Font(CasanovaStatus.Font, FontStyle.Regular);
             PublicEnemyStatus.Font = new Font(PublicEnemyStatus.Font, FontStyle.Regular);
             AddictedStatus.Font = new Font(AddictedStatus.Font, FontStyle.Regular);
+            ASOStatus.Font = new Font(ASOStatus.Font, FontStyle.Regular);
             SpeedlunkyStatus.Text = "";
             BigMoneyStatus.Text = "";
             NoGoldStatus.Text = "";
             TeamworkStatus.Text = "";
             ExtrapolatedTimeStatus.Text = "";
-
-            // Reset tunnel man status
-            TunnelManStatus.Text = "1 Bomb";
+            TutorialStatus.Text = "";
+            ASOStatus.Text = "1 Bomb";
 
             // Reset timer
             timer.Text = FormatTime(0);
@@ -503,14 +506,26 @@ namespace AchievementsTracker
             AddictedStatus.Text = String.Format("{0,5} {1}", num, "/ 1000");
         }
 
-        public void SetTunnelManStatus(string status)
+        public void SetASOStatus(string status)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action<string>(SetTunnelManStatus), new object[] { status });
+                Invoke(new Action<string>(SetASOStatus), new object[] { status });
                 return;
             }
-            TunnelManStatus.Text = status;
+            ASOStatus.Text = status;
+        }
+
+        public void ASODone(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<long>(ASODone), new object[] { time });
+                return;
+            }
+            ASOStatus.Text = FormatSplitTime(time);
+            ASOStatus.Font = new Font(ASOStatus.Font, FontStyle.Bold);
+            ASO.Font = new Font(ASO.Font, FontStyle.Bold);
         }
     }
 }

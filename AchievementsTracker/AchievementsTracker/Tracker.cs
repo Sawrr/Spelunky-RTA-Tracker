@@ -169,7 +169,12 @@ namespace AchievementsTracker
 
         public void TunnelManEvent(string status)
         {
-            ui.SetTunnelManStatus(status);
+            ui.SetASOStatus(status);
+        }
+
+        public void ASODone(long time)
+        {
+            ui.ASODone(time);
         }
 
         public void Main()
