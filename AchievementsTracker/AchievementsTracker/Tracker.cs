@@ -55,7 +55,12 @@ namespace AchievementsTracker
 
         public void NineteenAchieved(long time, int plays)
         {
-                ui.FinishNineteen(time, plays);
+            ui.FinishNineteen(time, plays);
+        }
+
+        public void TutorialDone(long time)
+        {
+            ui.FinishTutorial(time);
         }
 
         public void SpeedlunkyAchieved(long time, int plays)

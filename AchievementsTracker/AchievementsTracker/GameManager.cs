@@ -30,6 +30,8 @@ namespace AchievementsTracker
         private int p1HealthAddr;
         private int p2HealthAddr;
 
+        private TutorialState tutState;
+
         private int tunnelManRemaining;
 
         public GameManager(Tracker tracker, MemoryReader memoryReader)
@@ -70,6 +72,14 @@ namespace AchievementsTracker
         public void update()
         {
             long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+
+            // Tutorial status check
+            TutorialState newTutState = (TutorialState)memoryReader.ReadTutorialStatus();
+            if (newTutState == TutorialState.Complete && tutState == TutorialState.DoorBreaking)
+            {
+                tracker.TutorialDone(time);
+            }
+            tutState = newTutState;
 
             // gold check
             int newScore = memoryReader.ReadScore();

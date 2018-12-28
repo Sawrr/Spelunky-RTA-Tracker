@@ -82,6 +82,7 @@ namespace AchievementsTracker
             todoStatusList = new List<Label>();
             doneStatusList = new List<Label>();
 
+            todoList.Add(Tutorial);
             todoList.Add(Speedlunky);
             todoList.Add(BigMoney);
             todoList.Add(NoGold);
@@ -92,6 +93,7 @@ namespace AchievementsTracker
             todoList.Add(PublicEnemy);
             todoList.Add(Addicted);
 
+            todoStatusList.Add(TutorialStatus);
             todoStatusList.Add(SpeedlunkyStatus);
             todoStatusList.Add(BigMoneyStatus);
             todoStatusList.Add(NoGoldStatus);
@@ -251,6 +253,24 @@ namespace AchievementsTracker
                 // other
                 return String.Format("{0,1}:{1:00}:{2:00}.{3:00}", time / 3600000, (time % 3600000) / 60000, (time % 60000) / 1000, (time % 1000) / 10);
             }
+        }
+
+        public void FinishTutorial(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinishTutorial(time)));
+                return;
+            }
+            TutorialStatus.Text = FormatSplitTime(time);
+            TutorialStatus.Font = new Font(TutorialStatus.Font, FontStyle.Bold);
+            Tutorial.Font = new Font(Tutorial.Font, FontStyle.Bold);
+            todoList.Remove(Tutorial);
+            todoStatusList.Remove(TutorialStatus);
+            doneList.Add(Tutorial);
+            doneStatusList.Add(TutorialStatus);
+            drawList();
+            drawStatusList();
         }
 
         public void FinishSpeedlunky(long time)

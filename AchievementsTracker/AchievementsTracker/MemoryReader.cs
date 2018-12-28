@@ -27,6 +27,7 @@ namespace AchievementsTracker
         private int[] PLAYS = { 0x1384B4, 0x4459C8 };
         private int[] TUNNEL_CHAPTER = { 0x1384B4, 0x445BE4 };
         private int[] TUNNEL_REMAINING = { 0x1384B4, 0x445BE8 };
+        private int[] TUTORIAL_STATUS = { 0x1384B4, 0x445BE0 };
 
         private int processHandle;
         private int baseAddress;
@@ -35,6 +36,13 @@ namespace AchievementsTracker
         {
             this.processHandle = processHandle;
             this.baseAddress = baseAddress;
+        }
+
+        public int ReadTutorialStatus()
+        {
+            byte[] buffer = new byte[1];
+            ReadMemory(buffer, baseAddress, TUTORIAL_STATUS);
+            return buffer[0];
         }
 
         public int ReadTunnelChapter()
