@@ -164,13 +164,13 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ColorDialog bgColorDialog;
-        private System.Windows.Forms.TextBox bgColorText;
         private System.Windows.Forms.Button bgColorPicker;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox hotkeyBox;
         private System.Windows.Forms.Button textColorPicker;
-        private System.Windows.Forms.TextBox textColorText;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ColorDialog textColorDialog;
+        public System.Windows.Forms.TextBox hotkeyBox;
+        public System.Windows.Forms.TextBox textColorText;
+        public System.Windows.Forms.TextBox bgColorText;
     }
 }

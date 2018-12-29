@@ -26,12 +26,40 @@ namespace AchievementsTracker
             this.form = form;
 
             InitializeComponent();
+        }
 
-            bgColorText.Text = HexConverter(BackColor);
-            textColorText.Text = HexConverter(ForeColor);
+        public void SetBackgroundColor(Color color)
+        {
+            bgColorText.Text = HexConverter(color);
+            bgColorDialog.Color = color;
+        }
 
-            bgColorDialog.Color = BackColor;
-            textColorDialog.Color = ForeColor;
+        public void SetTextColor(Color color)
+        {
+            textColorText.Text = HexConverter(color);
+            textColorDialog.Color = color;
+        }
+
+        public void SetHotkey(int mods, Keys key)
+        {
+            modifiers = mods;
+            hotkey = key;
+
+            if (mods == 0)
+            {
+                hotkeyBox.Text = key.ToString();
+            }
+            else
+            {
+                string modsStr = "";
+                if (mods / 4 == 1)
+                    modsStr += "Shift + ";
+                if ((mods % 4) / 2 == 1)
+                    modsStr += "Ctrl + ";
+                if ((mods % 4) % 2 == 1)
+                    modsStr += "Alt + ";
+                hotkeyBox.Text = modsStr + key.ToString();
+            }
         }
 
         private void hotkeyBox_KeyDown(object sender, KeyEventArgs e)
@@ -42,23 +70,14 @@ namespace AchievementsTracker
             if (e.Control) modifiers += 2;
             if (e.Shift) modifiers += 4;
 
-            if (e.Modifiers == Keys.None)
+            // Disallow control, shift, alt, and menu
+            if (isKeyModifier(hotkey))
             {
-                hotkeyBox.Text = e.KeyCode.ToString();
+                modifiers = 0;
+                hotkey = Keys.None;
             }
-            else
-            {
-                string mods = e.Modifiers.ToString();
-                string key = e.KeyCode.ToString();
-                if (isKeyModifier(e.KeyCode))
-                {
-                    hotkeyBox.Text = "";
-                }
-                else
-                {
-                    hotkeyBox.Text = mods + " + " + key;
-                }
-            }
+
+            SetHotkey(modifiers, hotkey);
         }
 
         private bool isKeyModifier(Keys k)
@@ -71,6 +90,8 @@ namespace AchievementsTracker
             form.SetResetHotKey(modifiers, hotkey);
             context.SetBackgroundColor(bgColorDialog.Color);
             context.SetTextColor(textColorDialog.Color);
+
+            context.SaveSettings(bgColorDialog.Color, textColorDialog.Color, hotkey, modifiers);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -109,7 +130,6 @@ namespace AchievementsTracker
         // Credit: https://stackoverflow.com/questions/2021681/hide-form-instead-of-closing-when-close-button-clicked
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Console.WriteLine("YEAH");
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;

@@ -7,6 +7,7 @@ using System.Threading;
 using System.IO;
 using AchievementsTracker.Properties;
 using System.Drawing;
+using System.Web.Script.Serialization;
 
 namespace AchievementsTracker
 {
@@ -31,12 +32,16 @@ namespace AchievementsTracker
             StreamWriter logFile = File.CreateText(logName);
             logFile.AutoFlush = true;
             Console.SetOut(logFile);
-            
+
+            // Settings file
+            TrackerSettings settings = TrackerSettings.Load();
+            settings.Save();
+
             // Initial setup
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new TrayApplicationContext());
+            Application.Run(new TrayApplicationContext(settings));
         }
 
         public class TrayApplicationContext : ApplicationContext
@@ -48,8 +53,12 @@ namespace AchievementsTracker
             private SettingsForm settings;
             private Tracker tracker;
 
-            public TrayApplicationContext()
-            {                
+            TrackerSettings trackerSettings;
+
+            public TrayApplicationContext(TrackerSettings trackerSettings)
+            {
+                this.trackerSettings = trackerSettings;
+                
                 // Create forms
                 form = new MainForm(this);
                 imgForm = new ImgForm();
@@ -82,6 +91,22 @@ namespace AchievementsTracker
                 // Display both forms
                 form.Show();
                 imgForm.Show();
+
+                // Set hotkey
+                Keys key = (Keys)trackerSettings.resetHotkey;
+                int mods = trackerSettings.resetHotkeyMods;
+                form.SetResetHotKey(mods, key);
+                settings.SetHotkey(mods, key);
+
+                // Set background color
+                Color bgColor = ColorTranslator.FromHtml(trackerSettings.backColor);
+                SetBackgroundColor(bgColor);
+                settings.SetBackgroundColor(bgColor);
+
+                // Set text color
+                Color textColor = ColorTranslator.FromHtml(trackerSettings.textColor);
+                SetTextColor(textColor);
+                settings.SetTextColor(textColor);
 
                 // Get started!
                 Reset(null, null);
@@ -119,6 +144,41 @@ namespace AchievementsTracker
                 imgForm.Reset();
                 tracker.Reset();
             }
+
+            public void SaveSettings(Color backColor, Color formColor, Keys resetHotkey, int resetHotkeyMods)
+            {
+                trackerSettings.backColor = ColorTranslator.ToHtml(backColor);
+                trackerSettings.textColor = ColorTranslator.ToHtml(formColor);
+                trackerSettings.resetHotkey = (int)resetHotkey;
+                trackerSettings.resetHotkeyMods = resetHotkeyMods;
+                trackerSettings.Save();
+            }
+        }
+
+        public class TrackerSettings : AppSettings<TrackerSettings>
+        {
+            public String backColor = "#0F0F0F";
+            public String textColor = "#E2E2E2";
+            public int resetHotkey = 0;
+            public int resetHotkeyMods = 0;
+        }
+    }
+
+    public class AppSettings<T> where T : new()
+    {
+        private const string FILENAME = "AchievementsTrackerSettings.txt";
+
+        public void Save()
+        {
+            File.WriteAllText(FILENAME, (new JavaScriptSerializer()).Serialize(this));
+        }
+
+        public static T Load()
+        {
+            T t = new T();
+            if (File.Exists(FILENAME))
+                t = (new JavaScriptSerializer()).Deserialize<T>(File.ReadAllText(FILENAME));
+            return t;
         }
     }
 }
