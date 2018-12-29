@@ -27,7 +27,7 @@ The Addicted achievement is the most time-consuming achievement and some runners
 The tracker includes a window with icons for all of the characters and journal entries, which disappear upon being unlocked. The purpose of the included visual is to eliminate the need to run separate programs to have visual tracking aids.
 
 ## Settings
-The application creates an icon in the taskbar which you can right click to access the Settings menu. You can set a hotkey for resetting the tracker, which will be triggered regardless of whether the tracker is in focus! Background color and text color is also configurable.
+The application creates an icon in the taskbar which you can right click to access the Settings menu. You can set a hotkey for resetting the tracker, which will be triggered regardless of whether the tracker is in focus! Background color and text color is also configurable. Settings are saved in a settings file in the same directory as the .exe
 
 ## Note about Good Teamwork
 The tracker only observes the health of Players 1 and 2 for the Good Teamwork achievement. Using more than one extra spelunker may cause the tracker to not consider the achievement completed if either P1 or P2 is dead when the run ends. Use only two spelunkers for the achievement to be properly tracked.
@@ -38,4 +38,4 @@ The tracker only observes the health of Players 1 and 2 for the Good Teamwork ac
 - Download here if you need it: https://www.microsoft.com/net/download/dotnet-framework-runtime
 
 ## Download
-[Download the beta](https://github.com/Sawrr/Spelunky-AllAchievements/releases/download/1.6.1/AchievementsTracker.exe) or check the Releases tab
+[Download the beta](https://github.com/Sawrr/Spelunky-AllAchievements/releases/download/1.7.0/AchievementsTracker.exe) or check the Releases tab
