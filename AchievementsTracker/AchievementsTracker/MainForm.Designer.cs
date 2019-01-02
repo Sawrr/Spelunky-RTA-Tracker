@@ -359,32 +359,32 @@
 
         #endregion
 
-        private System.Windows.Forms.Label runningLabel;
-        private System.Windows.Forms.Label CasanovaStatus;
-        private System.Windows.Forms.Label PublicEnemyStatus;
-        private System.Windows.Forms.Label Casanova;
-        private System.Windows.Forms.Label PublicEnemy;
-        private System.Windows.Forms.Label timer;
-        private System.Windows.Forms.Label Journal;
-        private System.Windows.Forms.Label Characters;
-        private System.Windows.Forms.Label Speedlunky;
-        private System.Windows.Forms.Label BigMoney;
-        private System.Windows.Forms.Label NoGold;
-        private System.Windows.Forms.Label NoGoldStatus;
-        private System.Windows.Forms.Label BigMoneyStatus;
-        private System.Windows.Forms.Label SpeedlunkyStatus;
-        private System.Windows.Forms.Label CharactersStatus;
-        private System.Windows.Forms.Label JournalStatus;
-        private System.Windows.Forms.Label Teamwork;
-        private System.Windows.Forms.Label TeamworkStatus;
-        private System.Windows.Forms.Label Addicted;
-        private System.Windows.Forms.Label AddictedStatus;
-        private System.Windows.Forms.Label ExtrapolatedTime;
-        private System.Windows.Forms.Label ExtrapolatedTimeStatus;
-        private System.Windows.Forms.Label ASOStatus;
-        private System.Windows.Forms.Label ASO;
-        private System.Windows.Forms.Label Tutorial;
-        private System.Windows.Forms.Label TutorialStatus;
+        public System.Windows.Forms.Label runningLabel;
+        public System.Windows.Forms.Label CasanovaStatus;
+        public System.Windows.Forms.Label PublicEnemyStatus;
+        public System.Windows.Forms.Label Casanova;
+        public System.Windows.Forms.Label PublicEnemy;
+        public System.Windows.Forms.Label timer;
+        public System.Windows.Forms.Label Journal;
+        public System.Windows.Forms.Label Characters;
+        public System.Windows.Forms.Label Speedlunky;
+        public System.Windows.Forms.Label BigMoney;
+        public System.Windows.Forms.Label NoGold;
+        public System.Windows.Forms.Label NoGoldStatus;
+        public System.Windows.Forms.Label BigMoneyStatus;
+        public System.Windows.Forms.Label SpeedlunkyStatus;
+        public System.Windows.Forms.Label CharactersStatus;
+        public System.Windows.Forms.Label JournalStatus;
+        public System.Windows.Forms.Label Teamwork;
+        public System.Windows.Forms.Label TeamworkStatus;
+        public System.Windows.Forms.Label AddictedStatus;
+        public System.Windows.Forms.Label ExtrapolatedTime;
+        public System.Windows.Forms.Label ExtrapolatedTimeStatus;
+        public System.Windows.Forms.Label ASOStatus;
+        public System.Windows.Forms.Label ASO;
+        public System.Windows.Forms.Label Tutorial;
+        public System.Windows.Forms.Label TutorialStatus;
+        public System.Windows.Forms.Label Addicted;
     }
 }
 

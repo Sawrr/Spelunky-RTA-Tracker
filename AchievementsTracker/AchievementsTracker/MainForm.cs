@@ -12,8 +12,17 @@ using static AchievementsTracker.Program;
 
 namespace AchievementsTracker
 {
+
     public partial class MainForm : Form
     {
+
+        public const int FORM_WIDTH = 320;
+        public const int FORM_TIMER_DY = 40;
+        public const int FORM_LABEL_X = 12;
+        public const int FORM_LABEL_Y = 70;
+        public const int FORM_LABEL_DX = 168;
+        public const int FORM_LABEL_DY = 35;
+        public const int FORM_TIMER_HEIGHT = 105;
 
         const int RESET_HOTKEY_ID = 0;
 
@@ -145,45 +154,48 @@ namespace AchievementsTracker
             timer.Text = FormatTime(0);
         }
 
-        private void drawList()
+        public void drawList()
         {
-            int x = 12;
-            int y = 70;
-            int dy = 35;
+            int x = FORM_LABEL_X;
+            int y = FORM_LABEL_Y;
+            int dy = FORM_LABEL_DY;
 
             foreach (Label l in doneList)
             {
                 l.Location = new Point(x, y);
 
-                y += dy;
+                if (l.Visible) y += dy;
             }
 
             foreach (Label l in todoList)
             {
                 l.Location = new Point(x, y);
 
-                y += dy;
+                if (l.Visible) y += dy;
             }
+
+            timer.Location = new Point(-5, y + FORM_TIMER_DY);
+            this.Size = new Size(FORM_WIDTH, y + FORM_TIMER_DY + FORM_TIMER_HEIGHT);
         }
 
-        private void drawStatusList()
+        public void drawStatusList()
         {
-            int x = 180;
-            int y = 70;
-            int dy = 35;
+            int x = FORM_LABEL_X + FORM_LABEL_DX;
+            int y = FORM_LABEL_Y;
+            int dy = FORM_LABEL_DY;
 
             foreach (Label l in doneStatusList)
             {
                 l.Location = new Point(x, y);
 
-                y += dy;
+                if (l.Visible) y += dy;
             }
 
             foreach (Label l in todoStatusList)
             {
                 l.Location = new Point(x, y);
 
-                y += dy;
+                if (l.Visible) y += dy;
             }
         }
 

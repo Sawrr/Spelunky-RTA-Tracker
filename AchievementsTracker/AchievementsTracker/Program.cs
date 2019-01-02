@@ -71,11 +71,18 @@ namespace AchievementsTracker
                 trackerThread.Start();
 
                 // Create tray icon
+                MenuItem CategoryMenu = new MenuItem("Category");
+                CategoryMenu.MenuItems.Add(new MenuItem("All Achievements", SelectAA));
+                CategoryMenu.MenuItems.Add(new MenuItem("All Journal Entries", SelectAJE));
+                CategoryMenu.MenuItems.Add(new MenuItem("All Characters", SelectAC));
+                CategoryMenu.MenuItems.Add(new MenuItem("All Shortcuts + Olmec", SelectASO));
+                CategoryMenu.MenuItems.Add(new MenuItem("Tutorial%", SelectTutorial));
                 trayIcon = new NotifyIcon()
                 {
                     Icon = Resources.icon,
                     ContextMenu = new ContextMenu(new MenuItem[] {
                         new MenuItem("Reset", Reset),
+                        CategoryMenu,
                         new MenuItem("Settings", OpenSettings),
                         new MenuItem("Exit", Exit)
                     }),
@@ -110,6 +117,143 @@ namespace AchievementsTracker
 
                 // Get started!
                 Reset(null, null);
+            }
+
+            void SelectAA(object sender, EventArgs e)
+            {
+                form.ASO.Show();
+                form.ASOStatus.Show();
+                form.Tutorial.Show();
+                form.TutorialStatus.Show();
+                form.Journal.Show();
+                form.JournalStatus.Show();
+                form.Characters.Show();
+                form.CharactersStatus.Show();
+                form.Speedlunky.Show();
+                form.SpeedlunkyStatus.Show();
+                form.BigMoney.Show();
+                form.BigMoneyStatus.Show();
+                form.NoGold.Show();
+                form.NoGoldStatus.Show();
+                form.Casanova.Show();
+                form.CasanovaStatus.Show();
+                form.PublicEnemy.Show();
+                form.PublicEnemyStatus.Show();
+                form.Teamwork.Show();
+                form.TeamworkStatus.Show();
+                form.Addicted.Show();
+                form.AddictedStatus.Show();
+                form.ExtrapolatedTime.Show();
+                form.ExtrapolatedTimeStatus.Show();
+
+                form.drawList();
+                form.drawStatusList();
+
+                imgForm.Show();
+            }
+
+            void SelectAJE(object sender, EventArgs e)
+            {
+                form.ASO.Show();
+                form.ASOStatus.Show();
+                form.Tutorial.Show();
+                form.TutorialStatus.Show();
+                form.Journal.Show();
+                form.JournalStatus.Show();
+                form.Characters.Hide();
+                form.CharactersStatus.Hide();
+                form.Speedlunky.Hide();
+                form.SpeedlunkyStatus.Hide();
+                form.BigMoney.Hide();
+                form.BigMoneyStatus.Hide();
+                form.NoGold.Hide();
+                form.NoGoldStatus.Hide();
+                form.Casanova.Hide();
+                form.CasanovaStatus.Hide();
+                form.PublicEnemy.Hide();
+                form.PublicEnemyStatus.Hide();
+                form.Teamwork.Hide();
+                form.TeamworkStatus.Hide();
+                form.Addicted.Hide();
+                form.AddictedStatus.Hide();
+                form.ExtrapolatedTime.Hide();
+                form.ExtrapolatedTimeStatus.Hide();
+
+                form.drawList();
+                form.drawStatusList();
+
+                imgForm.Show();
+            }
+
+            void SelectAC(object sender, EventArgs e)
+            {
+                form.ASO.Show();
+                form.ASOStatus.Show();
+                form.Tutorial.Show();
+                form.TutorialStatus.Show();
+                form.Journal.Hide();
+                form.JournalStatus.Hide();
+                form.Characters.Show();
+                form.CharactersStatus.Show();
+                form.Speedlunky.Hide();
+                form.SpeedlunkyStatus.Hide();
+                form.BigMoney.Hide();
+                form.BigMoneyStatus.Hide();
+                form.NoGold.Hide();
+                form.NoGoldStatus.Hide();
+                form.Casanova.Hide();
+                form.CasanovaStatus.Hide();
+                form.PublicEnemy.Hide();
+                form.PublicEnemyStatus.Hide();
+                form.Teamwork.Hide();
+                form.TeamworkStatus.Hide();
+                form.Addicted.Hide();
+                form.AddictedStatus.Hide();
+                form.ExtrapolatedTime.Hide();
+                form.ExtrapolatedTimeStatus.Hide();
+
+                form.drawList();
+                form.drawStatusList();
+
+                imgForm.Show();
+            }
+
+            void SelectASO(object sender, EventArgs e)
+            {
+                // TODO
+            }
+
+            void SelectTutorial(object sender, EventArgs e)
+            {
+                form.ASO.Hide();
+                form.ASOStatus.Hide();
+                form.Tutorial.Show();
+                form.TutorialStatus.Show();
+                form.Journal.Hide();
+                form.JournalStatus.Hide();
+                form.Characters.Hide();
+                form.CharactersStatus.Hide();
+                form.Speedlunky.Hide();
+                form.SpeedlunkyStatus.Hide();
+                form.BigMoney.Hide();
+                form.BigMoneyStatus.Hide();
+                form.NoGold.Hide();
+                form.NoGoldStatus.Hide();
+                form.Casanova.Hide();
+                form.CasanovaStatus.Hide();
+                form.PublicEnemy.Hide();
+                form.PublicEnemyStatus.Hide();
+                form.Teamwork.Hide();
+                form.TeamworkStatus.Hide();
+                form.Addicted.Hide();
+                form.AddictedStatus.Hide();
+                form.ExtrapolatedTime.Hide();
+                form.ExtrapolatedTimeStatus.Hide();
+
+                form.drawList();
+                form.drawStatusList();
+
+                imgForm.Hide();
             }
 
             void Exit(object sender, EventArgs e)

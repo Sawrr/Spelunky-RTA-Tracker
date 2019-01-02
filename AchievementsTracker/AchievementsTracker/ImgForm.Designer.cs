@@ -1721,6 +1721,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ImgForm";
             this.Text = "Unlockables";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImgForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.m8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.m0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.m9)).EndInit();
@@ -1967,5 +1968,5 @@
         private System.Windows.Forms.PictureBox t10;
         private System.Windows.Forms.PictureBox t9;
         private System.Windows.Forms.PictureBox t8;
-    }
+        }
 }

@@ -106,5 +106,16 @@ namespace AchievementsTracker
                 }
             }
         }
+
+        // X button hides instead of closing
+        // Credit: https://stackoverflow.com/questions/2021681/hide-form-instead-of-closing-when-close-button-clicked
+        private void ImgForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+        }
     }
 }
