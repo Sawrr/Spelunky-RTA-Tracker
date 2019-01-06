@@ -6,6 +6,8 @@ This tracker began life as a tracker for the All Achievements category. The trac
 4. All Shortcuts + Olmec
 5. Tutorial%
 
+<img src="https://github.com/Sawrr/Spelunky-RTA-Tracker/blob/master/SpelunkyRTATracker_ASO.png" width=321>
+
 ## The All Achievements category
 *Complete all of the achievements starting from a brand new save file. The timer begins with the choice of player character and stops once the 20th achievement is completed.*
 
