@@ -118,6 +118,17 @@ namespace AchievementsTracker
             todoList.Add(PublicEnemy);
             todoList.Add(Addicted);
 
+            todoList.Add(aso1Bomb);
+            todoList.Add(aso1Rope);
+            todoList.Add(aso10k);
+            todoList.Add(aso2Bombs);
+            todoList.Add(aso2Ropes);
+            todoList.Add(asoShotgun);
+            todoList.Add(aso3Bombs);
+            todoList.Add(aso3Ropes);
+            todoList.Add(asoKey);
+            todoList.Add(asoOlmec);
+
             todoStatusList.Add(TutorialStatus);
             todoStatusList.Add(SpeedlunkyStatus);
             todoStatusList.Add(BigMoneyStatus);
@@ -128,6 +139,17 @@ namespace AchievementsTracker
             todoStatusList.Add(CasanovaStatus);
             todoStatusList.Add(PublicEnemyStatus);
             todoStatusList.Add(AddictedStatus);
+
+            todoStatusList.Add(aso1BombStatus);
+            todoStatusList.Add(aso1RopeStatus);
+            todoStatusList.Add(aso10kStatus);
+            todoStatusList.Add(aso2BombsStatus);
+            todoStatusList.Add(aso2RopesStatus);
+            todoStatusList.Add(asoShotgunStatus);
+            todoStatusList.Add(aso3BombsStatus);
+            todoStatusList.Add(aso3RopesStatus);
+            todoStatusList.Add(asoKeyStatus);
+            todoStatusList.Add(asoOlmecStatus);
 
             drawList();
             drawStatusList();
@@ -520,6 +542,168 @@ namespace AchievementsTracker
             drawStatusList();
         }
 
+        public void FinishASO1Bomb(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinishASO1Bomb(time)));
+                return;
+            }
+            aso1BombStatus.Text = FormatSplitTime(time);
+            aso1BombStatus.Font = new Font(aso1BombStatus.Font, FontStyle.Bold);
+            aso1Bomb.Font = new Font(aso1Bomb.Font, FontStyle.Bold);
+            todoList.Remove(aso1Bomb);
+            todoStatusList.Remove(aso1BombStatus);
+            doneList.Add(aso1Bomb);
+            doneStatusList.Add(aso1BombStatus);
+            drawList();
+            drawStatusList();
+        }
+
+        public void FinishASO1Rope(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinishASO1Rope(time)));
+                return;
+            }
+            aso1RopeStatus.Text = FormatSplitTime(time);
+            aso1RopeStatus.Font = new Font(aso1RopeStatus.Font, FontStyle.Bold);
+            aso1Rope.Font = new Font(aso1Rope.Font, FontStyle.Bold);
+            todoList.Remove(aso1Rope);
+            todoStatusList.Remove(aso1RopeStatus);
+            doneList.Add(aso1Rope);
+            doneStatusList.Add(aso1RopeStatus);
+            drawList();
+            drawStatusList();
+        }
+
+        public void FinishASO10k(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinishASO10k(time)));
+                return;
+            }
+            aso10kStatus.Text = FormatSplitTime(time);
+            aso10kStatus.Font = new Font(aso10kStatus.Font, FontStyle.Bold);
+            aso10k.Font = new Font(aso10k.Font, FontStyle.Bold);
+            todoList.Remove(aso10k);
+            todoStatusList.Remove(aso10kStatus);
+            doneList.Add(aso10k);
+            doneStatusList.Add(aso10kStatus);
+            drawList();
+            drawStatusList();
+        }
+
+        public void FinishASO2Bombs(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinishASO2Bombs(time)));
+                return;
+            }
+            aso2BombsStatus.Text = FormatSplitTime(time);
+            aso2BombsStatus.Font = new Font(aso2BombsStatus.Font, FontStyle.Bold);
+            aso2Bombs.Font = new Font(aso2Bombs.Font, FontStyle.Bold);
+            todoList.Remove(aso2Bombs);
+            todoStatusList.Remove(aso2BombsStatus);
+            doneList.Add(aso2Bombs);
+            doneStatusList.Add(aso2BombsStatus);
+            drawList();
+            drawStatusList();
+        }
+
+        public void FinishASO2Ropes(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinishASO2Ropes(time)));
+                return;
+            }
+            aso2RopesStatus.Text = FormatSplitTime(time);
+            aso2RopesStatus.Font = new Font(aso2RopesStatus.Font, FontStyle.Bold);
+            aso2Ropes.Font = new Font(aso2Ropes.Font, FontStyle.Bold);
+            todoList.Remove(aso2Ropes);
+            todoStatusList.Remove(aso2RopesStatus);
+            doneList.Add(aso2Ropes);
+            doneStatusList.Add(aso2RopesStatus);
+            drawList();
+            drawStatusList();
+        }
+
+        public void FinishASOShotgun(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinishASOShotgun(time)));
+                return;
+            }
+            asoShotgunStatus.Text = FormatSplitTime(time);
+            asoShotgunStatus.Font = new Font(asoShotgunStatus.Font, FontStyle.Bold);
+            asoShotgun.Font = new Font(asoShotgun.Font, FontStyle.Bold);
+            todoList.Remove(asoShotgun);
+            todoStatusList.Remove(asoShotgunStatus);
+            doneList.Add(asoShotgun);
+            doneStatusList.Add(asoShotgunStatus);
+            drawList();
+            drawStatusList();
+        }
+
+        public void FinishASO3Bombs(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinishASO3Bombs(time)));
+                return;
+            }
+            aso3BombsStatus.Text = FormatSplitTime(time);
+            aso3BombsStatus.Font = new Font(aso3BombsStatus.Font, FontStyle.Bold);
+            aso3Bombs.Font = new Font(aso3Bombs.Font, FontStyle.Bold);
+            todoList.Remove(aso3Bombs);
+            todoStatusList.Remove(aso3BombsStatus);
+            doneList.Add(aso3Bombs);
+            doneStatusList.Add(aso3BombsStatus);
+            drawList();
+            drawStatusList();
+        }
+
+        public void FinishASO3Ropes(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinishASO3Ropes(time)));
+                return;
+            }
+            aso3RopesStatus.Text = FormatSplitTime(time);
+            aso3RopesStatus.Font = new Font(aso3RopesStatus.Font, FontStyle.Bold);
+            aso3Ropes.Font = new Font(aso3Ropes.Font, FontStyle.Bold);
+            todoList.Remove(aso3Ropes);
+            todoStatusList.Remove(aso3RopesStatus);
+            doneList.Add(aso3Ropes);
+            doneStatusList.Add(aso3RopesStatus);
+            drawList();
+            drawStatusList();
+        }
+
+        public void FinishASOKey(long time)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => FinishASOKey(time)));
+                return;
+            }
+            asoKeyStatus.Text = FormatSplitTime(time);
+            asoKeyStatus.Font = new Font(asoKeyStatus.Font, FontStyle.Bold);
+            asoKey.Font = new Font(asoKey.Font, FontStyle.Bold);
+            todoList.Remove(asoKey);
+            todoStatusList.Remove(asoKeyStatus);
+            doneList.Add(asoKey);
+            doneStatusList.Add(asoKeyStatus);
+            drawList();
+            drawStatusList();
+        }
+
         // Progress status updates
 
         public void SetJournalStatus(int num)
@@ -592,6 +776,16 @@ namespace AchievementsTracker
             ASOStatus.Text = FormatSplitTime(time);
             ASOStatus.Font = new Font(ASOStatus.Font, FontStyle.Bold);
             ASO.Font = new Font(ASO.Font, FontStyle.Bold);
+
+            asoOlmecStatus.Text = FormatSplitTime(time);
+            asoOlmecStatus.Font = new Font(asoOlmecStatus.Font, FontStyle.Bold);
+            asoOlmec.Font = new Font(asoOlmec.Font, FontStyle.Bold);
+            todoList.Remove(asoOlmec);
+            todoStatusList.Remove(asoOlmecStatus);
+            doneList.Add(asoOlmec);
+            doneStatusList.Add(asoOlmecStatus);
+            drawList();
+            drawStatusList();
 
             asoFinishTime = time;
         }

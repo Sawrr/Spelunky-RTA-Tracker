@@ -283,17 +283,20 @@ namespace AchievementsTracker
                     if (newRemaining == 2)
                     {
                         // rope
+                        tracker.ASOSplit(0, time);
                         tracker.TunnelManEvent("1 Rope");
                     }
                     else if (newRemaining == 1)
                     {
                         // 10k
+                        tracker.ASOSplit(1, time);
                         tracker.TunnelManEvent("10k");
                     }
                 }
                 else if (tunnelManChapter == 2)
                 {
                     // 2 bombs
+                    tracker.ASOSplit(2, time);
                     tracker.TunnelManEvent("2 Bombs");
                 }
                 else if (tunnelManChapter == 3)
@@ -301,17 +304,20 @@ namespace AchievementsTracker
                     if (newRemaining == 2)
                     {
                         // 2 ropes
+                        tracker.ASOSplit(3, time);
                         tracker.TunnelManEvent("2 Ropes");
                     }
                     else if (newRemaining == 1)
                     {
                         // shotgun
+                        tracker.ASOSplit(4, time);
                         tracker.TunnelManEvent("Shotgun");
                     }
                 }
                 else if (tunnelManChapter == 4)
                 {
                     // 3 bombs
+                    tracker.ASOSplit(5, time);
                     tracker.TunnelManEvent("3 Bombs");
                 }
                 else if (tunnelManChapter == 5)
@@ -319,17 +325,20 @@ namespace AchievementsTracker
                     if (newRemaining == 2)
                     {
                         // 3 ropes
+                        tracker.ASOSplit(6, time);
                         tracker.TunnelManEvent("3 Ropes");
                     }
                     else if (newRemaining == 1)
                     {
                         // key
+                        tracker.ASOSplit(7, time);
                         tracker.TunnelManEvent("Key");
                     }
                 }
                 else if (tunnelManChapter == 6)
                 {
                     // done, except for Olmec
+                    tracker.ASOSplit(8, time);
                     tracker.TunnelManEvent("Olmec");
                 }
             }

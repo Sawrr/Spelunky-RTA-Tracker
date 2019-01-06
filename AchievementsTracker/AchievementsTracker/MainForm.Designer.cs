@@ -55,6 +55,26 @@
             this.ASO = new System.Windows.Forms.Label();
             this.Tutorial = new System.Windows.Forms.Label();
             this.TutorialStatus = new System.Windows.Forms.Label();
+            this.aso1Bomb = new System.Windows.Forms.Label();
+            this.aso1Rope = new System.Windows.Forms.Label();
+            this.aso10k = new System.Windows.Forms.Label();
+            this.aso2Bombs = new System.Windows.Forms.Label();
+            this.aso2Ropes = new System.Windows.Forms.Label();
+            this.asoShotgun = new System.Windows.Forms.Label();
+            this.aso3Bombs = new System.Windows.Forms.Label();
+            this.aso3Ropes = new System.Windows.Forms.Label();
+            this.asoKey = new System.Windows.Forms.Label();
+            this.asoOlmec = new System.Windows.Forms.Label();
+            this.aso1BombStatus = new System.Windows.Forms.Label();
+            this.aso1RopeStatus = new System.Windows.Forms.Label();
+            this.aso10kStatus = new System.Windows.Forms.Label();
+            this.aso2BombsStatus = new System.Windows.Forms.Label();
+            this.aso2RopesStatus = new System.Windows.Forms.Label();
+            this.asoShotgunStatus = new System.Windows.Forms.Label();
+            this.aso3BombsStatus = new System.Windows.Forms.Label();
+            this.aso3RopesStatus = new System.Windows.Forms.Label();
+            this.asoKeyStatus = new System.Windows.Forms.Label();
+            this.asoOlmecStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // runningLabel
@@ -310,6 +330,216 @@
             this.TutorialStatus.Size = new System.Drawing.Size(0, 20);
             this.TutorialStatus.TabIndex = 27;
             // 
+            // aso0
+            // 
+            this.aso1Bomb.AutoSize = true;
+            this.aso1Bomb.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso1Bomb.Location = new System.Drawing.Point(12, 105);
+            this.aso1Bomb.Name = "aso0";
+            this.aso1Bomb.Size = new System.Drawing.Size(71, 20);
+            this.aso1Bomb.TabIndex = 28;
+            this.aso1Bomb.Text = "1 Bomb";
+            this.aso1Bomb.Visible = false;
+            // 
+            // aso1
+            // 
+            this.aso1Rope.AutoSize = true;
+            this.aso1Rope.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso1Rope.Location = new System.Drawing.Point(12, 140);
+            this.aso1Rope.Name = "aso1";
+            this.aso1Rope.Size = new System.Drawing.Size(66, 20);
+            this.aso1Rope.TabIndex = 29;
+            this.aso1Rope.Text = "1 Rope";
+            this.aso1Rope.Visible = false;
+            // 
+            // aso2
+            // 
+            this.aso10k.AutoSize = true;
+            this.aso10k.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso10k.Location = new System.Drawing.Point(11, 175);
+            this.aso10k.Name = "aso2";
+            this.aso10k.Size = new System.Drawing.Size(38, 20);
+            this.aso10k.TabIndex = 30;
+            this.aso10k.Text = "10k";
+            this.aso10k.Visible = false;
+            // 
+            // aso3
+            // 
+            this.aso2Bombs.AutoSize = true;
+            this.aso2Bombs.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso2Bombs.Location = new System.Drawing.Point(12, 210);
+            this.aso2Bombs.Name = "aso3";
+            this.aso2Bombs.Size = new System.Drawing.Size(80, 20);
+            this.aso2Bombs.TabIndex = 31;
+            this.aso2Bombs.Text = "2 Bombs";
+            this.aso2Bombs.Visible = false;
+            // 
+            // aso4
+            // 
+            this.aso2Ropes.AutoSize = true;
+            this.aso2Ropes.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso2Ropes.Location = new System.Drawing.Point(12, 245);
+            this.aso2Ropes.Name = "aso4";
+            this.aso2Ropes.Size = new System.Drawing.Size(75, 20);
+            this.aso2Ropes.TabIndex = 32;
+            this.aso2Ropes.Text = "2 Ropes";
+            this.aso2Ropes.Visible = false;
+            // 
+            // aso5
+            // 
+            this.asoShotgun.AutoSize = true;
+            this.asoShotgun.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.asoShotgun.Location = new System.Drawing.Point(12, 280);
+            this.asoShotgun.Name = "aso5";
+            this.asoShotgun.Size = new System.Drawing.Size(76, 20);
+            this.asoShotgun.TabIndex = 33;
+            this.asoShotgun.Text = "Shotgun";
+            this.asoShotgun.Visible = false;
+            // 
+            // aso6
+            // 
+            this.aso3Bombs.AutoSize = true;
+            this.aso3Bombs.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso3Bombs.Location = new System.Drawing.Point(12, 315);
+            this.aso3Bombs.Name = "aso6";
+            this.aso3Bombs.Size = new System.Drawing.Size(80, 20);
+            this.aso3Bombs.TabIndex = 34;
+            this.aso3Bombs.Text = "3 Bombs";
+            this.aso3Bombs.Visible = false;
+            // 
+            // aso7
+            // 
+            this.aso3Ropes.AutoSize = true;
+            this.aso3Ropes.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso3Ropes.Location = new System.Drawing.Point(12, 350);
+            this.aso3Ropes.Name = "aso7";
+            this.aso3Ropes.Size = new System.Drawing.Size(75, 20);
+            this.aso3Ropes.TabIndex = 35;
+            this.aso3Ropes.Text = "3 Ropes";
+            this.aso3Ropes.Visible = false;
+            // 
+            // aso8
+            // 
+            this.asoKey.AutoSize = true;
+            this.asoKey.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.asoKey.Location = new System.Drawing.Point(12, 385);
+            this.asoKey.Name = "aso8";
+            this.asoKey.Size = new System.Drawing.Size(39, 20);
+            this.asoKey.TabIndex = 36;
+            this.asoKey.Text = "Key";
+            this.asoKey.Visible = false;
+            // 
+            // aso9
+            // 
+            this.asoOlmec.AutoSize = true;
+            this.asoOlmec.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.asoOlmec.Location = new System.Drawing.Point(12, 420);
+            this.asoOlmec.Name = "aso9";
+            this.asoOlmec.Size = new System.Drawing.Size(60, 20);
+            this.asoOlmec.TabIndex = 37;
+            this.asoOlmec.Text = "Olmec";
+            this.asoOlmec.Visible = false;
+            // 
+            // aso0Status
+            // 
+            this.aso1BombStatus.AutoSize = true;
+            this.aso1BombStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso1BombStatus.Location = new System.Drawing.Point(218, 105);
+            this.aso1BombStatus.Name = "aso0Status";
+            this.aso1BombStatus.Size = new System.Drawing.Size(0, 20);
+            this.aso1BombStatus.TabIndex = 38;
+            this.aso1BombStatus.Visible = false;
+            // 
+            // aso1Status
+            // 
+            this.aso1RopeStatus.AutoSize = true;
+            this.aso1RopeStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso1RopeStatus.Location = new System.Drawing.Point(218, 140);
+            this.aso1RopeStatus.Name = "aso1Status";
+            this.aso1RopeStatus.Size = new System.Drawing.Size(0, 20);
+            this.aso1RopeStatus.TabIndex = 39;
+            this.aso1RopeStatus.Visible = false;
+            // 
+            // aso2Status
+            // 
+            this.aso10kStatus.AutoSize = true;
+            this.aso10kStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso10kStatus.Location = new System.Drawing.Point(218, 175);
+            this.aso10kStatus.Name = "aso2Status";
+            this.aso10kStatus.Size = new System.Drawing.Size(0, 20);
+            this.aso10kStatus.TabIndex = 40;
+            this.aso10kStatus.Visible = false;
+            // 
+            // aso3Status
+            // 
+            this.aso2BombsStatus.AutoSize = true;
+            this.aso2BombsStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso2BombsStatus.Location = new System.Drawing.Point(218, 210);
+            this.aso2BombsStatus.Name = "aso3Status";
+            this.aso2BombsStatus.Size = new System.Drawing.Size(0, 20);
+            this.aso2BombsStatus.TabIndex = 41;
+            this.aso2BombsStatus.Visible = false;
+            // 
+            // aso4Status
+            // 
+            this.aso2RopesStatus.AutoSize = true;
+            this.aso2RopesStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso2RopesStatus.Location = new System.Drawing.Point(218, 245);
+            this.aso2RopesStatus.Name = "aso4Status";
+            this.aso2RopesStatus.Size = new System.Drawing.Size(0, 20);
+            this.aso2RopesStatus.TabIndex = 42;
+            this.aso2RopesStatus.Visible = false;
+            // 
+            // aso5Status
+            // 
+            this.asoShotgunStatus.AutoSize = true;
+            this.asoShotgunStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.asoShotgunStatus.Location = new System.Drawing.Point(218, 280);
+            this.asoShotgunStatus.Name = "aso5Status";
+            this.asoShotgunStatus.Size = new System.Drawing.Size(0, 20);
+            this.asoShotgunStatus.TabIndex = 43;
+            this.asoShotgunStatus.Visible = false;
+            // 
+            // aso6Status
+            // 
+            this.aso3BombsStatus.AutoSize = true;
+            this.aso3BombsStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso3BombsStatus.Location = new System.Drawing.Point(218, 315);
+            this.aso3BombsStatus.Name = "aso6Status";
+            this.aso3BombsStatus.Size = new System.Drawing.Size(0, 20);
+            this.aso3BombsStatus.TabIndex = 44;
+            this.aso3BombsStatus.Visible = false;
+            // 
+            // aso7Status
+            // 
+            this.aso3RopesStatus.AutoSize = true;
+            this.aso3RopesStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aso3RopesStatus.Location = new System.Drawing.Point(218, 350);
+            this.aso3RopesStatus.Name = "aso7Status";
+            this.aso3RopesStatus.Size = new System.Drawing.Size(0, 20);
+            this.aso3RopesStatus.TabIndex = 45;
+            this.aso3RopesStatus.Visible = false;
+            // 
+            // aso8Status
+            // 
+            this.asoKeyStatus.AutoSize = true;
+            this.asoKeyStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.asoKeyStatus.Location = new System.Drawing.Point(218, 385);
+            this.asoKeyStatus.Name = "aso8Status";
+            this.asoKeyStatus.Size = new System.Drawing.Size(0, 20);
+            this.asoKeyStatus.TabIndex = 46;
+            this.asoKeyStatus.Visible = false;
+            // 
+            // aso9Status
+            // 
+            this.asoOlmecStatus.AutoSize = true;
+            this.asoOlmecStatus.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.asoOlmecStatus.Location = new System.Drawing.Point(218, 420);
+            this.asoOlmecStatus.Name = "aso9Status";
+            this.asoOlmecStatus.Size = new System.Drawing.Size(0, 20);
+            this.asoOlmecStatus.TabIndex = 47;
+            this.asoOlmecStatus.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -317,6 +547,26 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(304, 532);
+            this.Controls.Add(this.asoOlmecStatus);
+            this.Controls.Add(this.asoKeyStatus);
+            this.Controls.Add(this.aso3RopesStatus);
+            this.Controls.Add(this.aso3BombsStatus);
+            this.Controls.Add(this.asoShotgunStatus);
+            this.Controls.Add(this.aso2RopesStatus);
+            this.Controls.Add(this.aso2BombsStatus);
+            this.Controls.Add(this.aso10kStatus);
+            this.Controls.Add(this.aso1RopeStatus);
+            this.Controls.Add(this.aso1BombStatus);
+            this.Controls.Add(this.asoOlmec);
+            this.Controls.Add(this.asoKey);
+            this.Controls.Add(this.aso3Ropes);
+            this.Controls.Add(this.aso3Bombs);
+            this.Controls.Add(this.asoShotgun);
+            this.Controls.Add(this.aso2Ropes);
+            this.Controls.Add(this.aso2Bombs);
+            this.Controls.Add(this.aso10k);
+            this.Controls.Add(this.aso1Rope);
+            this.Controls.Add(this.aso1Bomb);
             this.Controls.Add(this.TutorialStatus);
             this.Controls.Add(this.Tutorial);
             this.Controls.Add(this.ASO);
@@ -385,6 +635,26 @@
         public System.Windows.Forms.Label Tutorial;
         public System.Windows.Forms.Label TutorialStatus;
         public System.Windows.Forms.Label Addicted;
+        public System.Windows.Forms.Label aso1Bomb;
+        public System.Windows.Forms.Label aso1Rope;
+        public System.Windows.Forms.Label aso10k;
+        public System.Windows.Forms.Label aso2Bombs;
+        public System.Windows.Forms.Label aso2Ropes;
+        public System.Windows.Forms.Label asoShotgun;
+        public System.Windows.Forms.Label aso3Bombs;
+        public System.Windows.Forms.Label aso3Ropes;
+        public System.Windows.Forms.Label asoKey;
+        public System.Windows.Forms.Label asoOlmec;
+        public System.Windows.Forms.Label aso1BombStatus;
+        public System.Windows.Forms.Label aso1RopeStatus;
+        public System.Windows.Forms.Label aso10kStatus;
+        public System.Windows.Forms.Label aso2BombsStatus;
+        public System.Windows.Forms.Label aso2RopesStatus;
+        public System.Windows.Forms.Label asoShotgunStatus;
+        public System.Windows.Forms.Label aso3BombsStatus;
+        public System.Windows.Forms.Label aso3RopesStatus;
+        public System.Windows.Forms.Label asoKeyStatus;
+        public System.Windows.Forms.Label asoOlmecStatus;
     }
 }
 

@@ -172,6 +172,40 @@ namespace AchievementsTracker
             ui.SetASOStatus(status);
         }
 
+        public void ASOSplit(int index, long time)
+        {
+            switch (index)
+            {
+                case 0:
+                    ui.FinishASO1Bomb(time);
+                    break;
+                case 1:
+                    ui.FinishASO1Rope(time);
+                    break;
+                case 2:
+                    ui.FinishASO10k(time);
+                    break;
+                case 3:
+                    ui.FinishASO2Bombs(time);
+                    break;
+                case 4:
+                    ui.FinishASO2Ropes(time);
+                    break;
+                case 5:
+                    ui.FinishASOShotgun(time);
+                    break;
+                case 6:
+                    ui.FinishASO3Bombs(time);
+                    break;
+                case 7:
+                    ui.FinishASO3Ropes(time);
+                    break;
+                case 8:
+                    ui.FinishASOKey(time);
+                    break;
+            }
+        }
+
         public void ASODone(long time)
         {
             ui.ASODone(time);

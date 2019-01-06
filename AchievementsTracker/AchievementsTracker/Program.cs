@@ -146,6 +146,27 @@ namespace AchievementsTracker
                 form.ExtrapolatedTime.Show();
                 form.ExtrapolatedTimeStatus.Show();
 
+                form.aso1Bomb.Hide();
+                form.aso1BombStatus.Hide();
+                form.aso1Rope.Hide();
+                form.aso1RopeStatus.Hide();
+                form.aso10k.Hide();
+                form.aso10kStatus.Hide();
+                form.aso2Bombs.Hide();
+                form.aso2BombsStatus.Hide();
+                form.aso2Ropes.Hide();
+                form.aso2RopesStatus.Hide();
+                form.asoShotgun.Hide();
+                form.asoShotgunStatus.Hide();
+                form.aso3Bombs.Hide();
+                form.aso3BombsStatus.Hide();
+                form.aso3Ropes.Hide();
+                form.aso3RopesStatus.Hide();
+                form.asoKey.Hide();
+                form.asoKeyStatus.Hide();
+                form.asoOlmec.Hide();
+                form.asoOlmecStatus.Hide();
+
                 form.drawList();
                 form.drawStatusList();
 
@@ -180,6 +201,27 @@ namespace AchievementsTracker
                 form.AddictedStatus.Hide();
                 form.ExtrapolatedTime.Hide();
                 form.ExtrapolatedTimeStatus.Hide();
+
+                form.aso1Bomb.Hide();
+                form.aso1BombStatus.Hide();
+                form.aso1Rope.Hide();
+                form.aso1RopeStatus.Hide();
+                form.aso10k.Hide();
+                form.aso10kStatus.Hide();
+                form.aso2Bombs.Hide();
+                form.aso2BombsStatus.Hide();
+                form.aso2Ropes.Hide();
+                form.aso2RopesStatus.Hide();
+                form.asoShotgun.Hide();
+                form.asoShotgunStatus.Hide();
+                form.aso3Bombs.Hide();
+                form.aso3BombsStatus.Hide();
+                form.aso3Ropes.Hide();
+                form.aso3RopesStatus.Hide();
+                form.asoKey.Hide();
+                form.asoKeyStatus.Hide();
+                form.asoOlmec.Hide();
+                form.asoOlmecStatus.Hide();
 
                 form.drawList();
                 form.drawStatusList();
@@ -216,6 +258,27 @@ namespace AchievementsTracker
                 form.ExtrapolatedTime.Hide();
                 form.ExtrapolatedTimeStatus.Hide();
 
+                form.aso1Bomb.Hide();
+                form.aso1BombStatus.Hide();
+                form.aso1Rope.Hide();
+                form.aso1RopeStatus.Hide();
+                form.aso10k.Hide();
+                form.aso10kStatus.Hide();
+                form.aso2Bombs.Hide();
+                form.aso2BombsStatus.Hide();
+                form.aso2Ropes.Hide();
+                form.aso2RopesStatus.Hide();
+                form.asoShotgun.Hide();
+                form.asoShotgunStatus.Hide();
+                form.aso3Bombs.Hide();
+                form.aso3BombsStatus.Hide();
+                form.aso3Ropes.Hide();
+                form.aso3RopesStatus.Hide();
+                form.asoKey.Hide();
+                form.asoKeyStatus.Hide();
+                form.asoOlmec.Hide();
+                form.asoOlmecStatus.Hide();
+
                 form.drawList();
                 form.drawStatusList();
 
@@ -251,6 +314,27 @@ namespace AchievementsTracker
                 form.ExtrapolatedTime.Hide();
                 form.ExtrapolatedTimeStatus.Hide();
 
+                form.aso1Bomb.Show();
+                form.aso1BombStatus.Show();
+                form.aso1Rope.Show();
+                form.aso1RopeStatus.Show();
+                form.aso10k.Show();
+                form.aso10kStatus.Show();
+                form.aso2Bombs.Show();
+                form.aso2BombsStatus.Show();
+                form.aso2Ropes.Show();
+                form.aso2RopesStatus.Show();
+                form.asoShotgun.Show();
+                form.asoShotgunStatus.Show();
+                form.aso3Bombs.Show();
+                form.aso3BombsStatus.Show();
+                form.aso3Ropes.Show();
+                form.aso3RopesStatus.Show();
+                form.asoKey.Show();
+                form.asoKeyStatus.Show();
+                form.asoOlmec.Show();
+                form.asoOlmecStatus.Show();
+
                 form.drawList();
                 form.drawStatusList();
 
@@ -285,6 +369,27 @@ namespace AchievementsTracker
                 form.AddictedStatus.Hide();
                 form.ExtrapolatedTime.Hide();
                 form.ExtrapolatedTimeStatus.Hide();
+
+                form.aso1Bomb.Hide();
+                form.aso1BombStatus.Hide();
+                form.aso1Rope.Hide();
+                form.aso1RopeStatus.Hide();
+                form.aso10k.Hide();
+                form.aso10kStatus.Hide();
+                form.aso2Bombs.Hide();
+                form.aso2BombsStatus.Hide();
+                form.aso2Ropes.Hide();
+                form.aso2RopesStatus.Hide();
+                form.asoShotgun.Hide();
+                form.asoShotgunStatus.Hide();
+                form.aso3Bombs.Hide();
+                form.aso3BombsStatus.Hide();
+                form.aso3Ropes.Hide();
+                form.aso3RopesStatus.Hide();
+                form.asoKey.Hide();
+                form.asoKeyStatus.Hide();
+                form.asoOlmec.Hide();
+                form.asoOlmecStatus.Hide();
 
                 form.drawList();
                 form.drawStatusList();
