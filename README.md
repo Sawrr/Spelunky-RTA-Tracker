@@ -47,4 +47,4 @@ The tracker only observes the health of Players 1 and 2 for the Good Teamwork ac
 - Download here if you need it: https://www.microsoft.com/net/download/dotnet-framework-runtime
 
 ## Download
-[Download the beta](https://github.com/Sawrr/Spelunky-AllAchievements/releases/download/1.7.0/AchievementsTracker.exe) or check the Releases tab
+[Download the beta](https://github.com/Sawrr/Spelunky-AllAchievements/releases/download/1.8.0/AchievementsTracker.exe) or check the Releases tab
