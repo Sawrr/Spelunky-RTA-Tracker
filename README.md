@@ -1,4 +1,11 @@
-# All Achievements Tracker
+# Spelunky RTA Tracker
+This tracker began life as a tracker for the All Achievements category. The tracker now supports major RTA categories including:
+1. All Achievements
+2. All Journal Entries
+3. All Characters
+4. All Shortcuts + Olmec
+5. Tutorial%
+
 ## The All Achievements category
 *Complete all of the achievements starting from a brand new save file. The timer begins with the choice of player character and stops once the 20th achievement is completed.*
 
