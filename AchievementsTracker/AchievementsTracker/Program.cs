@@ -150,6 +150,8 @@ namespace AchievementsTracker
                 form.drawStatusList();
 
                 imgForm.Show();
+
+                form.changeCategory(Category.AA);
             }
 
             void SelectAJE(object sender, EventArgs e)
@@ -183,6 +185,8 @@ namespace AchievementsTracker
                 form.drawStatusList();
 
                 imgForm.Show();
+
+                form.changeCategory(Category.AJE);
             }
 
             void SelectAC(object sender, EventArgs e)
@@ -216,11 +220,43 @@ namespace AchievementsTracker
                 form.drawStatusList();
 
                 imgForm.Show();
+
+                form.changeCategory(Category.AC);
             }
 
             void SelectASO(object sender, EventArgs e)
             {
-                // TODO
+                form.ASO.Show();
+                form.ASOStatus.Show();
+                form.Tutorial.Show();
+                form.TutorialStatus.Show();
+                form.Journal.Hide();
+                form.JournalStatus.Hide();
+                form.Characters.Hide();
+                form.CharactersStatus.Hide();
+                form.Speedlunky.Hide();
+                form.SpeedlunkyStatus.Hide();
+                form.BigMoney.Hide();
+                form.BigMoneyStatus.Hide();
+                form.NoGold.Hide();
+                form.NoGoldStatus.Hide();
+                form.Casanova.Hide();
+                form.CasanovaStatus.Hide();
+                form.PublicEnemy.Hide();
+                form.PublicEnemyStatus.Hide();
+                form.Teamwork.Hide();
+                form.TeamworkStatus.Hide();
+                form.Addicted.Hide();
+                form.AddictedStatus.Hide();
+                form.ExtrapolatedTime.Hide();
+                form.ExtrapolatedTimeStatus.Hide();
+
+                form.drawList();
+                form.drawStatusList();
+
+                imgForm.Show();
+
+                form.changeCategory(Category.ASO);
             }
 
             void SelectTutorial(object sender, EventArgs e)
@@ -254,6 +290,8 @@ namespace AchievementsTracker
                 form.drawStatusList();
 
                 imgForm.Hide();
+
+                form.changeCategory(Category.Tutorial);
             }
 
             void Exit(object sender, EventArgs e)

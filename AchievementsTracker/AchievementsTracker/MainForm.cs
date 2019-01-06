@@ -42,6 +42,15 @@ namespace AchievementsTracker
 
         private TrayApplicationContext context;
 
+        // Default to AA
+        private Category category = Category.AA;
+
+        private long achievementsFinishTime;
+        private long journalFinishTime;
+        private long charactersFinishTime;
+        private long asoFinishTime;
+        private long tutorialFinishTime;
+
         public MainForm(TrayApplicationContext ctx)
         {
             context = ctx;
@@ -82,6 +91,13 @@ namespace AchievementsTracker
             runTimer.Tick += new EventHandler(UpdateTimer);
             runTimer.Interval = 50;
             runTimer.Start();
+
+            // Reset completion times
+            achievementsFinishTime = 0;
+            journalFinishTime = 0;
+            charactersFinishTime = 0;
+            asoFinishTime = 0;
+            tutorialFinishTime = 0;
 
             // Label lists
 
@@ -154,6 +170,11 @@ namespace AchievementsTracker
             timer.Text = FormatTime(0);
         }
 
+        public void changeCategory(Category cat)
+        {
+            this.category = cat;
+        }
+
         public void drawList()
         {
             int x = FORM_LABEL_X;
@@ -210,14 +231,16 @@ namespace AchievementsTracker
         public void StopTimer(long time)
         {
             runTimer.Stop();
-            FinalizeTimer(time);
+            SetTimer(time);
+
+            achievementsFinishTime = time;
         }
 
-        public void FinalizeTimer(long time)
+        public void SetTimer(long time)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(() => FinalizeTimer(time)));
+                Invoke(new Action(() => SetTimer(time)));
                 return;
             }
             timer.Text = FormatTime(time - startTime);
@@ -225,12 +248,37 @@ namespace AchievementsTracker
 
         public void UpdateTimer(object sender, EventArgs e)
         {
+            // Make sure run has started
             if (startTime == 0)
             {
                 return;
             }
 
-            long time = DateTimeOffset.Now.ToUnixTimeMilliseconds() - startTime;
+            // Get current time
+            long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+
+            // If selected category is complete, display the completion time instead
+            switch (this.category)
+            {
+                case Category.AA:
+                    if (achievementsFinishTime != 0) time = achievementsFinishTime;
+                    break;
+                case Category.AJE:
+                    if (journalFinishTime != 0) time = journalFinishTime;
+                    break;
+                case Category.AC:
+                    if (charactersFinishTime != 0) time = charactersFinishTime;
+                    break;
+                case Category.ASO:
+                    if (asoFinishTime != 0) time = asoFinishTime;
+                    break;
+                case Category.Tutorial:
+                    if (tutorialFinishTime != 0) time = tutorialFinishTime;
+                    break;
+            }
+
+            // Subtract off start time of run
+            time -= startTime;
 
             timer.Text = FormatTime(time);
         }
@@ -286,6 +334,8 @@ namespace AchievementsTracker
             doneStatusList.Add(TutorialStatus);
             drawList();
             drawStatusList();
+
+            tutorialFinishTime = time;
         }
 
         public void FinishSpeedlunky(long time)
@@ -410,6 +460,8 @@ namespace AchievementsTracker
             doneStatusList.Add(JournalStatus);
             drawList();
             drawStatusList();
+
+            journalFinishTime = time;
         }
 
         public void FinishCharacters(long time)
@@ -428,6 +480,8 @@ namespace AchievementsTracker
             doneStatusList.Add(CharactersStatus);
             drawList();
             drawStatusList();
+
+            charactersFinishTime = time;
         }
 
         public void FinishCasanova(long time)
@@ -538,6 +592,8 @@ namespace AchievementsTracker
             ASOStatus.Text = FormatSplitTime(time);
             ASOStatus.Font = new Font(ASOStatus.Font, FontStyle.Bold);
             ASO.Font = new Font(ASO.Font, FontStyle.Bold);
+
+            asoFinishTime = time;
         }
     }
 }
