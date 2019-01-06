@@ -7,7 +7,7 @@
     <ProjectGuid>{7F22C9B0-91CD-4B3D-BB9D-97D7F481A400}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>AchievementsTracker</RootNamespace>
-    <AssemblyName>AchievementsTracker</AssemblyName>
+    <AssemblyName>Spelunky RTA Tracker</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

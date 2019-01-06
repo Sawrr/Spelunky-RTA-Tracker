@@ -280,9 +280,8 @@ namespace AchievementsTracker
             }
         }
 
-        public void StopTimer(long time)
+        public void FinishAA(long time)
         {
-            runTimer.Stop();
             SetTimer(time);
 
             achievementsFinishTime = time;

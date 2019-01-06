@@ -26,7 +26,7 @@ namespace AchievementsTracker
             };
 
             // Logging
-            string logFolder = "AchievementsTrackerLogs";
+            string logFolder = "SpelunkyRTATrackerLogs";
             Directory.CreateDirectory(logFolder);
             string logName = logFolder + "\\log_" + (DateTime.Now.ToString("MMddyyyy_HHmmss")) + ".txt";
             StreamWriter logFile = File.CreateText(logName);
@@ -453,7 +453,7 @@ namespace AchievementsTracker
 
     public class AppSettings<T> where T : new()
     {
-        private const string FILENAME = "AchievementsTrackerSettings.txt";
+        private const string FILENAME = "SpelunkyRTATrackerSettings.txt";
 
         public void Save()
         {

@@ -50,7 +50,7 @@ namespace AchievementsTracker
 
         public void RunCompleted(long time)
         {
-            ui.StopTimer(time);
+            ui.FinishAA(time);
         }
 
         public void NineteenAchieved(long time, int plays)
