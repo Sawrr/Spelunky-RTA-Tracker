@@ -166,6 +166,16 @@ namespace AchievementsTracker
             Teamwork.Font = new Font(Teamwork.Font, FontStyle.Regular);
             Addicted.Font = new Font(Addicted.Font, FontStyle.Regular);
             ASO.Font = new Font(ASO.Font, FontStyle.Regular);
+            aso1Bomb.Font = new Font(aso1Bomb.Font, FontStyle.Regular);
+            aso1Rope.Font = new Font(aso1Rope.Font, FontStyle.Regular);
+            aso10k.Font = new Font(aso10k.Font, FontStyle.Regular);
+            aso2Bombs.Font = new Font(aso2Bombs.Font, FontStyle.Regular);
+            aso2Ropes.Font = new Font(aso2Ropes.Font, FontStyle.Regular);
+            asoShotgun.Font = new Font(asoShotgun.Font, FontStyle.Regular);
+            aso3Bombs.Font = new Font(aso3Bombs.Font, FontStyle.Regular);
+            aso3Ropes.Font = new Font(aso3Ropes.Font, FontStyle.Regular);
+            asoKey.Font = new Font(asoKey.Font, FontStyle.Regular);
+            asoOlmec.Font = new Font(asoOlmec.Font, FontStyle.Regular);
 
             // Refresh statuses
             SetJournalStatus(0);
@@ -187,6 +197,26 @@ namespace AchievementsTracker
             ExtrapolatedTimeStatus.Text = "";
             TutorialStatus.Text = "";
             ASOStatus.Text = "1 Bomb";
+            aso1BombStatus.Font = new Font(aso1BombStatus.Font, FontStyle.Regular);
+            aso1RopeStatus.Font = new Font(aso1RopeStatus.Font, FontStyle.Regular);
+            aso10kStatus.Font = new Font(aso10kStatus.Font, FontStyle.Regular);
+            aso2BombsStatus.Font = new Font(aso2BombsStatus.Font, FontStyle.Regular);
+            aso2RopesStatus.Font = new Font(aso2RopesStatus.Font, FontStyle.Regular);
+            asoShotgunStatus.Font = new Font(asoShotgunStatus.Font, FontStyle.Regular);
+            aso3BombsStatus.Font = new Font(aso3BombsStatus.Font, FontStyle.Regular);
+            aso3RopesStatus.Font = new Font(aso3RopesStatus.Font, FontStyle.Regular);
+            asoKeyStatus.Font = new Font(asoKeyStatus.Font, FontStyle.Regular);
+            asoOlmecStatus.Font = new Font(asoOlmecStatus.Font, FontStyle.Regular);
+            aso1BombStatus.Text = "";
+            aso1RopeStatus.Text = "";
+            aso10kStatus.Text = "";
+            aso2BombsStatus.Text = "";
+            aso2RopesStatus.Text = "";
+            asoShotgunStatus.Text = "";
+            aso3BombsStatus.Text = "";
+            aso3RopesStatus.Text = "";
+            asoKeyStatus.Text = "";
+            asoOlmecStatus.Text = "";
 
             // Reset timer
             timer.Text = FormatTime(0);
