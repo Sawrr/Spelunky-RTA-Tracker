@@ -254,7 +254,7 @@ namespace AchievementsTracker
                 form.drawList();
                 form.drawStatusList();
 
-                imgForm.Show();
+                imgForm.Hide();
 
                 form.changeCategory(Category.ASO);
             }
