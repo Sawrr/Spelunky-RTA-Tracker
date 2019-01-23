@@ -40,12 +40,20 @@
             this.textColorText = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textColorDialog = new System.Windows.Forms.ColorDialog();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.freshSaveBox = new System.Windows.Forms.TextBox();
+            this.gameSaveBox = new System.Windows.Forms.TextBox();
+            this.freshSaveButton = new System.Windows.Forms.Button();
+            this.gameSaveButton = new System.Windows.Forms.Button();
+            this.clearFresh = new System.Windows.Forms.Button();
+            this.clearGame = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(151, 308);
+            this.button1.Location = new System.Drawing.Point(190, 479);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -134,12 +142,109 @@
             // 
             this.textColorDialog.Color = System.Drawing.Color.White;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label4.Location = new System.Drawing.Point(12, 301);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(90, 20);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Fresh Save";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label5.Location = new System.Drawing.Point(12, 394);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(93, 20);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Game Save";
+            // 
+            // freshSaveBox
+            // 
+            this.freshSaveBox.Enabled = false;
+            this.freshSaveBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.freshSaveBox.Location = new System.Drawing.Point(16, 341);
+            this.freshSaveBox.Name = "freshSaveBox";
+            this.freshSaveBox.ReadOnly = true;
+            this.freshSaveBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.freshSaveBox.Size = new System.Drawing.Size(249, 20);
+            this.freshSaveBox.TabIndex = 11;
+            // 
+            // gameSaveBox
+            // 
+            this.gameSaveBox.Enabled = false;
+            this.gameSaveBox.Location = new System.Drawing.Point(16, 432);
+            this.gameSaveBox.Name = "gameSaveBox";
+            this.gameSaveBox.ReadOnly = true;
+            this.gameSaveBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.gameSaveBox.Size = new System.Drawing.Size(249, 20);
+            this.gameSaveBox.TabIndex = 12;
+            // 
+            // freshSaveButton
+            // 
+            this.freshSaveButton.ForeColor = System.Drawing.Color.Black;
+            this.freshSaveButton.Location = new System.Drawing.Point(113, 300);
+            this.freshSaveButton.Name = "freshSaveButton";
+            this.freshSaveButton.Size = new System.Drawing.Size(73, 24);
+            this.freshSaveButton.TabIndex = 14;
+            this.freshSaveButton.Text = "Browse...";
+            this.freshSaveButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.freshSaveButton.UseVisualStyleBackColor = true;
+            this.freshSaveButton.Click += new System.EventHandler(this.freshSaveButton_Click);
+            // 
+            // gameSaveButton
+            // 
+            this.gameSaveButton.ForeColor = System.Drawing.Color.Black;
+            this.gameSaveButton.Location = new System.Drawing.Point(113, 393);
+            this.gameSaveButton.Name = "gameSaveButton";
+            this.gameSaveButton.Size = new System.Drawing.Size(73, 24);
+            this.gameSaveButton.TabIndex = 15;
+            this.gameSaveButton.Text = "Browse...";
+            this.gameSaveButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.gameSaveButton.UseVisualStyleBackColor = true;
+            this.gameSaveButton.Click += new System.EventHandler(this.gameSaveButton_Click);
+            // 
+            // clearFresh
+            // 
+            this.clearFresh.ForeColor = System.Drawing.Color.Black;
+            this.clearFresh.Location = new System.Drawing.Point(192, 301);
+            this.clearFresh.Name = "clearFresh";
+            this.clearFresh.Size = new System.Drawing.Size(61, 24);
+            this.clearFresh.TabIndex = 16;
+            this.clearFresh.Text = "Clear";
+            this.clearFresh.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.clearFresh.UseVisualStyleBackColor = true;
+            this.clearFresh.Click += new System.EventHandler(this.clearFresh_Click);
+            // 
+            // clearGame
+            // 
+            this.clearGame.ForeColor = System.Drawing.Color.Black;
+            this.clearGame.Location = new System.Drawing.Point(192, 394);
+            this.clearGame.Name = "clearGame";
+            this.clearGame.Size = new System.Drawing.Size(61, 24);
+            this.clearGame.TabIndex = 17;
+            this.clearGame.Text = "Clear";
+            this.clearGame.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.clearGame.UseVisualStyleBackColor = true;
+            this.clearGame.Click += new System.EventHandler(this.clearGame_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            this.ClientSize = new System.Drawing.Size(247, 360);
+            this.ClientSize = new System.Drawing.Size(277, 523);
+            this.Controls.Add(this.clearGame);
+            this.Controls.Add(this.clearFresh);
+            this.Controls.Add(this.gameSaveButton);
+            this.Controls.Add(this.freshSaveButton);
+            this.Controls.Add(this.gameSaveBox);
+            this.Controls.Add(this.freshSaveBox);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.textColorPicker);
             this.Controls.Add(this.textColorText);
             this.Controls.Add(this.label3);
@@ -152,6 +257,7 @@
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
             this.ResumeLayout(false);
@@ -172,5 +278,13 @@
         public System.Windows.Forms.TextBox hotkeyBox;
         public System.Windows.Forms.TextBox textColorText;
         public System.Windows.Forms.TextBox bgColorText;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.TextBox freshSaveBox;
+        public System.Windows.Forms.TextBox gameSaveBox;
+        private System.Windows.Forms.Button freshSaveButton;
+        private System.Windows.Forms.Button gameSaveButton;
+        private System.Windows.Forms.Button clearFresh;
+        private System.Windows.Forms.Button clearGame;
     }
 }

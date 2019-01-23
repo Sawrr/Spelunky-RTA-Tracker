@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -19,6 +20,8 @@ namespace AchievementsTracker
 
         Keys hotkey;
         int modifiers;
+        String freshSaveFile;
+        String gameSaveFile;
 
         public SettingsForm(TrayApplicationContext context, MainForm form)
         {
@@ -62,6 +65,18 @@ namespace AchievementsTracker
             }
         }
 
+        public void SetFreshSave(String freshSave)
+        {
+            freshSaveFile = freshSave;
+            freshSaveBox.Text = freshSave;
+        }
+
+        public void SetGameSave(String gameSave)
+        {
+            gameSaveFile = gameSave;
+            gameSaveBox.Text = gameSave;
+        }
+
         private void hotkeyBox_KeyDown(object sender, KeyEventArgs e)
         {
             hotkey = e.KeyCode;
@@ -91,7 +106,7 @@ namespace AchievementsTracker
             context.SetBackgroundColor(bgColorDialog.Color);
             context.SetTextColor(textColorDialog.Color);
 
-            context.SaveSettings(bgColorDialog.Color, textColorDialog.Color, hotkey, modifiers);
+            context.SaveSettings(bgColorDialog.Color, textColorDialog.Color, hotkey, modifiers, freshSaveFile, gameSaveFile);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -135,6 +150,49 @@ namespace AchievementsTracker
                 e.Cancel = true;
                 Hide();
             }
+        }
+
+        private void freshSaveButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Spelunky save|*.SAV";
+            openFileDialog.Title = "Select your fresh save file";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                SetFreshSave(openFileDialog.FileName);
+            }
+        }
+
+        private void gameSaveButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Spelunky save|*.SAV";
+            openFileDialog.Title = "Select your actual save file";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                SetGameSave(openFileDialog.FileName);
+            }
+        }
+
+        public void ResetSaveFile()
+        {
+            if (File.Exists(freshSaveFile) && File.Exists(gameSaveFile))
+            {
+                File.Copy(freshSaveFile, gameSaveFile, true);
+                Log.WriteLine("Writing fresh save file to game save");
+            }
+        }
+
+        private void clearFresh_Click(object sender, EventArgs e)
+        {
+            SetFreshSave(null);
+        }
+
+        private void clearGame_Click(object sender, EventArgs e)
+        {
+            SetGameSave(null);
         }
     }
 }

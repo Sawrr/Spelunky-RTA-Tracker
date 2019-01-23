@@ -70,22 +70,30 @@ namespace AchievementsTracker
                 trackerThread.IsBackground = true;
                 trackerThread.Start();
 
-                // Create tray icon
+                // Create Category menu
                 MenuItem CategoryMenu = new MenuItem("Category");
                 CategoryMenu.MenuItems.Add(new MenuItem("All Achievements", SelectAA));
                 CategoryMenu.MenuItems.Add(new MenuItem("All Journal Entries", SelectAJE));
                 CategoryMenu.MenuItems.Add(new MenuItem("All Characters", SelectAC));
                 CategoryMenu.MenuItems.Add(new MenuItem("All Shortcuts + Olmec", SelectASO));
                 CategoryMenu.MenuItems.Add(new MenuItem("Tutorial%", SelectTutorial));
+
+                // Create context menu
+                ContextMenu contextMenu = new ContextMenu(new MenuItem[] {
+                    new MenuItem("Reset", Reset),
+                    CategoryMenu,
+                    new MenuItem("Settings", OpenSettings),
+                    new MenuItem("Exit", Exit)
+                });
+
+                form.ContextMenu = contextMenu;
+                imgForm.ContextMenu = contextMenu;
+
+                // Create tray icon
                 trayIcon = new NotifyIcon()
                 {
                     Icon = Resources.icon,
-                    ContextMenu = new ContextMenu(new MenuItem[] {
-                        new MenuItem("Reset", Reset),
-                        CategoryMenu,
-                        new MenuItem("Settings", OpenSettings),
-                        new MenuItem("Exit", Exit)
-                    }),
+                    ContextMenu = contextMenu,
                     Visible = true
                 };
 
@@ -115,8 +123,12 @@ namespace AchievementsTracker
                 SetTextColor(textColor);
                 settings.SetTextColor(textColor);
 
+                // Set save files
+                settings.SetFreshSave(trackerSettings.freshSave);
+                settings.SetGameSave(trackerSettings.gameSave);
+
                 // Get started!
-                Reset(null, null);
+                ResetFormsAndTracker();
             }
 
             void SelectAA(object sender, EventArgs e)
@@ -425,19 +437,28 @@ namespace AchievementsTracker
                 settings.ForeColor = color;
             }
 
-            public void Reset(object sender, EventArgs e)
+            private void ResetFormsAndTracker()
             {
                 form.Reset();
                 imgForm.Reset();
                 tracker.Reset();
             }
 
-            public void SaveSettings(Color backColor, Color formColor, Keys resetHotkey, int resetHotkeyMods)
+            public void Reset(object sender, EventArgs e)
+            {
+                ResetFormsAndTracker();
+
+                settings.ResetSaveFile();
+            }
+
+            public void SaveSettings(Color backColor, Color formColor, Keys resetHotkey, int resetHotkeyMods, String freshSave, String gameSave)
             {
                 trackerSettings.backColor = ColorTranslator.ToHtml(backColor);
                 trackerSettings.textColor = ColorTranslator.ToHtml(formColor);
                 trackerSettings.resetHotkey = (int)resetHotkey;
                 trackerSettings.resetHotkeyMods = resetHotkeyMods;
+                trackerSettings.freshSave = freshSave;
+                trackerSettings.gameSave = gameSave;
                 trackerSettings.Save();
             }
         }
@@ -448,6 +469,8 @@ namespace AchievementsTracker
             public String textColor = "#E2E2E2";
             public int resetHotkey = 0;
             public int resetHotkeyMods = 0;
+            public String freshSave;
+            public String gameSave;
         }
     }
 
