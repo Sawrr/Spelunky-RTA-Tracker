@@ -6,6 +6,8 @@ This tracker began life as a tracker for the All Achievements category. The trac
 4. All Shortcuts + Olmec
 5. Tutorial%
 
+<img src="https://github.com/Sawrr/Spelunky-RTA-Tracker/blob/master/SpelunkyRTATracker_ASO.png" width=321>
+
 ## The All Achievements category
 *Complete all of the achievements starting from a brand new save file. The timer begins with the choice of player character and stops once the 20th achievement is completed.*
 
@@ -45,4 +47,4 @@ The tracker only observes the health of Players 1 and 2 for the Good Teamwork ac
 - Download here if you need it: https://www.microsoft.com/net/download/dotnet-framework-runtime
 
 ## Download
-[Download the beta](https://github.com/Sawrr/Spelunky-AllAchievements/releases/download/1.7.0/AchievementsTracker.exe) or check the Releases tab
+[Download the beta](https://github.com/Sawrr/Spelunky-RTA-Tracker/releases/download/1.8.0/SpelunkyRTATracker.exe) or check the Releases tab
