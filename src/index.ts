@@ -1,9 +1,12 @@
 import express from 'express';
+import bodyparser from 'body-parser';
 import rooms from './rooms';
 import { init } from './dao';
 
 const app = express();
 const PORT = 8080;
+
+app.use(bodyparser.json());
 
 app.get("/", (req, res) => {
     res.send("Success");

@@ -1,58 +1,35 @@
-import { Typegoose, prop, Ref } from 'typegoose';
-
-export class Achievement extends Typegoose {
-    @prop()
-    done: Boolean;
-    @prop()
-    time: Number;
-}
-
-export class AchievementArray extends Typegoose {
-    @prop()
-    unlockables: [Boolean];
-    @prop()
-    time: Number;
-};
-
-export class Data extends Typegoose {
-    @prop()
-    journal: Ref<AchievementArray>;
-    @prop()
-    characters: Ref<AchievementArray>;
-    @prop()
-    speedlunky: Ref<Achievement>;
-    @prop()
-    bigMoney: Ref<Achievement>;
-    @prop()
-    noGold: Ref<Achievement>;
-    @prop()
-    teamwork: Ref<Achievement>;
-    @prop()
-    casanova: Ref<Achievement>;
-    @prop()
-    publicEnemy: Ref<Achievement>;
-    @prop()
-    addicted: Ref<Achievement>;
-    @prop()
-    deaths: {
-        host: Boolean,
-        guest: Boolean
-    }
-};
+import { Typegoose, prop } from 'typegoose';
 
 export class Room extends Typegoose {
     @prop()
-    _id: String;
+    _id: string;
     @prop()
-    createTime: Number;
+    createTime: number;
     @prop()
-    joined: Boolean;
+    joined: boolean;
     @prop()
-    startTime: Number;
+    startTime: number;
     @prop()
-    endTime: Number;
+    endTime: number;
     @prop()
-    data: Ref<Data>;
+    data: {
+        journalTime: number;
+        charactersTime: number;
+        speedlunkyTime: number;
+        bigMoneyTime: number;
+        noGoldTime: number;
+        teamworkTime: number;
+        casanovaTime: number;
+        publicEnemyTime: number;
+        addictedTime: number;
+        
+        journal: boolean[];    
+        characters: boolean[];
+        deaths: {
+            host: number,
+            guest: number
+        }
+    }
 };
 
 export let RoomModel = new Room().getModelForClass(Room);
