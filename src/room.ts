@@ -1,40 +1,58 @@
-import { Schema, model } from 'mongoose';
+import { Typegoose, prop, Ref } from 'typegoose';
 
-let achievementSchema = {
-    done: Boolean,
-    time: Number
+export class Achievement extends Typegoose {
+    @prop()
+    done: Boolean;
+    @prop()
+    time: Number;
+}
+
+export class AchievementArray extends Typegoose {
+    @prop()
+    unlockables: [Boolean];
+    @prop()
+    time: Number;
 };
 
-let achievementArraySchema = {
-    unlockables: [Boolean],
-    time: Number
-};
-
-let dataSchema = {
-    journal: achievementArraySchema,
-    characters: achievementArraySchema,
-    speedlunky: achievementSchema,
-    bigMoney: achievementSchema,
-    noGold: achievementSchema,
-    teamwork: achievementSchema,
-    casanova: achievementSchema,
-    publicEnemy: achievementSchema,
-    addicted: achievementSchema,
+export class Data extends Typegoose {
+    @prop()
+    journal: Ref<AchievementArray>;
+    @prop()
+    characters: Ref<AchievementArray>;
+    @prop()
+    speedlunky: Ref<Achievement>;
+    @prop()
+    bigMoney: Ref<Achievement>;
+    @prop()
+    noGold: Ref<Achievement>;
+    @prop()
+    teamwork: Ref<Achievement>;
+    @prop()
+    casanova: Ref<Achievement>;
+    @prop()
+    publicEnemy: Ref<Achievement>;
+    @prop()
+    addicted: Ref<Achievement>;
+    @prop()
     deaths: {
         host: Boolean,
         guest: Boolean
     }
 };
 
-let roomSchema = new Schema({
-    _id: String,
-    createTime: Number,
-    joined: Boolean,
-    startTime: Number,
-    endTime: Number,
-    hostIP: String,
-    guestIP: String,
-    data: dataSchema
-});
+export class Room extends Typegoose {
+    @prop()
+    _id: String;
+    @prop()
+    createTime: Number;
+    @prop()
+    joined: Boolean;
+    @prop()
+    startTime: Number;
+    @prop()
+    endTime: Number;
+    @prop()
+    data: Ref<Data>;
+};
 
-export let Room = model('rooms', roomSchema);
+export let RoomModel = new Room().getModelForClass(Room);
