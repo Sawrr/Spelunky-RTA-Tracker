@@ -1,4 +1,1 @@
-.vs/
-bin/
-Debug/
-Release/
+node_modules/
