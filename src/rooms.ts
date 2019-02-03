@@ -321,4 +321,4 @@ r.patch("/:id/update", async (req, res) => {
     }
 });
 
-export = r;
+export let router = r;
