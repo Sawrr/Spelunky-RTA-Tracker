@@ -209,7 +209,7 @@ r.patch("/:id/update", async (req, res) => {
         let newData = room.data;
 
         // Check journal
-        if (!room.data.journalTime) {
+        if (!room.data.journalTime && req.body.journal) {
             if (req.body.journal.length != NUM_JOURNAL_ENTRIES) {
                 // Bad journal data
                 return res.sendStatus(400);
@@ -227,7 +227,7 @@ r.patch("/:id/update", async (req, res) => {
         }
 
         // Check characters
-        if (!room.data.charactersTime) {
+        if (!room.data.charactersTime && req.body.characters) {
             if (req.body.characters.length != NUM_CHARACTER_ENTRIES) {
                 // Bad characters data
                 return res.sendStatus(400);
