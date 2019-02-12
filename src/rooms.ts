@@ -92,7 +92,7 @@ r.get("/:id", async (req, res) => {
 });
 
 // Join a room
-r.patch("/:id/join", async (req, res) => {
+r.put("/:id/join", async (req, res) => {
     try {
         let result = await RoomModel.updateOne({ _id: req.params.id }, { joined: true });
 
@@ -115,7 +115,7 @@ r.patch("/:id/join", async (req, res) => {
 });
 
 // Start the run
-r.patch("/:id/start", async (req, res) => {
+r.put("/:id/start", async (req, res) => {
     try {
         if (!req.headers.time) {
             // Time header required
@@ -168,7 +168,7 @@ r.patch("/:id/start", async (req, res) => {
 });
 
 // Update the run status
-r.patch("/:id/update", async (req, res) => {
+r.put("/:id/update", async (req, res) => {
     try {
         if (!req.headers.time) {
             // Time header required
