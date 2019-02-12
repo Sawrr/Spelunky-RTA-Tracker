@@ -75,15 +75,17 @@
             this.aso3RopesStatus = new System.Windows.Forms.Label();
             this.asoKeyStatus = new System.Windows.Forms.Label();
             this.asoOlmecStatus = new System.Windows.Forms.Label();
+            this.room = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // runningLabel
             // 
             this.runningLabel.AutoSize = true;
-            this.runningLabel.Location = new System.Drawing.Point(151, 9);
+            this.runningLabel.Location = new System.Drawing.Point(137, 9);
             this.runningLabel.Name = "runningLabel";
-            this.runningLabel.Size = new System.Drawing.Size(0, 15);
+            this.runningLabel.Size = new System.Drawing.Size(53, 15);
             this.runningLabel.TabIndex = 0;
+            this.runningLabel.Text = "Running";
             // 
             // CasanovaStatus
             // 
@@ -540,6 +542,14 @@
             this.asoOlmecStatus.TabIndex = 47;
             this.asoOlmecStatus.Visible = false;
             // 
+            // room
+            // 
+            this.room.AutoSize = true;
+            this.room.Location = new System.Drawing.Point(212, 9);
+            this.room.Name = "room";
+            this.room.Size = new System.Drawing.Size(0, 15);
+            this.room.TabIndex = 48;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -547,6 +557,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(304, 532);
+            this.Controls.Add(this.room);
             this.Controls.Add(this.asoOlmecStatus);
             this.Controls.Add(this.asoKeyStatus);
             this.Controls.Add(this.aso3RopesStatus);
@@ -655,6 +666,7 @@
         public System.Windows.Forms.Label aso3RopesStatus;
         public System.Windows.Forms.Label asoKeyStatus;
         public System.Windows.Forms.Label asoOlmecStatus;
+        public System.Windows.Forms.Label room;
     }
 }
 

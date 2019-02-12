@@ -80,6 +80,8 @@ namespace AchievementsTracker
 
         public void Reset()
         {
+            room.Text = "";
+
             startTime = 0;
             
             // Init timer
@@ -222,6 +224,17 @@ namespace AchievementsTracker
             timer.Text = FormatTime(0);
         }
 
+        public void setRoomCode(string code)
+        {
+            if (code != null)
+            {
+                room.Text = "Room: " + code;
+            } else
+            {
+                room.Text = "";
+            }
+        }
+
         public void changeCategory(Category cat)
         {
             this.category = cat;
@@ -341,7 +354,7 @@ namespace AchievementsTracker
                 Invoke(new Action<bool>(SetSpelunkyRunning), new object[] { value });
                 return;
             }
-            runningLabel.Text = value ? "Running" : "Waiting for game";
+            runningLabel.Text = value ? "Running" : "Waiting";
         }
 
         private string FormatSplitTime(long time)

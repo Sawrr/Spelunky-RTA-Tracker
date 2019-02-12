@@ -70,6 +70,11 @@ namespace AchievementsTracker
                 trackerThread.IsBackground = true;
                 trackerThread.Start();
 
+                // Create tracker multiplayer thread
+                Thread trackerMultiplayerThread = new Thread(() => tracker.MultiplayerMain());
+                trackerMultiplayerThread.IsBackground = true;
+                trackerMultiplayerThread.Start();
+
                 // Create Category menu
                 MenuItem CategoryMenu = new MenuItem("Category");
                 CategoryMenu.MenuItems.Add(new MenuItem("All Achievements", SelectAA));
@@ -78,10 +83,16 @@ namespace AchievementsTracker
                 CategoryMenu.MenuItems.Add(new MenuItem("All Shortcuts + Olmec", SelectASO));
                 CategoryMenu.MenuItems.Add(new MenuItem("Tutorial%", SelectTutorial));
 
+                // Create Coop menu
+                MenuItem CoopMenu = new MenuItem("Co-op");
+                CoopMenu.MenuItems.Add(new MenuItem("Create room", CreateRoom));
+                CoopMenu.MenuItems.Add(new MenuItem("Join room", JoinRoom));
+
                 // Create context menu
                 ContextMenu contextMenu = new ContextMenu(new MenuItem[] {
                     new MenuItem("Reset", Reset),
                     CategoryMenu,
+                    CoopMenu,
                     new MenuItem("Settings", OpenSettings),
                     new MenuItem("Exit", Exit)
                 });
@@ -127,8 +138,34 @@ namespace AchievementsTracker
                 settings.SetFreshSave(trackerSettings.freshSave);
                 settings.SetGameSave(trackerSettings.gameSave);
 
+                // Initialize HTTP client
+                Http.setURL(trackerSettings.baseURL);
+
                 // Get started!
                 ResetFormsAndTracker();
+            }
+
+            async void CreateRoom(object sender, EventArgs e)
+            {
+                string code = await Http.createRoomAsync();
+                tracker.SetMultiplayerRoom(code, true);
+                form.setRoomCode(code);
+            }
+
+            async void JoinRoom(object sender, EventArgs e)
+            {
+                string code = Microsoft.VisualBasic.Interaction.InputBox("Enter room code", "Room code", "", -1, -1);
+                if (code.Length == 4 && code.All(char.IsLetterOrDigit))
+                {
+                    // try to join room
+                    bool success = await Http.joinRoom(code);
+                    if (success)
+                    {
+                        // valid code chosen
+                        tracker.SetMultiplayerRoom(code, false);
+                        form.setRoomCode(code);
+                    }
+                }
             }
 
             void SelectAA(object sender, EventArgs e)
@@ -471,6 +508,7 @@ namespace AchievementsTracker
             public int resetHotkeyMods = 0;
             public String freshSave;
             public String gameSave;
+            public String baseURL = "http://localhost:8080";
         }
     }
 

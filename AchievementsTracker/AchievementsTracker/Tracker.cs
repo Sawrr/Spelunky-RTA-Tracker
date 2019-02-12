@@ -25,6 +25,9 @@ namespace AchievementsTracker
         private bool running;
         private RunManager runManager;
 
+        private bool host;
+        private string roomCode;
+
         public Tracker(MainForm form, ImgForm imgForm)
         {
             ui = form;
@@ -34,9 +37,17 @@ namespace AchievementsTracker
             runManager = new RunManager(this);
         }
 
+        public void SetMultiplayerRoom(string roomCode, bool host)
+        {
+            this.roomCode = roomCode;
+            this.host = host;
+        }
+
         public void Reset()
         {
-            lock(_runManagerLock)
+            roomCode = null;
+
+            lock (_runManagerLock)
             {
                 runManager = new RunManager(this);
             }
@@ -209,6 +220,29 @@ namespace AchievementsTracker
         public void ASODone(long time)
         {
             ui.ASODone(time);
+        }
+
+        public async void MultiplayerMain()
+        {
+            // Check for multiplayer updates
+            while (true)
+            {
+                long time = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                long wakeUpTime = time + 5000;
+
+                if (roomCode != null)
+                {
+                    string data = await Http.getUpdates(roomCode);
+                    // TODO parse JSON data and throw events
+                }
+
+                long currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                long sleepTime = wakeUpTime - currentTime;
+                if (sleepTime > 0)
+                {
+                    Thread.Sleep((int)sleepTime);
+                }
+            }
         }
 
         public void Main()
