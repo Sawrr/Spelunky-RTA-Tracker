@@ -285,11 +285,11 @@ namespace AchievementsTracker
             }
         }
 
-        public void StartTimer()
+        public void StartTimer(long time)
         {
             if (startTime == 0)
             {
-                startTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                startTime = time;
             }
         }
 

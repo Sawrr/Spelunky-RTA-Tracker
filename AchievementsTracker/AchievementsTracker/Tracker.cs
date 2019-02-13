@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -53,9 +55,9 @@ namespace AchievementsTracker
             }
         }
 
-        public void RunStarted()
+        public void RunStarted(long time)
         {
-            ui.StartTimer();
+            ui.StartTimer(time);
             runManager.StartRun();
         }
 
@@ -126,6 +128,25 @@ namespace AchievementsTracker
             }
         }
 
+        public void SendCharactersUpdate(long time, byte[] chars)
+        {
+            string body = "{\"characters\": [";
+            for (int i = 0; i < 16; i++)
+            {
+                if (chars[4 * i] == 1)
+                {
+                    body += "true,";
+                } else
+                {
+                    body += "false,";
+                }
+            }
+            body = body.TrimEnd(',');
+            body += "]}";
+
+            Http.sendUpdate(roomCode, time, host, body);
+        }
+
         public void CharactersEvent(int num, long time, int plays, byte[] chars)
         {
             if (!runManager.IsAchievementDone(Achievement.Characters) && runManager.IsRunInProgress())
@@ -142,7 +163,8 @@ namespace AchievementsTracker
 
         public void DamselEvent(int num, long time, int plays)
         {
-            if (!runManager.IsAchievementDone(Achievement.Casanova) && runManager.IsRunInProgress()) {
+            if (!runManager.IsAchievementDone(Achievement.Casanova) && runManager.IsRunInProgress())
+            {
                 ui.SetDamselCount(num);
                 if (num >= 10)
                 {
@@ -233,7 +255,88 @@ namespace AchievementsTracker
                 if (roomCode != null)
                 {
                     string data = await Http.getUpdates(roomCode);
-                    // TODO parse JSON data and throw events
+
+                    dynamic updates = JsonConvert.DeserializeObject(data);
+
+                    // Check for run start
+                    long startTime = updates.startTime;
+                    if (startTime > 0)
+                    {
+                        RunStarted(startTime);
+                    }
+
+                    // Check for end time
+                    long endTime = updates.endTime;
+                    if (endTime > 0)
+                    {
+                        RunCompleted(endTime);
+                    }
+
+                    // Check for achievements
+                    dynamic achievements = updates.data;
+
+                    // Addicted
+                    int plays = achievements.plays.host + achievements.plays.guest;
+                    long addictedTime = achievements.addictedTime;
+                    PlaysEvent(plays, addictedTime); // TODO update plays ?
+
+                    // Speedlunky
+                    long speedlunkyTime = achievements.speedlunkyTime;
+                    if (speedlunkyTime > 0)
+                    {
+                        SpeedlunkyAchieved(speedlunkyTime, plays);
+                    }
+
+                    // Big Money
+                    long bigMoneyTime = achievements.bigMoneyTime;
+                    if (bigMoneyTime > 0)
+                    {
+                        BigMoneyAchieved(bigMoneyTime, plays);
+                    }
+
+                    // No Gold
+                    long noGoldTime = achievements.noGoldTime;
+                    if (noGoldTime > 0)
+                    {
+                        NoGoldAchieved(noGoldTime, plays);
+                    }
+
+                    // Teamwork Time
+                    long teamworkTime = achievements.teamworkTime;
+                    if (teamworkTime > 0)
+                    {
+                        TeamworkAchieved(teamworkTime, plays);
+                    }
+
+                    // Casanova Time
+                    long casanovaTime = achievements.casanovaTime;
+                    if (casanovaTime > 0)
+                    {
+                        DamselEvent(10, casanovaTime, plays);
+                    }
+
+                    // Public Enemy Time
+                    long publicEnemyTime = achievements.publicEnemyTime;
+                    if (publicEnemyTime > 0)
+                    {
+                        ShoppieEvent(12, publicEnemyTime, plays);
+                    }
+
+                    // Characters
+                    JArray charArray = achievements.characters;
+                    byte[] charBytes = charArray.Select(jv => (byte)jv).ToArray();
+                    byte[] chars = new byte[64];
+                    int charNum = 0;
+                    for (int i = 0; i < 16; i ++)
+                    {
+                        chars[4 * i] = charBytes[i];
+                        if (charBytes[i] > 0) charNum++;
+                    }
+
+                    long charactersTime = achievements.charactersTime;
+                    CharactersEvent(charNum, charactersTime, plays, chars);
+
+                    // TODO journal
                 }
 
                 long currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -289,7 +392,7 @@ namespace AchievementsTracker
                 long wakeUpTime = time + 16;
 
                 // Acquire lock to prevent reset during updates
-                lock(_runManagerLock)
+                lock (_runManagerLock)
                 {
                     gameManager.update();
                 }

@@ -192,7 +192,7 @@ namespace AchievementsTracker
             {
                 // Start timer
                 Log.WriteLine("Character selected!");
-                tracker.RunStarted();
+                tracker.RunStarted(time);
             }
             charSelect = newCharSelect;
 
@@ -222,6 +222,7 @@ namespace AchievementsTracker
             if (newChars != characters && newChars > 0 && newChars <= 16)
             {
                 tracker.CharactersEvent(newChars, time, plays, chars);
+                tracker.SendCharactersUpdate(time, chars);
             }
             characters = newChars;
 
@@ -266,11 +267,11 @@ namespace AchievementsTracker
             journal = newJournal;
 
             int newPlays = memoryReader.ReadPlays();
-            if (newPlays != plays && newPlays > 0 && newPlays <= 1000)
+            if (newPlays != plays && newPlays > 0 && newPlays <= 1000 && newPlays > plays)
             {
                 tracker.PlaysEvent(newPlays, time);
+                plays = newPlays;
             }
-            plays = newPlays;
 
             // Tunnel man progress
             tunnelManChapter = memoryReader.ReadTunnelChapter();

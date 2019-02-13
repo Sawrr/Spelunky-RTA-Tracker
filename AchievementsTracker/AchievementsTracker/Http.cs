@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace AchievementsTracker
 {
@@ -37,6 +38,15 @@ namespace AchievementsTracker
             HttpResponseMessage res = await client.GetAsync(URL + "/api/rooms/" + code);
 
             return await res.Content.ReadAsStringAsync();
+        }
+
+        public static void sendUpdate(string code, long time, bool host, string body)
+        {            
+            HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, URL + "/api/rooms/" + code + "/update");
+            message.Headers.Add("time", time.ToString());
+            message.Headers.Add("player", host ? "host" : "guest");
+            message.Content = new StringContent(body, UnicodeEncoding.UTF8, "application/json"); ;
+            client.SendAsync(message);  
         }
 
     }
