@@ -13,10 +13,16 @@ namespace AchievementsTracker
         private static readonly HttpClient client = new HttpClient();
 
         private static string URL;
+        private static bool active;
 
         public static void setURL(string url)
         {
             URL = url;
+        }
+
+        public static void setActive(bool act)
+        {
+            active = act;
         }
 
         public static async Task<string> createRoomAsync()
@@ -35,9 +41,12 @@ namespace AchievementsTracker
 
         public static void startRoom(string code, long time)
         {
-            HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, URL + "/api/rooms/" + code + "/start");
-            message.Headers.Add("time", time.ToString());
-            client.SendAsync(message);
+            if (code != null)
+            {
+                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, URL + "/api/rooms/" + code + "/start");
+                message.Headers.Add("time", time.ToString());
+                client.SendAsync(message);
+            }
         }
 
         public static async Task<string> getUpdates(string code)
@@ -48,12 +57,15 @@ namespace AchievementsTracker
         }
 
         public static void sendUpdate(string code, long time, bool host, string body)
-        {            
-            HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, URL + "/api/rooms/" + code + "/update");
-            message.Headers.Add("time", time.ToString());
-            message.Headers.Add("player", host ? "host" : "guest");
-            message.Content = new StringContent(body, UnicodeEncoding.UTF8, "application/json");
-            client.SendAsync(message);
+        {
+            if (code != null)
+            {
+                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, URL + "/api/rooms/" + code + "/update");
+                message.Headers.Add("time", time.ToString());
+                message.Headers.Add("player", host ? "host" : "guest");
+                message.Content = new StringContent(body, UnicodeEncoding.UTF8, "application/json");
+                client.SendAsync(message);
+            }
         }
 
     }
