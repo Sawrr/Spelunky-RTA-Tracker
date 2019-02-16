@@ -1,0 +1,12 @@
+ul {
+  list-style-type: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(8, 1fr);
+  width: 80px;
+}
+
+li img {
+  width: 80px;
+  opacity: 50%;
+}
