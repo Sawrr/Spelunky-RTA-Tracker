@@ -61,6 +61,11 @@ namespace AchievementsTracker
             runManager.StartRun();
         }
 
+        public void SendRunStart(long time)
+        {
+            Http.startRoom(roomCode, time);
+        }
+
         public void RunCompleted(long time)
         {
             ui.FinishAA(time);
@@ -128,21 +133,45 @@ namespace AchievementsTracker
             }
         }
 
-        public void SendCharactersUpdate(long time, byte[] chars)
+        public void SendJournalUpdate(long time, byte[] journalPlaces, byte[] journalMonsters, byte[] journalItems, byte[] journalTraps)
         {
-            string body = "{\"characters\": [";
-            for (int i = 0; i < 16; i++)
+            string body = "{\"journal\": {";
+
+            // Places
+            body += "\"places\":[";
+            for (int i = 0; i < 10; i++)
             {
-                if (chars[4 * i] == 1)
-                {
-                    body += "true,";
-                } else
-                {
-                    body += "false,";
-                }
+                if (journalPlaces[4 * i] == 1) body += "true,"; else body += "false,";
             }
             body = body.TrimEnd(',');
-            body += "]}";
+            body += "],";
+
+            // Monsters
+            body += "\"monsters\":[";
+            for (int i = 0; i < 56; i++)
+            {
+                if (journalMonsters[4 * i] == 1) body += "true,"; else body += "false,";
+            }
+            body = body.TrimEnd(',');
+            body += "],";
+
+            // Items
+            body += "\"items\":[";
+            for (int i = 0; i < 34; i++)
+            {
+                if (journalItems[4 * i] == 1) body += "true,"; else body += "false,";
+            }
+            body = body.TrimEnd(',');
+            body += "],";
+
+            // Traps
+            body += "\"traps\":[";
+            for (int i = 0; i < 14; i++)
+            {
+                if (journalTraps[4 * i] == 1) body += "true,"; else body += "false,";
+            }
+            body = body.TrimEnd(',');
+            body += "]}}";
 
             Http.sendUpdate(roomCode, time, host, body);
         }
@@ -159,6 +188,26 @@ namespace AchievementsTracker
                     runManager.FinishAchievement(Achievement.Characters, time, plays);
                 }
             }
+        }
+
+        public void SendCharactersUpdate(long time, byte[] chars)
+        {
+            string body = "{\"characters\": [";
+            for (int i = 0; i < 16; i++)
+            {
+                if (chars[4 * i] == 1)
+                {
+                    body += "true,";
+                }
+                else
+                {
+                    body += "false,";
+                }
+            }
+            body = body.TrimEnd(',');
+            body += "]}";
+
+            Http.sendUpdate(roomCode, time, host, body);
         }
 
         public void DamselEvent(int num, long time, int plays)
@@ -325,7 +374,7 @@ namespace AchievementsTracker
                     // Characters
                     JArray charArray = achievements.characters;
                     byte[] charBytes = charArray.Select(jv => (byte)jv).ToArray();
-                    byte[] chars = new byte[64];
+                    byte[] chars = new byte[16 * 4];
                     int charNum = 0;
                     for (int i = 0; i < 16; i ++)
                     {
@@ -336,7 +385,51 @@ namespace AchievementsTracker
                     long charactersTime = achievements.charactersTime;
                     CharactersEvent(charNum, charactersTime, plays, chars);
 
-                    // TODO journal
+                    // Journal
+                    int journalNum = 0;
+                    long journalTime = achievements.journalTime;
+
+                    // Places
+                    JArray placesArray = achievements.journal.places;
+                    byte[] placesBytes = placesArray.Select(jv => (byte)jv).ToArray();
+                    byte[] places = new byte[10 * 4];
+                    for (int i = 0; i < 10; i++)
+                    {
+                        places[4 * i] = placesBytes[i];
+                        if (placesBytes[i] > 0) journalNum++;
+                    }
+
+                    // Monsters
+                    JArray monstersArray = achievements.journal.monsters;
+                    byte[] monstersBytes = monstersArray.Select(jv => (byte)jv).ToArray();
+                    byte[] mons = new byte[56 * 4];
+                    for (int i = 0; i < 56; i++)
+                    {
+                        mons[4 * i] = monstersBytes[i];
+                        if (monstersBytes[i] > 0) journalNum++;
+                    }
+
+                    // Items
+                    JArray itemsArray = achievements.journal.items;
+                    byte[] itemsBytes = itemsArray.Select(jv => (byte)jv).ToArray();
+                    byte[] items = new byte[34 * 4];
+                    for (int i = 0; i < 34; i++)
+                    {
+                        items[4 * i] = itemsBytes[i];
+                        if (itemsBytes[i] > 0) journalNum++;
+                    }
+
+                    // Traps
+                    JArray trapsArray = achievements.journal.traps;
+                    byte[] trapsBytes = trapsArray.Select(jv => (byte)jv).ToArray();
+                    byte[] traps = new byte[14 * 4];
+                    for (int i = 0; i < 14; i++)
+                    {
+                        traps[4 * i] = trapsBytes[i];
+                        if (trapsBytes[i] > 0) journalNum++;
+                    }
+
+                    JournalEvent(journalNum, journalTime, plays, mons, items, traps);
                 }
 
                 long currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();

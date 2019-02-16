@@ -193,6 +193,7 @@ namespace AchievementsTracker
                 // Start timer
                 Log.WriteLine("Character selected!");
                 tracker.RunStarted(time);
+                tracker.SendRunStart(time);
             }
             charSelect = newCharSelect;
 
@@ -263,6 +264,7 @@ namespace AchievementsTracker
             if (newJournal != journal && newJournal > 0 && newJournal <= 144)
             {
                 tracker.JournalEvent(newJournal, time, plays, journalMonsters, journalItems, journalTraps);
+                tracker.SendJournalUpdate(time, journalPlaces, journalMonsters, journalItems, journalTraps);
             }
             journal = newJournal;
 

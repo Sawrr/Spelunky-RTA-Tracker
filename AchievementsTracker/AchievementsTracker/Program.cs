@@ -147,6 +147,7 @@ namespace AchievementsTracker
 
             async void CreateRoom(object sender, EventArgs e)
             {
+                Reset(sender, e);
                 string code = await Http.createRoomAsync();
                 tracker.SetMultiplayerRoom(code, true);
                 form.setRoomCode(code);

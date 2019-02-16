@@ -287,10 +287,7 @@ namespace AchievementsTracker
 
         public void StartTimer(long time)
         {
-            if (startTime == 0)
-            {
-                startTime = time;
-            }
+            startTime = time;
         }
 
         public void FinishAA(long time)

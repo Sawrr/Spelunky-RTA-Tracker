@@ -33,6 +33,13 @@ namespace AchievementsTracker
             return res.IsSuccessStatusCode;
         }
 
+        public static void startRoom(string code, long time)
+        {
+            HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, URL + "/api/rooms/" + code + "/start");
+            message.Headers.Add("time", time.ToString());
+            client.SendAsync(message);
+        }
+
         public static async Task<string> getUpdates(string code)
         {
             HttpResponseMessage res = await client.GetAsync(URL + "/api/rooms/" + code);
@@ -45,8 +52,8 @@ namespace AchievementsTracker
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, URL + "/api/rooms/" + code + "/update");
             message.Headers.Add("time", time.ToString());
             message.Headers.Add("player", host ? "host" : "guest");
-            message.Content = new StringContent(body, UnicodeEncoding.UTF8, "application/json"); ;
-            client.SendAsync(message);  
+            message.Content = new StringContent(body, UnicodeEncoding.UTF8, "application/json");
+            client.SendAsync(message);
         }
 
     }
