@@ -11,21 +11,21 @@ const NUM_CHARACTER_ENTRIES = 16;
 let r = Router();
 
 // Get list of opened rooms
-r.get("/", async (req, res) => {
-    try {
-        let data = await RoomModel.find();
+// r.get("/", async (req, res) => {
+//     try {
+//         let data = await RoomModel.find();
 
-        if (data) {
-            return res.send(data);
-        }
+//         if (data) {
+//             return res.send(data);
+//         }
 
-        // No rooms opened
-        return res.sendStatus(204);
-    } catch (err) {
-        // Other error occurred
-        return res.sendStatus(500);
-    }
-});
+//         // No rooms opened
+//         return res.sendStatus(204);
+//     } catch (err) {
+//         // Other error occurred
+//         return res.sendStatus(500);
+//     }
+// });
 
 // Create a new room
 r.post("/", async (req, res) => {
