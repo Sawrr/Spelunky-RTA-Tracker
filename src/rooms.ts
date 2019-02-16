@@ -2,8 +2,11 @@ import { Router } from 'express';
 import { generateID } from './util';
 import { RoomModel, Room } from './room';
 
-const NUM_JOURNAL_ENTRIES = 3; // TODO update
-const NUM_CHARACTER_ENTRIES = 4; // TODO update
+const NUM_JOURNAL_PLACES = 2; // TODO update
+const NUM_JOURNAL_MONSTERS = 3; // TODO update
+const NUM_JOURNAL_ITEMS = 4; // TODO update
+const NUM_JOURNAL_TRAPS = 5; // TODO update
+const NUM_CHARACTER_ENTRIES = 16;
 
 let r = Router();
 
@@ -50,9 +53,14 @@ r.post("/", async (req, res) => {
                     publicEnemyTime: 0,
                     addictedTime: 0,
 
-                    journal: new Array<Boolean>(NUM_JOURNAL_ENTRIES).fill(false),
+                    journal: {
+                        places: new Array<Boolean>(NUM_JOURNAL_PLACES).fill(false),
+                        monsters: new Array<Boolean>(NUM_JOURNAL_MONSTERS).fill(false),
+                        items: new Array<Boolean>(NUM_JOURNAL_ITEMS).fill(false),
+                        traps: new Array<Boolean>(NUM_JOURNAL_TRAPS).fill(false)
+                    },
                     characters: new Array<Boolean>(NUM_CHARACTER_ENTRIES).fill(false),
-                    deaths: {
+                    plays: {
                         host: 0,
                         guest: 0
                     }
@@ -210,17 +218,46 @@ r.put("/:id/update", async (req, res) => {
 
         // Check journal
         if (!room.data.journalTime && req.body.journal) {
-            if (req.body.journal.length != NUM_JOURNAL_ENTRIES) {
+            if (req.body.journal.places.length != NUM_JOURNAL_PLACES
+            || req.body.journal.monsters.length != NUM_JOURNAL_MONSTERS
+            || req.body.journal.items.length != NUM_JOURNAL_ITEMS
+            || req.body.journal.traps.length != NUM_JOURNAL_TRAPS) {
                 // Bad journal data
                 return res.sendStatus(400);
             }
-            for (let i = 0; i < NUM_JOURNAL_ENTRIES; i++) {
-                if (!room.data.journal[i] && req.body.journal[i]) {
+            // Places
+            for (let i = 0; i < NUM_JOURNAL_PLACES; i++) {
+                if (!room.data.journal.places[i] && req.body.journal.places[i]) {
                     // Entry unlocked
-                    newData.journal[i] = true;
+                    newData.journal.places[i] = true;
                 }
             }
-            if (newData.journal.every(entry => { return entry })) {
+            // Monsters
+            for (let i = 0; i < NUM_JOURNAL_MONSTERS; i++) {
+                if (!room.data.journal.monsters[i] && req.body.journal.monsters[i]) {
+                    // Entry unlocked
+                    newData.journal.monsters[i] = true;
+                }
+            }
+            // Items
+            for (let i = 0; i < NUM_JOURNAL_ITEMS; i++) {
+                if (!room.data.journal.items[i] && req.body.journal.items[i]) {
+                    // Entry unlocked
+                    newData.journal.items[i] = true;
+                }
+            }
+            // Traps
+            for (let i = 0; i < NUM_JOURNAL_TRAPS; i++) {
+                if (!room.data.journal.traps[i] && req.body.journal.traps[i]) {
+                    // Entry unlocked
+                    newData.journal.traps[i] = true;
+                }
+            }
+            
+            if (newData.journal.places.every(entry => { return entry })
+            && newData.journal.monsters.every(entry => { return entry })
+            && newData.journal.items.every(entry => { return entry })
+            && newData.journal.traps.every(entry => { return entry })) {
                 // All journal entries unlocked, mark as done
                 newData.journalTime = time;
             }
@@ -264,21 +301,21 @@ r.put("/:id/update", async (req, res) => {
             newData.publicEnemyTime = time;
         }
 
-        // Check deaths
-        if (!room.data.addictedTime && req.body.deaths) {
+        // Check plays
+        if (!room.data.addictedTime && req.body.plays) {
             // Only update the player's death count
             if (req.headers.player === "host") {
-                if (req.body.deaths > room.data.deaths.host) {
-                    newData.deaths.host = req.body.deaths;
+                if (req.body.plays > room.data.plays.host) {
+                    newData.plays.host = req.body.plays;
                 }
             } else {
-                if (req.body.deaths > room.data.deaths.guest) {
-                    newData.deaths.guest = req.body.deaths;
+                if (req.body.plays > room.data.plays.guest) {
+                    newData.plays.guest = req.body.plays;
                 }
             }
 
             // Check for Addicted
-            if (newData.deaths.host + newData.deaths.guest >= 1000) {
+            if (newData.plays.host + newData.plays.guest >= 1000) {
                 newData.addictedTime = time;
             }
         }

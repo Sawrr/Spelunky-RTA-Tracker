@@ -23,9 +23,14 @@ export class Room extends Typegoose {
         publicEnemyTime: number;
         addictedTime: number;
         
-        journal: boolean[];    
+        journal: {
+            places: boolean[];
+            monsters: boolean[];
+            items: boolean[];
+            traps: boolean[];
+        };    
         characters: boolean[];
-        deaths: {
+        plays: {
             host: number,
             guest: number
         }
