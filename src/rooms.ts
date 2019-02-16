@@ -2,10 +2,10 @@ import { Router } from 'express';
 import { generateID } from './util';
 import { RoomModel, Room } from './room';
 
-const NUM_JOURNAL_PLACES = 2; // TODO update
-const NUM_JOURNAL_MONSTERS = 3; // TODO update
-const NUM_JOURNAL_ITEMS = 4; // TODO update
-const NUM_JOURNAL_TRAPS = 5; // TODO update
+const NUM_JOURNAL_PLACES = 10;
+const NUM_JOURNAL_MONSTERS = 56;
+const NUM_JOURNAL_ITEMS = 34;
+const NUM_JOURNAL_TRAPS = 14;
 const NUM_CHARACTER_ENTRIES = 16;
 
 let r = Router();
