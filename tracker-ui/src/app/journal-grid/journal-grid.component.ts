@@ -64,10 +64,10 @@ export class JournalGridComponent implements OnInit {
     });
   }
 
-  private roomCode: string;
+  public roomCode: string;
 
-  private monsters: string[];
-  private items: string[];
-  private traps: string[];
+  public monsters: string[];
+  public items: string[];
+  public traps: string[];
 
 }

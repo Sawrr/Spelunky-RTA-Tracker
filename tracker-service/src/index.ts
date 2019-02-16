@@ -9,12 +9,6 @@ process.env.NODE_ENV = 'production';
 const app = express();
 const PORT = 8080;
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
-});
-
 // Log HTTP requests
 app.use(morgan('combined'));
 
@@ -23,6 +17,13 @@ app.use(bodyparser.json());
 
 // API
 app.use("/api/rooms", router);
+
+// Front end
+app.use(express.static('dist'));
+app.all('/*', function(req, res, next) {
+    // Just send the index.html for other files to support HTML5Mode
+    res.sendFile('dist/index.html', { root: __dirname });
+});
 
 // All other errors
 app.use((err: any, req: any, res: any, next: any) => {
