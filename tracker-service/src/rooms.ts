@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { generateID } from './util';
-import { RoomModel, Room } from './room';
+import { RoomModel } from './room';
 
 const NUM_JOURNAL_PLACES = 10;
 const NUM_JOURNAL_MONSTERS = 56;
@@ -91,12 +91,7 @@ r.put("/:id/join", async (req, res) => {
             // Room not found
             return res.sendStatus(404);
         }
-
-        if (result.nModified === 0) {
-            // Not modified
-            return res.sendStatus(304);
-        }
-
+        
         // Success
         return res.sendStatus(200);
     } catch (err) {
@@ -128,14 +123,9 @@ r.put("/:id/start", async (req, res) => {
         // Parse time from header
         let time = (+req.headers.time);
 
-        if (time < room.createTime || time > Date.now()) {
-            // Start time can't be earlier than room creation time, or later than the current time
+        if (time < room.createTime) {
+            // Start time can't be earlier than room creation time
             return res.sendStatus(400);
-        }
-
-        if (!room.joined) {
-            // Room not joined
-            return res.sendStatus(412);
         }
 
         let result = await RoomModel.updateOne({ _id: req.params.id }, { startTime: time });
@@ -191,8 +181,8 @@ r.put("/:id/update", async (req, res) => {
         // Parse time from header
         let time = (+req.headers.time);
 
-        if (time < room.createTime || time < room.startTime || time > Date.now()) {
-            // Timestamp can't be earlier than room creation or start time, or later than the current time
+        if (time < room.createTime || time < room.startTime) {
+            // Timestamp can't be earlier than room creation or start time
             return res.sendStatus(400);
         }
 
