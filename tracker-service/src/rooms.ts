@@ -168,11 +168,6 @@ r.put("/:id/update", async (req, res) => {
             return res.sendStatus(404);
         }
 
-        if (!room.joined) {
-            // Room not joined
-            return res.sendStatus(412);
-        }
-
         if (!room.startTime) {
             // Room hasn't started
             return res.sendStatus(412);
