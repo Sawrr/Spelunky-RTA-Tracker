@@ -9,6 +9,6 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   public getStatus(roomCode: string) {
-    return this.http.get('http://localhost:8080/api/rooms/' + roomCode);
+    return this.http.get('api/rooms/' + roomCode);
   }
 }
