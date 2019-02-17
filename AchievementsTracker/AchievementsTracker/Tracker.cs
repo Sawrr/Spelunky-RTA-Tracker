@@ -43,6 +43,8 @@ namespace AchievementsTracker
         {
             this.roomCode = roomCode;
             this.host = host;
+
+            Http.GetAndSetTimeOffset();
         }
 
         public void Reset()
@@ -308,14 +310,14 @@ namespace AchievementsTracker
                     dynamic updates = JsonConvert.DeserializeObject(data);
 
                     // Check for run start
-                    long startTime = updates.startTime;
+                    long startTime = updates.startTime - Http.getTimeOffset();
                     if (startTime > 0)
                     {
                         RunStarted(startTime);
                     }
 
                     // Check for end time
-                    long endTime = updates.endTime;
+                    long endTime = updates.endTime - Http.getTimeOffset();
                     if (endTime > 0)
                     {
                         RunCompleted(endTime);
@@ -326,46 +328,46 @@ namespace AchievementsTracker
 
                     // Addicted
                     int plays = achievements.plays.host + achievements.plays.guest;
-                    long addictedTime = achievements.addictedTime;
+                    long addictedTime = achievements.addictedTime - Http.getTimeOffset();
                     PlaysEvent(plays, addictedTime); // TODO update plays ?
 
                     // Speedlunky
-                    long speedlunkyTime = achievements.speedlunkyTime;
+                    long speedlunkyTime = achievements.speedlunkyTime - Http.getTimeOffset();
                     if (speedlunkyTime > 0)
                     {
                         SpeedlunkyAchieved(speedlunkyTime, plays);
                     }
 
                     // Big Money
-                    long bigMoneyTime = achievements.bigMoneyTime;
+                    long bigMoneyTime = achievements.bigMoneyTime - Http.getTimeOffset();
                     if (bigMoneyTime > 0)
                     {
                         BigMoneyAchieved(bigMoneyTime, plays);
                     }
 
                     // No Gold
-                    long noGoldTime = achievements.noGoldTime;
+                    long noGoldTime = achievements.noGoldTime - Http.getTimeOffset();
                     if (noGoldTime > 0)
                     {
                         NoGoldAchieved(noGoldTime, plays);
                     }
 
                     // Teamwork Time
-                    long teamworkTime = achievements.teamworkTime;
+                    long teamworkTime = achievements.teamworkTime - Http.getTimeOffset();
                     if (teamworkTime > 0)
                     {
                         TeamworkAchieved(teamworkTime, plays);
                     }
 
                     // Casanova Time
-                    long casanovaTime = achievements.casanovaTime;
+                    long casanovaTime = achievements.casanovaTime - Http.getTimeOffset();
                     if (casanovaTime > 0)
                     {
                         DamselEvent(10, casanovaTime, plays);
                     }
 
                     // Public Enemy Time
-                    long publicEnemyTime = achievements.publicEnemyTime;
+                    long publicEnemyTime = achievements.publicEnemyTime - Http.getTimeOffset();
                     if (publicEnemyTime > 0)
                     {
                         ShoppieEvent(12, publicEnemyTime, plays);
@@ -382,12 +384,12 @@ namespace AchievementsTracker
                         if (charBytes[i] > 0) charNum++;
                     }
 
-                    long charactersTime = achievements.charactersTime;
+                    long charactersTime = achievements.charactersTime - Http.getTimeOffset();
                     CharactersEvent(charNum, charactersTime, plays, chars);
 
                     // Journal
                     int journalNum = 0;
-                    long journalTime = achievements.journalTime;
+                    long journalTime = achievements.journalTime - Http.getTimeOffset();
 
                     // Places
                     JArray placesArray = achievements.journal.places;

@@ -509,7 +509,7 @@ namespace AchievementsTracker
             public int resetHotkeyMods = 0;
             public String freshSave;
             public String gameSave;
-            public String baseURL = "http://localhost:8080";
+            public String baseURL = "http://34.73.50.53:8080";
         }
     }
 
