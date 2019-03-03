@@ -145,27 +145,64 @@ namespace AchievementsTracker
                 ResetFormsAndTracker();
             }
 
+            bool SynchronizeTime()
+            {
+                try
+                {
+                    Http.GetAndSetTimeOffset();
+                } catch (Exception e)
+                {
+                    Log.WriteLine(e.ToString());
+                    MessageBox.Show("Failed to synchronize system clock. Please check your internet connection and make sure your system clock is in sync.", "Error");
+                    return false;
+                }
+                // Success
+                return true;
+            }
+
             async void CreateRoom(object sender, EventArgs e)
             {
+                if (!SynchronizeTime()) return;
+
                 Reset(sender, e);
-                string code = await Http.createRoomAsync();
+                string code = null;
+                try
+                {
+                     code = await Http.createRoom();
+                } catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to create a room.", "Error");
+                    Log.WriteLine(ex.ToString());
+                    return;
+                }
                 tracker.SetMultiplayerRoom(code, true);
                 form.setRoomCode(code);
             }
 
             async void JoinRoom(object sender, EventArgs e)
             {
+                if (!SynchronizeTime()) return;
+
                 string code = Microsoft.VisualBasic.Interaction.InputBox("Enter room code", "Room code", "", -1, -1);
                 if (code.Length == 4 && code.All(char.IsLetterOrDigit))
                 {
                     // try to join room
-                    bool success = await Http.joinRoom(code);
-                    if (success)
+                    try
                     {
-                        // valid code chosen
-                        tracker.SetMultiplayerRoom(code, false);
-                        form.setRoomCode(code);
+                        await Http.joinRoom(code);
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Failed to join the room.", "Error");
+                        Log.WriteLine(ex.ToString());
+                        return;
+                    }
+                    // valid code chosen
+                    tracker.SetMultiplayerRoom(code, false);
+                    form.setRoomCode(code);
+                } else
+                {
+                    MessageBox.Show("Invalid room code", "Error");
                 }
             }
 
@@ -509,7 +546,7 @@ namespace AchievementsTracker
             public int resetHotkeyMods = 0;
             public String freshSave;
             public String gameSave;
-            public String baseURL = "http://34.73.50.53:8080";
+            public String baseURL = "http://spelunky.sawyerharris.com:8080";
         }
     }
 

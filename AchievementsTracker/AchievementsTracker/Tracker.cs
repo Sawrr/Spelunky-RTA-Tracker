@@ -43,8 +43,6 @@ namespace AchievementsTracker
         {
             this.roomCode = roomCode;
             this.host = host;
-
-            Http.GetAndSetTimeOffset();
         }
 
         public void Reset()
