@@ -9,8 +9,7 @@ RUN mv dist/tracker-ui /app/tracker-service/src/dist
 WORKDIR /app/tracker-service
 RUN npm install
 
-WORKDIR /app/db
-ADD crontab /etc/cron.d/mongo-cron
+ADD ./db/crontab /etc/cron.d/mongo-cron
 RUN chmod 0644 /etc/cron.d/mongo-cron
 RUN crontab /etc/cron.d/mongo-cron
 
