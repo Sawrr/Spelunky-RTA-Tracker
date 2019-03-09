@@ -303,133 +303,140 @@ namespace AchievementsTracker
 
                 if (roomCode != null)
                 {
-                    string data = await Http.getUpdates(roomCode);
-
-                    dynamic updates = JsonConvert.DeserializeObject(data);
-
-                    // Check for run start
-                    long startTime = updates.startTime - Http.getTimeOffset();
-                    if (startTime > 0)
+                    try
                     {
-                        RunStarted(startTime);
-                    }
+                        string data = await Http.getUpdates(roomCode);
 
-                    // Check for end time
-                    long endTime = updates.endTime - Http.getTimeOffset();
-                    if (endTime > 0)
+                        dynamic updates = JsonConvert.DeserializeObject(data);
+
+                        // Check for run start
+                        long startTime = updates.startTime - Http.getTimeOffset();
+                        if (startTime > 0)
+                        {
+                            RunStarted(startTime);
+                        }
+
+                        // Check for end time
+                        long endTime = updates.endTime - Http.getTimeOffset();
+                        if (endTime > 0)
+                        {
+                            RunCompleted(endTime);
+                        }
+
+                        // Check for achievements
+                        dynamic achievements = updates.data;
+
+                        // Addicted
+                        int plays = achievements.plays.host + achievements.plays.guest;
+                        long addictedTime = achievements.addictedTime - Http.getTimeOffset();
+                        PlaysEvent(plays, addictedTime); // TODO update plays ?
+
+                        // Speedlunky
+                        long speedlunkyTime = achievements.speedlunkyTime - Http.getTimeOffset();
+                        if (speedlunkyTime > 0)
+                        {
+                            SpeedlunkyAchieved(speedlunkyTime, plays);
+                        }
+
+                        // Big Money
+                        long bigMoneyTime = achievements.bigMoneyTime - Http.getTimeOffset();
+                        if (bigMoneyTime > 0)
+                        {
+                            BigMoneyAchieved(bigMoneyTime, plays);
+                        }
+
+                        // No Gold
+                        long noGoldTime = achievements.noGoldTime - Http.getTimeOffset();
+                        if (noGoldTime > 0)
+                        {
+                            NoGoldAchieved(noGoldTime, plays);
+                        }
+
+                        // Teamwork Time
+                        long teamworkTime = achievements.teamworkTime - Http.getTimeOffset();
+                        if (teamworkTime > 0)
+                        {
+                            TeamworkAchieved(teamworkTime, plays);
+                        }
+
+                        // Casanova Time
+                        long casanovaTime = achievements.casanovaTime - Http.getTimeOffset();
+                        if (casanovaTime > 0)
+                        {
+                            DamselEvent(10, casanovaTime, plays);
+                        }
+
+                        // Public Enemy Time
+                        long publicEnemyTime = achievements.publicEnemyTime - Http.getTimeOffset();
+                        if (publicEnemyTime > 0)
+                        {
+                            ShoppieEvent(12, publicEnemyTime, plays);
+                        }
+
+                        // Characters
+                        JArray charArray = achievements.characters;
+                        byte[] charBytes = charArray.Select(jv => (byte)jv).ToArray();
+                        byte[] chars = new byte[16 * 4];
+                        int charNum = 0;
+                        for (int i = 0; i < 16; i ++)
+                        {
+                            chars[4 * i] = charBytes[i];
+                            if (charBytes[i] > 0) charNum++;
+                        }
+
+                        long charactersTime = achievements.charactersTime - Http.getTimeOffset();
+                        CharactersEvent(charNum, charactersTime, plays, chars);
+
+                        // Journal
+                        int journalNum = 0;
+                        long journalTime = achievements.journalTime - Http.getTimeOffset();
+
+                        // Places
+                        JArray placesArray = achievements.journal.places;
+                        byte[] placesBytes = placesArray.Select(jv => (byte)jv).ToArray();
+                        byte[] places = new byte[10 * 4];
+                        for (int i = 0; i < 10; i++)
+                        {
+                            places[4 * i] = placesBytes[i];
+                            if (placesBytes[i] > 0) journalNum++;
+                        }
+
+                        // Monsters
+                        JArray monstersArray = achievements.journal.monsters;
+                        byte[] monstersBytes = monstersArray.Select(jv => (byte)jv).ToArray();
+                        byte[] mons = new byte[56 * 4];
+                        for (int i = 0; i < 56; i++)
+                        {
+                            mons[4 * i] = monstersBytes[i];
+                            if (monstersBytes[i] > 0) journalNum++;
+                        }
+
+                        // Items
+                        JArray itemsArray = achievements.journal.items;
+                        byte[] itemsBytes = itemsArray.Select(jv => (byte)jv).ToArray();
+                        byte[] items = new byte[34 * 4];
+                        for (int i = 0; i < 34; i++)
+                        {
+                            items[4 * i] = itemsBytes[i];
+                            if (itemsBytes[i] > 0) journalNum++;
+                        }
+
+                        // Traps
+                        JArray trapsArray = achievements.journal.traps;
+                        byte[] trapsBytes = trapsArray.Select(jv => (byte)jv).ToArray();
+                        byte[] traps = new byte[14 * 4];
+                        for (int i = 0; i < 14; i++)
+                        {
+                            traps[4 * i] = trapsBytes[i];
+                            if (trapsBytes[i] > 0) journalNum++;
+                        }
+
+                        JournalEvent(journalNum, journalTime, plays, mons, items, traps);
+                    }
+                    catch (Exception e)
                     {
-                        RunCompleted(endTime);
+                        Log.WriteLine(e.ToString());
                     }
-
-                    // Check for achievements
-                    dynamic achievements = updates.data;
-
-                    // Addicted
-                    int plays = achievements.plays.host + achievements.plays.guest;
-                    long addictedTime = achievements.addictedTime - Http.getTimeOffset();
-                    PlaysEvent(plays, addictedTime); // TODO update plays ?
-
-                    // Speedlunky
-                    long speedlunkyTime = achievements.speedlunkyTime - Http.getTimeOffset();
-                    if (speedlunkyTime > 0)
-                    {
-                        SpeedlunkyAchieved(speedlunkyTime, plays);
-                    }
-
-                    // Big Money
-                    long bigMoneyTime = achievements.bigMoneyTime - Http.getTimeOffset();
-                    if (bigMoneyTime > 0)
-                    {
-                        BigMoneyAchieved(bigMoneyTime, plays);
-                    }
-
-                    // No Gold
-                    long noGoldTime = achievements.noGoldTime - Http.getTimeOffset();
-                    if (noGoldTime > 0)
-                    {
-                        NoGoldAchieved(noGoldTime, plays);
-                    }
-
-                    // Teamwork Time
-                    long teamworkTime = achievements.teamworkTime - Http.getTimeOffset();
-                    if (teamworkTime > 0)
-                    {
-                        TeamworkAchieved(teamworkTime, plays);
-                    }
-
-                    // Casanova Time
-                    long casanovaTime = achievements.casanovaTime - Http.getTimeOffset();
-                    if (casanovaTime > 0)
-                    {
-                        DamselEvent(10, casanovaTime, plays);
-                    }
-
-                    // Public Enemy Time
-                    long publicEnemyTime = achievements.publicEnemyTime - Http.getTimeOffset();
-                    if (publicEnemyTime > 0)
-                    {
-                        ShoppieEvent(12, publicEnemyTime, plays);
-                    }
-
-                    // Characters
-                    JArray charArray = achievements.characters;
-                    byte[] charBytes = charArray.Select(jv => (byte)jv).ToArray();
-                    byte[] chars = new byte[16 * 4];
-                    int charNum = 0;
-                    for (int i = 0; i < 16; i ++)
-                    {
-                        chars[4 * i] = charBytes[i];
-                        if (charBytes[i] > 0) charNum++;
-                    }
-
-                    long charactersTime = achievements.charactersTime - Http.getTimeOffset();
-                    CharactersEvent(charNum, charactersTime, plays, chars);
-
-                    // Journal
-                    int journalNum = 0;
-                    long journalTime = achievements.journalTime - Http.getTimeOffset();
-
-                    // Places
-                    JArray placesArray = achievements.journal.places;
-                    byte[] placesBytes = placesArray.Select(jv => (byte)jv).ToArray();
-                    byte[] places = new byte[10 * 4];
-                    for (int i = 0; i < 10; i++)
-                    {
-                        places[4 * i] = placesBytes[i];
-                        if (placesBytes[i] > 0) journalNum++;
-                    }
-
-                    // Monsters
-                    JArray monstersArray = achievements.journal.monsters;
-                    byte[] monstersBytes = monstersArray.Select(jv => (byte)jv).ToArray();
-                    byte[] mons = new byte[56 * 4];
-                    for (int i = 0; i < 56; i++)
-                    {
-                        mons[4 * i] = monstersBytes[i];
-                        if (monstersBytes[i] > 0) journalNum++;
-                    }
-
-                    // Items
-                    JArray itemsArray = achievements.journal.items;
-                    byte[] itemsBytes = itemsArray.Select(jv => (byte)jv).ToArray();
-                    byte[] items = new byte[34 * 4];
-                    for (int i = 0; i < 34; i++)
-                    {
-                        items[4 * i] = itemsBytes[i];
-                        if (itemsBytes[i] > 0) journalNum++;
-                    }
-
-                    // Traps
-                    JArray trapsArray = achievements.journal.traps;
-                    byte[] trapsBytes = trapsArray.Select(jv => (byte)jv).ToArray();
-                    byte[] traps = new byte[14 * 4];
-                    for (int i = 0; i < 14; i++)
-                    {
-                        traps[4 * i] = trapsBytes[i];
-                        if (trapsBytes[i] > 0) journalNum++;
-                    }
-
-                    JournalEvent(journalNum, journalTime, plays, mons, items, traps);
                 }
 
                 long currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();

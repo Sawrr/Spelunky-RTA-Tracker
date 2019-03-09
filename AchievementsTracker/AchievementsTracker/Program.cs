@@ -546,7 +546,7 @@ namespace AchievementsTracker
             public int resetHotkeyMods = 0;
             public String freshSave;
             public String gameSave;
-            public String baseURL = "http://spelunky.sawyerharris.com:8080";
+            public String baseURL = "http://spelunky.sawr.org";
         }
     }
 
