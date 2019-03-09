@@ -13,4 +13,4 @@ ADD ./db/crontab /etc/cron.d/mongo-cron
 RUN chmod 0644 /etc/cron.d/mongo-cron
 RUN crontab /etc/cron.d/mongo-cron
 
-CMD mongod & sleep 5 && cron & ts-node src/index.ts
+CMD mongod & sleep 5 && cron -f & ts-node src/index.ts
