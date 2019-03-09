@@ -1,2 +1,1 @@
-* * * * * cd /app/db/ && echo "this is a test"
-#10 * * * * cd /app/db/ && mongo < clear-old-rooms
+10 * * * * cd /app/db/ && mongo < clear-old-rooms
