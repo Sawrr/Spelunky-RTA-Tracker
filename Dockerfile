@@ -1,4 +1,4 @@
-FROM gcr.io/aje-coop/mean:1
+FROM gcr.io/aje-coop/mean:2
 ADD . /app
 
 WORKDIR /app/tracker-ui
@@ -10,7 +10,6 @@ WORKDIR /app/tracker-service
 RUN npm install
 
 WORKDIR /app/db
-RUN apt-get update && apt-get -y install cron
 ADD crontab /etc/cron.d/mongo-cron
 RUN chmod 0644 /etc/cron.d/mongo-cron
 RUN crontab /etc/cron.d/mongo-cron
