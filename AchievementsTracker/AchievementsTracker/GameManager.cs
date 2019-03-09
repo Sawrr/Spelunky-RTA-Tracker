@@ -192,7 +192,7 @@ namespace AchievementsTracker
             {
                 // Start timer
                 Log.WriteLine("Character selected!");
-                tracker.RunStarted(time);
+                tracker.RunStarted(time, false);
                 tracker.SendRunStart(time);
             }
             charSelect = newCharSelect;

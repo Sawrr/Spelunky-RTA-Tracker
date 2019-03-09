@@ -51,6 +51,8 @@ namespace AchievementsTracker
         private long asoFinishTime;
         private long tutorialFinishTime;
 
+        private int journalNum;
+
         public MainForm(TrayApplicationContext ctx)
         {
             context = ctx;
@@ -285,9 +287,12 @@ namespace AchievementsTracker
             }
         }
 
-        public void StartTimer(long time)
+        public void StartTimer(long time, bool coop)
         {
-            startTime = time;
+            if (startTime == 0 || coop)
+            {
+                startTime = time;
+            }
         }
 
         public void FinishAA(long time)
@@ -752,7 +757,11 @@ namespace AchievementsTracker
                 Invoke(new Action<int>(SetJournalStatus), new object[] { num });
                 return;
             }
-            JournalStatus.Text = String.Format("{0,5} {1}", num, "/ 114");
+            if (num > journalNum || num == 0)
+            {
+                journalNum = num;
+                JournalStatus.Text = String.Format("{0,5} {1}", num, "/ 114");
+            }
         }
 
         public void SetCharactersStatus(int num)

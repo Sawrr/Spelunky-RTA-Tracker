@@ -55,9 +55,9 @@ namespace AchievementsTracker
             }
         }
 
-        public void RunStarted(long time)
+        public void RunStarted(long time, bool coop)
         {
-            ui.StartTimer(time);
+            ui.StartTimer(time, coop);
             runManager.StartRun();
         }
 
@@ -313,7 +313,7 @@ namespace AchievementsTracker
                         long startTime = updates.startTime - Http.getTimeOffset();
                         if (startTime > 0)
                         {
-                            RunStarted(startTime);
+                            RunStarted(startTime, true);
                         }
 
                         // Check for end time

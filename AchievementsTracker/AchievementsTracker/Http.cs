@@ -55,7 +55,8 @@ namespace AchievementsTracker
 
         public static async Task<string> getUpdates(string code)
         {
-            HttpResponseMessage res = await client.GetAsync(URL + "/api/rooms/" + code);
+            CancellationToken cancelToken = new CancellationTokenSource(new TimeSpan(0, 0, 5)).Token;
+            HttpResponseMessage res = await client.GetAsync(URL + "/api/rooms/" + code, cancelToken);
 
             return await res.Content.ReadAsStringAsync();
         }
