@@ -33,10 +33,9 @@ export class TimerComponent implements OnInit {
   }
 
   checkForStart() {
-    // this.http.getStatus(this.roomCode).subscribe((res: any) => {
-    //   this.startTime = res.startTime;
-    // });
-    this.startTime = + new Date();
+    this.http.getStatus(this.roomCode).subscribe((res: any) => {
+      this.startTime = res.startTime;
+    });
   }
 
   updateTimer() {
