@@ -2,11 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { interval } from 'rxjs';
 import { Router } from '@angular/router';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-journal-grid',
   templateUrl: './journal-grid.component.html',
-  styleUrls: ['./journal-grid.component.css']
+  styleUrls: ['./journal-grid.component.css'],
+  animations: [
+    trigger('unlock', [
+      state('unlocked', style({
+        opacity: 1
+      })),
+      state('locked', style({
+        opacity: 0
+      })),
+      transition('* => *', [
+        animate('1500ms ease-out')
+      ])
+    ]
+  )]
 })
 export class JournalGridComponent implements OnInit {
 
@@ -18,13 +32,22 @@ export class JournalGridComponent implements OnInit {
     this.traps = [];
     
     for (let i = 0; i < 56; i++) {
-      this.monsters.push(`assets/monsters/Mon_${i}.png`);
+      this.monsters.push({
+        src: `assets/monsters/Mon_${i}.png`,
+        unlocked: false
+      });
     }
     for (let i = 0; i < 34; i++) {
-      this.items.push(`assets/items/Item_${i}.png`);
+      this.items.push({
+        src: `assets/items/Item_${i}.png`,
+        unlocked: false
+      });
     }
     for (let i = 0; i < 14; i++) {
-      this.traps.push(`assets/traps/Trap_${i}.png`);
+      this.traps.push({
+        src: `assets/traps/Trap_${i}.png`,
+        unlocked: false
+      });
     }
 
     this.roomCode = this.router.url.replace('/', '');
@@ -44,21 +67,21 @@ export class JournalGridComponent implements OnInit {
       // Monsters
       for (let i = 0; i < 56; i++) {
         if (res.data.journal.monsters[i]) {
-          this.monsters[i] = '';
+          this.monsters[i].unlocked = true;
         }
       }
 
       // Items
       for (let i = 0; i < 34; i++) {
         if (res.data.journal.items[i]) {
-          this.items[i] = '';
+          this.items[i].unlocked = true;
         }
       }
 
       // Traps
       for (let i = 0; i < 14; i++) {
         if (res.data.journal.traps[i]) {
-          this.traps[i] = '';
+          this.traps[i].unlocked = true;
         }
       }
     });
@@ -66,8 +89,8 @@ export class JournalGridComponent implements OnInit {
 
   public roomCode: string;
 
-  public monsters: string[];
-  public items: string[];
-  public traps: string[];
+  public monsters: {src: string, unlocked: boolean}[];
+  public items:  {src: string, unlocked: boolean}[];
+  public traps:  {src: string, unlocked: boolean}[];
 
 }

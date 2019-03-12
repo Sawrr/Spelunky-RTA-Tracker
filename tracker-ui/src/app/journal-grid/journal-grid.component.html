@@ -1,11 +1,11 @@
 <ul>
   <li *ngFor="let tile of monsters">
-    <img src="{{tile}}">
+    <div [@unlock]="tile.unlocked ? 'locked' : 'unlocked'"><img src="{{tile.src}}"></div>
   </li>
   <li *ngFor="let tile of items">
-    <img src="{{tile}}">
+    <div [@unlock]="tile.unlocked ? 'locked' : 'unlocked'"><img src="{{tile.src}}"></div>
   </li>
   <li *ngFor="let tile of traps">
-    <img src="{{tile}}">
+    <div [@unlock]="tile.unlocked ? 'locked' : 'unlocked'"><img src="{{tile.src}}"></div>
   </li>
 </ul>

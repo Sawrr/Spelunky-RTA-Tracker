@@ -3,10 +3,10 @@ ul {
   display: grid;
   grid-auto-flow: column;
   grid-template-rows: repeat(8, 1fr);
-  width: 80px;
+  width: 60px;
+  height: 60px;
 }
 
 li img {
-  width: 80px;
-  opacity: 50%;
+  width: 60px;
 }
