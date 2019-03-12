@@ -7,15 +7,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JournalGridComponent } from './journal-grid/journal-grid.component';
 import { RouterModule, Routes } from '@angular/router';
+import { TimerComponent } from './timer/timer.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
-  { path: ':id', component: JournalGridComponent }
+  { path: ':id', component: DashboardComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    JournalGridComponent
+    JournalGridComponent,
+    TimerComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
