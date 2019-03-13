@@ -13,33 +13,36 @@ export class TimerComponent implements OnInit {
 
   constructor(private http: HttpService, private router: Router) { }
 
-  time: string;
+  time: string = "0.00";
+  endTime: number = 0;
   startTime: number = 0;
 
-  public roomCode: string;
-
   ngOnInit() {
-    this.roomCode = this.router.url.replace('/', '');
-
     interval(10).subscribe(() => {
       this.updateTimer();
     });
-
-    interval(100).subscribe(() => {
-      if (this.startTime === 0) {
-        this.checkForStart();
-      }
-    });
   }
 
-  checkForStart() {
-    this.http.getStatus(this.roomCode).subscribe((res: any) => {
+  checkForStartAndEnd(res) {
+    if (this.startTime == 0) {
       this.startTime = res.startTime;
-    });
+    }
+    if (res.data.journalTime > 0) {
+      this.endTime = res.data.journalTime;
+      this.formatTimer(this.endTime);
+    }
   }
 
   updateTimer() {
-    let time = + new Date() - this.startTime;
+    if (this.startTime == 0 || this.endTime > 0) return;
+
+    let time = + new Date();
+    this.formatTimer(time);
+  }
+
+  formatTimer(time: number) {
+    time -= this.startTime;
+
     if (time < 60 * 1000) {
         // time < 1 minute
         this.time = sprintf('%1$d.%2$02d', time / 1000, (time % 1000) / 10);

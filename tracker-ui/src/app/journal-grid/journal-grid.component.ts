@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
-import { interval } from 'rxjs';
-import { Router } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
@@ -24,7 +21,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class JournalGridComponent implements OnInit {
 
-  constructor(private http: HttpService, private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
     this.monsters = [];
@@ -49,42 +46,29 @@ export class JournalGridComponent implements OnInit {
         unlocked: false
       });
     }
-
-    this.roomCode = this.router.url.replace('/', '');
-
-    console.log(this.roomCode);
-
-    interval(5000).subscribe(() => {
-      this.updateData();
-    });
-
-    this.updateData();
   }
 
-  private updateData() {
-    console.log(this.roomCode);
-    this.http.getStatus(this.roomCode).subscribe((res: any) => {      
-      // Monsters
-      for (let i = 0; i < 56; i++) {
-        if (res.data.journal.monsters[i]) {
-          this.monsters[i].unlocked = true;
-        }
+  updateData(res) {
+    // Monsters
+    for (let i = 0; i < 56; i++) {
+      if (res.data.journal.monsters[i]) {
+        this.monsters[i].unlocked = true;
       }
+    }
 
-      // Items
-      for (let i = 0; i < 34; i++) {
-        if (res.data.journal.items[i]) {
-          this.items[i].unlocked = true;
-        }
+    // Items
+    for (let i = 0; i < 34; i++) {
+      if (res.data.journal.items[i]) {
+        this.items[i].unlocked = true;
       }
+    }
 
-      // Traps
-      for (let i = 0; i < 14; i++) {
-        if (res.data.journal.traps[i]) {
-          this.traps[i].unlocked = true;
-        }
+    // Traps
+    for (let i = 0; i < 14; i++) {
+      if (res.data.journal.traps[i]) {
+        this.traps[i].unlocked = true;
       }
-    });
+    }
   }
 
   public roomCode: string;
