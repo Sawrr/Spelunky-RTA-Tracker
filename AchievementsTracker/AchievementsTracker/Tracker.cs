@@ -15,6 +15,8 @@ namespace AchievementsTracker
     {
         private const int PROCESS_WM_READ = 0x0010;
 
+        private const int DAY_IN_MS = 1000 * 60 * 60 * 24;
+
         [DllImport("kernel32.dll")]
         private static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
@@ -311,14 +313,14 @@ namespace AchievementsTracker
 
                         // Check for run start
                         long startTime = updates.startTime - Http.getTimeOffset();
-                        if (startTime > 0)
+                        if (startTime > DAY_IN_MS)
                         {
                             RunStarted(startTime, true);
                         }
 
                         // Check for end time
                         long endTime = updates.endTime - Http.getTimeOffset();
-                        if (endTime > 0)
+                        if (endTime > DAY_IN_MS)
                         {
                             RunCompleted(endTime);
                         }
@@ -333,42 +335,42 @@ namespace AchievementsTracker
 
                         // Speedlunky
                         long speedlunkyTime = achievements.speedlunkyTime - Http.getTimeOffset();
-                        if (speedlunkyTime > 0)
+                        if (speedlunkyTime > DAY_IN_MS)
                         {
                             SpeedlunkyAchieved(speedlunkyTime, plays);
                         }
 
                         // Big Money
                         long bigMoneyTime = achievements.bigMoneyTime - Http.getTimeOffset();
-                        if (bigMoneyTime > 0)
+                        if (bigMoneyTime > DAY_IN_MS)
                         {
                             BigMoneyAchieved(bigMoneyTime, plays);
                         }
 
                         // No Gold
                         long noGoldTime = achievements.noGoldTime - Http.getTimeOffset();
-                        if (noGoldTime > 0)
+                        if (noGoldTime > DAY_IN_MS)
                         {
                             NoGoldAchieved(noGoldTime, plays);
                         }
 
                         // Teamwork Time
                         long teamworkTime = achievements.teamworkTime - Http.getTimeOffset();
-                        if (teamworkTime > 0)
+                        if (teamworkTime > DAY_IN_MS)
                         {
                             TeamworkAchieved(teamworkTime, plays);
                         }
 
                         // Casanova Time
                         long casanovaTime = achievements.casanovaTime - Http.getTimeOffset();
-                        if (casanovaTime > 0)
+                        if (casanovaTime > DAY_IN_MS)
                         {
                             DamselEvent(10, casanovaTime, plays);
                         }
 
                         // Public Enemy Time
                         long publicEnemyTime = achievements.publicEnemyTime - Http.getTimeOffset();
-                        if (publicEnemyTime > 0)
+                        if (publicEnemyTime > DAY_IN_MS)
                         {
                             ShoppieEvent(12, publicEnemyTime, plays);
                         }
