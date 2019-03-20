@@ -1,4 +1,7 @@
 div {
-    font-family: Calibri;
+    font-family: Verdana, Geneva, sans-serif;
     font-size: 64pt;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    text-align: right;
 }

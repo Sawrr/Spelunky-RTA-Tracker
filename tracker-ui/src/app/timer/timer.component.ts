@@ -18,7 +18,7 @@ export class TimerComponent implements OnInit {
   startTime: number = 0;
 
   ngOnInit() {
-    interval(10).subscribe(() => {
+    interval(30).subscribe(() => {
       this.updateTimer();
     });
   }
