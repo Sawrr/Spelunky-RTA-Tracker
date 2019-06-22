@@ -311,6 +311,12 @@ namespace AchievementsTracker
 
                         dynamic updates = JsonConvert.DeserializeObject(data);
 
+                        // Check for run joined
+                        if (updates.joined == true)
+                        {
+                            ui.SetRoomStatusReady(true);
+                        }
+
                         // Check for run start
                         long startTime = updates.startTime - Http.getTimeOffset();
                         if (startTime > DAY_IN_MS)
@@ -452,7 +458,6 @@ namespace AchievementsTracker
 
         public void Main()
         {
-            ui.SetSpelunkyRunning(false);
             running = false;
 
             // Listen for Spelunky Process
@@ -462,7 +467,6 @@ namespace AchievementsTracker
             {
                 spelunky = SpelunkyProcessListener.listenForSpelunkyProcess();
                 Log.WriteLine("Spelunky process detected");
-                ui.SetSpelunkyRunning(true);
                 processHandle = (int)OpenProcess(PROCESS_WM_READ, false, spelunky.Id);
                 baseAddress = spelunky.MainModule.BaseAddress.ToInt32();
             }

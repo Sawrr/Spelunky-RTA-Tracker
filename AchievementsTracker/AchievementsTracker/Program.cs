@@ -168,7 +168,7 @@ namespace AchievementsTracker
                 string code = null;
                 try
                 {
-                     code = await Http.createRoom();
+                    code = await Http.createRoom();
                 } catch (Exception ex)
                 {
                     MessageBox.Show("Failed to create a room.", "Error");
@@ -177,6 +177,7 @@ namespace AchievementsTracker
                 }
                 tracker.SetMultiplayerRoom(code, true);
                 form.setRoomCode(code);
+                form.SetRoomStatusReady(false);
             }
 
             async void JoinRoom(object sender, EventArgs e)
@@ -189,7 +190,12 @@ namespace AchievementsTracker
                     // try to join room
                     try
                     {
-                        await Http.joinRoom(code);
+                        System.Net.Http.HttpResponseMessage res = await Http.joinRoom(code);
+                        if (!res.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Room not found", "Error");
+                            return;
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -200,6 +206,7 @@ namespace AchievementsTracker
                     // valid code chosen
                     tracker.SetMultiplayerRoom(code, false);
                     form.setRoomCode(code);
+                    form.SetRoomStatusReady(true);
                 } else
                 {
                     MessageBox.Show("Invalid room code", "Error");

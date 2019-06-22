@@ -83,6 +83,7 @@ namespace AchievementsTracker
         public void Reset()
         {
             room.Text = "";
+            roomStatus.Text = "";
 
             startTime = 0;
             
@@ -349,14 +350,14 @@ namespace AchievementsTracker
             timer.Text = FormatTime(time);
         }
 
-        public void SetSpelunkyRunning(bool value)
+        public void SetRoomStatusReady(bool value)
         {
             if (InvokeRequired)
             {
-                Invoke(new Action<bool>(SetSpelunkyRunning), new object[] { value });
+                Invoke(new Action<bool>(SetRoomStatusReady), new object[] { value });
                 return;
             }
-            runningLabel.Text = value ? "Running" : "Waiting";
+            roomStatus.Text = value ? "Ready" : "Waiting";
         }
 
         private string FormatSplitTime(long time)
@@ -836,6 +837,11 @@ namespace AchievementsTracker
             drawStatusList();
 
             asoFinishTime = time;
+        }
+
+        private void runningLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

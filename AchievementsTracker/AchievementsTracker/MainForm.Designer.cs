@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.runningLabel = new System.Windows.Forms.Label();
+            this.roomStatus = new System.Windows.Forms.Label();
             this.CasanovaStatus = new System.Windows.Forms.Label();
             this.PublicEnemyStatus = new System.Windows.Forms.Label();
             this.Casanova = new System.Windows.Forms.Label();
@@ -80,12 +80,12 @@
             // 
             // runningLabel
             // 
-            this.runningLabel.AutoSize = true;
-            this.runningLabel.Location = new System.Drawing.Point(137, 9);
-            this.runningLabel.Name = "runningLabel";
-            this.runningLabel.Size = new System.Drawing.Size(53, 15);
-            this.runningLabel.TabIndex = 0;
-            this.runningLabel.Text = "Running";
+            this.roomStatus.AutoSize = true;
+            this.roomStatus.Location = new System.Drawing.Point(137, 9);
+            this.roomStatus.Name = "runningLabel";
+            this.roomStatus.Size = new System.Drawing.Size(0, 15);
+            this.roomStatus.TabIndex = 0;
+            this.roomStatus.Click += new System.EventHandler(this.runningLabel_Click);
             // 
             // CasanovaStatus
             // 
@@ -603,7 +603,7 @@
             this.Controls.Add(this.Casanova);
             this.Controls.Add(this.PublicEnemyStatus);
             this.Controls.Add(this.CasanovaStatus);
-            this.Controls.Add(this.runningLabel);
+            this.Controls.Add(this.roomStatus);
             this.Font = new System.Drawing.Font("MS Reference Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -620,7 +620,7 @@
 
         #endregion
 
-        public System.Windows.Forms.Label runningLabel;
+        public System.Windows.Forms.Label roomStatus;
         public System.Windows.Forms.Label CasanovaStatus;
         public System.Windows.Forms.Label PublicEnemyStatus;
         public System.Windows.Forms.Label Casanova;
