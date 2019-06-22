@@ -48,12 +48,19 @@
             this.gameSaveButton = new System.Windows.Forms.Button();
             this.clearFresh = new System.Windows.Forms.Button();
             this.clearGame = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.imageSizeBox = new System.Windows.Forms.NumericUpDown();
+            this.rowsBox = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.invertedBox = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.imageSizeBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rowsBox)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(190, 479);
+            this.button1.Location = new System.Drawing.Point(190, 553);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -146,7 +153,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label4.Location = new System.Drawing.Point(12, 301);
+            this.label4.Location = new System.Drawing.Point(12, 375);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 20);
             this.label4.TabIndex = 9;
@@ -156,7 +163,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label5.Location = new System.Drawing.Point(12, 394);
+            this.label5.Location = new System.Drawing.Point(12, 468);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 20);
             this.label5.TabIndex = 10;
@@ -166,7 +173,7 @@
             // 
             this.freshSaveBox.Enabled = false;
             this.freshSaveBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.freshSaveBox.Location = new System.Drawing.Point(16, 341);
+            this.freshSaveBox.Location = new System.Drawing.Point(16, 415);
             this.freshSaveBox.Name = "freshSaveBox";
             this.freshSaveBox.ReadOnly = true;
             this.freshSaveBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -176,7 +183,7 @@
             // gameSaveBox
             // 
             this.gameSaveBox.Enabled = false;
-            this.gameSaveBox.Location = new System.Drawing.Point(16, 432);
+            this.gameSaveBox.Location = new System.Drawing.Point(16, 506);
             this.gameSaveBox.Name = "gameSaveBox";
             this.gameSaveBox.ReadOnly = true;
             this.gameSaveBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -186,7 +193,7 @@
             // freshSaveButton
             // 
             this.freshSaveButton.ForeColor = System.Drawing.Color.Black;
-            this.freshSaveButton.Location = new System.Drawing.Point(113, 300);
+            this.freshSaveButton.Location = new System.Drawing.Point(113, 374);
             this.freshSaveButton.Name = "freshSaveButton";
             this.freshSaveButton.Size = new System.Drawing.Size(73, 24);
             this.freshSaveButton.TabIndex = 14;
@@ -198,7 +205,7 @@
             // gameSaveButton
             // 
             this.gameSaveButton.ForeColor = System.Drawing.Color.Black;
-            this.gameSaveButton.Location = new System.Drawing.Point(113, 393);
+            this.gameSaveButton.Location = new System.Drawing.Point(113, 467);
             this.gameSaveButton.Name = "gameSaveButton";
             this.gameSaveButton.Size = new System.Drawing.Size(73, 24);
             this.gameSaveButton.TabIndex = 15;
@@ -210,7 +217,7 @@
             // clearFresh
             // 
             this.clearFresh.ForeColor = System.Drawing.Color.Black;
-            this.clearFresh.Location = new System.Drawing.Point(192, 301);
+            this.clearFresh.Location = new System.Drawing.Point(192, 375);
             this.clearFresh.Name = "clearFresh";
             this.clearFresh.Size = new System.Drawing.Size(61, 24);
             this.clearFresh.TabIndex = 16;
@@ -222,7 +229,7 @@
             // clearGame
             // 
             this.clearGame.ForeColor = System.Drawing.Color.Black;
-            this.clearGame.Location = new System.Drawing.Point(192, 394);
+            this.clearGame.Location = new System.Drawing.Point(192, 468);
             this.clearGame.Name = "clearGame";
             this.clearGame.Size = new System.Drawing.Size(61, 24);
             this.clearGame.TabIndex = 17;
@@ -231,12 +238,71 @@
             this.clearGame.UseVisualStyleBackColor = true;
             this.clearGame.Click += new System.EventHandler(this.clearGame_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label6.Location = new System.Drawing.Point(12, 290);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 20);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Image Size";
+            // 
+            // imageSizeBox
+            // 
+            this.imageSizeBox.Location = new System.Drawing.Point(45, 323);
+            this.imageSizeBox.Name = "imageSizeBox";
+            this.imageSizeBox.Size = new System.Drawing.Size(39, 20);
+            this.imageSizeBox.TabIndex = 19;
+            this.imageSizeBox.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            // 
+            // rowsBox
+            // 
+            this.rowsBox.Location = new System.Drawing.Point(151, 323);
+            this.rowsBox.Name = "rowsBox";
+            this.rowsBox.Size = new System.Drawing.Size(39, 20);
+            this.rowsBox.TabIndex = 20;
+            this.rowsBox.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label7.Location = new System.Drawing.Point(137, 290);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 20);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Rows";
+            // 
+            // invertedBox
+            // 
+            this.invertedBox.AutoSize = true;
+            this.invertedBox.Location = new System.Drawing.Point(200, 324);
+            this.invertedBox.Name = "invertedBox";
+            this.invertedBox.Size = new System.Drawing.Size(65, 17);
+            this.invertedBox.TabIndex = 22;
+            this.invertedBox.Text = "Inverted";
+            this.invertedBox.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
-            this.ClientSize = new System.Drawing.Size(277, 523);
+            this.ClientSize = new System.Drawing.Size(277, 594);
+            this.Controls.Add(this.invertedBox);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.rowsBox);
+            this.Controls.Add(this.imageSizeBox);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.clearGame);
             this.Controls.Add(this.clearFresh);
             this.Controls.Add(this.gameSaveButton);
@@ -260,6 +326,8 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.imageSizeBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rowsBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -286,5 +354,10 @@
         private System.Windows.Forms.Button gameSaveButton;
         private System.Windows.Forms.Button clearFresh;
         private System.Windows.Forms.Button clearGame;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown imageSizeBox;
+        private System.Windows.Forms.NumericUpDown rowsBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox invertedBox;
     }
 }

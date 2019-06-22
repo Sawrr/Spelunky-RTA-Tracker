@@ -17,18 +17,44 @@ namespace AchievementsTracker
     {
         TrayApplicationContext context;
         MainForm form;
+        ImgForm imgForm;
 
         Keys hotkey;
         int modifiers;
         String freshSaveFile;
         String gameSaveFile;
+        int imageSize;
+        int rows;
+        bool inverted;
 
-        public SettingsForm(TrayApplicationContext context, MainForm form)
+        public SettingsForm(TrayApplicationContext context, MainForm form, ImgForm imgForm)
         {
             this.context = context;
             this.form = form;
+            this.imgForm = imgForm;
 
             InitializeComponent();
+        }
+
+        public void SetImageSize(int size)
+        {
+            imageSize = size;
+            imageSizeBox.Value = size;
+            imgForm.SetImageSize(size);
+        }
+
+        public void SetRows(int r)
+        {
+            rows = r;
+            rowsBox.Value = r;
+            imgForm.SetRows(rows);
+        }
+
+        public void SetInverted(bool inv)
+        {
+            inverted = inv;
+            invertedBox.Checked = inv;
+            imgForm.SetInverted(inv);
         }
 
         public void SetBackgroundColor(Color color)
@@ -103,10 +129,14 @@ namespace AchievementsTracker
         void Save()
         {
             form.SetResetHotKey(modifiers, hotkey);
+            SetImageSize((int)imageSizeBox.Value);
+            SetRows((int)rowsBox.Value);
+            SetInverted(invertedBox.Checked);
+            imgForm.ArrangeUnlockables();
             context.SetBackgroundColor(bgColorDialog.Color);
             context.SetTextColor(textColorDialog.Color);
 
-            context.SaveSettings(bgColorDialog.Color, textColorDialog.Color, hotkey, modifiers, freshSaveFile, gameSaveFile);
+            context.SaveSettings(bgColorDialog.Color, textColorDialog.Color, hotkey, modifiers, freshSaveFile, gameSaveFile, imageSize, rows, inverted);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)

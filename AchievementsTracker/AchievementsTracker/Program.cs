@@ -62,7 +62,7 @@ namespace AchievementsTracker
                 // Create forms
                 form = new MainForm(this);
                 imgForm = new ImgForm();
-                settings = new SettingsForm(this, form);
+                settings = new SettingsForm(this, form, imgForm);
 
                 // Create tracker thread
                 tracker = new Tracker(form, imgForm);
@@ -123,6 +123,11 @@ namespace AchievementsTracker
                 int mods = trackerSettings.resetHotkeyMods;
                 form.SetResetHotKey(mods, key);
                 settings.SetHotkey(mods, key);
+
+                // Set image size, rows, inverted
+                settings.SetImageSize(trackerSettings.imageSize);
+                settings.SetRows(trackerSettings.rows);
+                settings.SetInverted(trackerSettings.inverted);
 
                 // Set background color
                 Color bgColor = ColorTranslator.FromHtml(trackerSettings.backColor);
@@ -533,7 +538,7 @@ namespace AchievementsTracker
                 settings.ResetSaveFile();
             }
 
-            public void SaveSettings(Color backColor, Color formColor, Keys resetHotkey, int resetHotkeyMods, String freshSave, String gameSave)
+            public void SaveSettings(Color backColor, Color formColor, Keys resetHotkey, int resetHotkeyMods, String freshSave, String gameSave, int imageSize, int rows, bool inverted)
             {
                 trackerSettings.backColor = ColorTranslator.ToHtml(backColor);
                 trackerSettings.textColor = ColorTranslator.ToHtml(formColor);
@@ -541,6 +546,9 @@ namespace AchievementsTracker
                 trackerSettings.resetHotkeyMods = resetHotkeyMods;
                 trackerSettings.freshSave = freshSave;
                 trackerSettings.gameSave = gameSave;
+                trackerSettings.imageSize = imageSize;
+                trackerSettings.rows = rows;
+                trackerSettings.inverted = inverted;
                 trackerSettings.Save();
             }
         }
@@ -554,6 +562,9 @@ namespace AchievementsTracker
             public String freshSave;
             public String gameSave;
             public String baseURL = "http://spelunky.sawr.org";
+            public int imageSize = 40;
+            public int rows = 8;
+            public bool inverted = false;
         }
     }
 
