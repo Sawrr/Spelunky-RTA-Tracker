@@ -106,12 +106,19 @@ namespace AchievementsTracker
                 picBox.Size = new Size(imageSize, imageSize);
             }
 
+            // Handle remainder
+            int remainder = 0;
+            if (120 % rows != 0)
+            {
+                remainder = 1;
+            }
+
             if (inverted)
             {
-                ClientSize = new Size(imageSize * rows, imageSize * (120 / rows));
+                ClientSize = new Size(imageSize * rows, imageSize * (120 / rows + remainder));
             } else
             {
-                ClientSize = new Size(imageSize * (120 / rows), imageSize * rows);
+                ClientSize = new Size(imageSize * (120 / rows + remainder), imageSize * rows);
             }
         }
 
