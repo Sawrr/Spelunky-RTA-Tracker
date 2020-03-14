@@ -327,7 +327,7 @@ namespace AchievementsTracker
             SetTimer(time);
 
             achievementsFinishTime = time;
-            achievementsLoadlessFinishTime = playingTimeTotal;
+            achievementsLoadlessFinishTime = playingTimeTotal + time - lastPlayingStartTime;
         }
 
         public void SetTimer(long time)
@@ -430,7 +430,7 @@ namespace AchievementsTracker
             drawStatusList();
 
             tutorialFinishTime = time;
-            tutorialLoadlessFinishTime = playingTimeTotal;
+            tutorialLoadlessFinishTime = playingTimeTotal + time - lastPlayingStartTime;
         }
 
         public void FinishSpeedlunky(long time)
@@ -557,7 +557,7 @@ namespace AchievementsTracker
             drawStatusList();
 
             journalFinishTime = time;
-            journalLoadlessFinishTime = playingTimeTotal;
+            journalLoadlessFinishTime = playingTimeTotal + time - lastPlayingStartTime;
         }
 
         public void FinishCharacters(long time)
@@ -578,7 +578,7 @@ namespace AchievementsTracker
             drawStatusList();
 
             charactersFinishTime = time;
-            charactersLoadlessFinishTime = playingTimeTotal;
+            charactersLoadlessFinishTime = playingTimeTotal + time - lastPlayingStartTime;
         }
 
         public void FinishCasanova(long time)
@@ -867,7 +867,7 @@ namespace AchievementsTracker
             drawStatusList();
 
             asoFinishTime = time;
-            asoLoadlessFinishTime = playingTimeTotal;
+            asoLoadlessFinishTime = playingTimeTotal + time - lastPlayingStartTime;
         }
 
         private void runningLabel_Click(object sender, EventArgs e)
