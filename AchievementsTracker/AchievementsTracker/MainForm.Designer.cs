@@ -76,6 +76,8 @@
             this.asoKeyStatus = new System.Windows.Forms.Label();
             this.asoOlmecStatus = new System.Windows.Forms.Label();
             this.room = new System.Windows.Forms.Label();
+            this.loadlessTimer = new System.Windows.Forms.Label();
+            this.loadlessLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // runningLabel
@@ -550,13 +552,38 @@
             this.room.Size = new System.Drawing.Size(0, 15);
             this.room.TabIndex = 48;
             // 
+            // loadlessTimer
+            // 
+            this.loadlessTimer.AutoSize = true;
+            this.loadlessTimer.Font = new System.Drawing.Font("MS Reference Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadlessTimer.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.loadlessTimer.Location = new System.Drawing.Point(-5, 524);
+            this.loadlessTimer.Name = "loadlessTimer";
+            this.loadlessTimer.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.loadlessTimer.Size = new System.Drawing.Size(196, 46);
+            this.loadlessTimer.TabIndex = 49;
+            this.loadlessTimer.Text = "         0.00";
+            this.loadlessTimer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // loadlessLabel
+            // 
+            this.loadlessLabel.AutoSize = true;
+            this.loadlessLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadlessLabel.Location = new System.Drawing.Point(256, 534);
+            this.loadlessLabel.Name = "loadlessLabel";
+            this.loadlessLabel.Size = new System.Drawing.Size(36, 26);
+            this.loadlessLabel.TabIndex = 50;
+            this.loadlessLabel.Text = "LL";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(304, 532);
+            this.ClientSize = new System.Drawing.Size(304, 572);
+            this.Controls.Add(this.loadlessLabel);
+            this.Controls.Add(this.loadlessTimer);
             this.Controls.Add(this.room);
             this.Controls.Add(this.asoOlmecStatus);
             this.Controls.Add(this.asoKeyStatus);
@@ -667,6 +694,8 @@
         public System.Windows.Forms.Label asoKeyStatus;
         public System.Windows.Forms.Label asoOlmecStatus;
         public System.Windows.Forms.Label room;
+        public System.Windows.Forms.Label loadlessTimer;
+        public System.Windows.Forms.Label loadlessLabel;
     }
 }
 

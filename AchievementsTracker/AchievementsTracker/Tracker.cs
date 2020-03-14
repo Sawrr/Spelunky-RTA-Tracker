@@ -45,6 +45,7 @@ namespace AchievementsTracker
         {
             this.roomCode = roomCode;
             this.host = host;
+            ui.SetHideLoadless(true);
         }
 
         public void Reset()
@@ -176,6 +177,18 @@ namespace AchievementsTracker
             body += "]}}";
 
             Http.sendUpdate(roomCode, time, host, body);
+        }
+
+        public void TimePlayingBeginEvent(long currentTime)
+        {
+            ui.setCurrentlyPlaying(true);
+            ui.setLastPlayingStartTime(currentTime);
+        }
+
+        public void TimePlayingEndEvent(long timeChunk)
+        {
+            ui.setCurrentlyPlaying(false);
+            ui.AddPlayingTimeChunk(timeChunk);
         }
 
         public void CharactersEvent(int num, long time, int plays, byte[] chars)
@@ -481,6 +494,9 @@ namespace AchievementsTracker
             spelunky.Exited += new EventHandler((s, e) =>
             {
                 Log.WriteLine("Spelunky process exited");
+                
+                // Make sure loadless timer stops while game is closed
+                ui.setCurrentlyPlaying(false);
 
                 // Now start over
                 Main();

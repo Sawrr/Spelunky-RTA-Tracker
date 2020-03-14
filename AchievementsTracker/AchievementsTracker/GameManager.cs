@@ -34,6 +34,8 @@ namespace AchievementsTracker
         private int tunnelManChapter;
         private int tunnelManRemaining;
 
+        private long playingStartTime;
+
         public GameManager(Tracker tracker, MemoryReader memoryReader)
         {
             this.tracker = tracker;
@@ -135,6 +137,25 @@ namespace AchievementsTracker
 
             // Screen state
             ScreenState newState = (ScreenState)memoryReader.ReadScreenState();
+            if ((newState == ScreenState.Running && state != ScreenState.Running)
+                || (newState == ScreenState.Tutorial && state != ScreenState.Tutorial)
+                || (newState == ScreenState.OpeningScreen && state != ScreenState.OpeningScreen))
+            {
+                // Set playing start time
+                playingStartTime = time;
+                tracker.TimePlayingBeginEvent(playingStartTime);
+            }
+            if ((newState != ScreenState.Running && state == ScreenState.Running)
+                || (newState != ScreenState.Tutorial && state == ScreenState.Tutorial)
+                || (newState != ScreenState.OpeningScreen && state == ScreenState.OpeningScreen))
+            {
+                // Stop playing start time and add time chunk
+                if (playingStartTime != 0)
+                {
+                    long timeChunk = time - playingStartTime;
+                    tracker.TimePlayingEndEvent(timeChunk);
+                }
+            }
             if (newState == ScreenState.Running && state == ScreenState.Loading2 && runInProgress == false)
             {
                 // run started
