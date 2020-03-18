@@ -185,10 +185,10 @@ namespace AchievementsTracker
             ui.setLastPlayingStartTime(currentTime);
         }
 
-        public void TimePlayingEndEvent(long timeChunk)
+        public void TimePlayingEndEvent(long endTime)
         {
             ui.setCurrentlyPlaying(false);
-            ui.AddPlayingTimeChunk(timeChunk);
+            ui.AddPlayingTimeChunk(endTime);
         }
 
         public void CharactersEvent(int num, long time, int plays, byte[] chars)
@@ -494,9 +494,11 @@ namespace AchievementsTracker
             spelunky.Exited += new EventHandler((s, e) =>
             {
                 Log.WriteLine("Spelunky process exited");
-                
-                // Make sure loadless timer stops while game is closed
-                ui.setCurrentlyPlaying(false);
+
+                if (ui.getCurrentlyPlaying())
+                {
+                    TimePlayingEndEvent(DateTimeOffset.Now.ToUnixTimeMilliseconds());
+                }
 
                 // Now start over
                 Main();

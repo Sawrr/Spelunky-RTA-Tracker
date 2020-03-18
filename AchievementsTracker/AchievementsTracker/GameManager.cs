@@ -137,23 +137,20 @@ namespace AchievementsTracker
 
             // Screen state
             ScreenState newState = (ScreenState)memoryReader.ReadScreenState();
-            if ((newState == ScreenState.Running && state != ScreenState.Running)
-                || (newState == ScreenState.Tutorial && state != ScreenState.Tutorial)
-                || (newState == ScreenState.OpeningScreen && state != ScreenState.OpeningScreen))
+            if (newState != ScreenState.Loading1 && newState != ScreenState.Loading2 && newState != ScreenState.Loading3
+                && (state == ScreenState.Loading1 || state == ScreenState.Loading2 || state == ScreenState.Loading3))
             {
                 // Set playing start time
                 playingStartTime = time;
                 tracker.TimePlayingBeginEvent(playingStartTime);
             }
-            if ((newState != ScreenState.Running && state == ScreenState.Running)
-                || (newState != ScreenState.Tutorial && state == ScreenState.Tutorial)
-                || (newState != ScreenState.OpeningScreen && state == ScreenState.OpeningScreen))
+            if ((newState == ScreenState.Loading1 || newState == ScreenState.Loading2 || newState == ScreenState.Loading3)
+                && state != ScreenState.Loading1 && state != ScreenState.Loading2 && state != ScreenState.Loading3)
             {
                 // Stop playing start time and add time chunk
                 if (playingStartTime != 0)
                 {
-                    long timeChunk = time - playingStartTime;
-                    tracker.TimePlayingEndEvent(timeChunk);
+                    tracker.TimePlayingEndEvent(time);
                 }
             }
             if (newState == ScreenState.Running && state == ScreenState.Loading2 && runInProgress == false)

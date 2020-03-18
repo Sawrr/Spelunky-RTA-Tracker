@@ -875,6 +875,11 @@ namespace AchievementsTracker
 
         }
 
+        public bool getCurrentlyPlaying()
+        {
+            return currentlyPlaying;
+        }
+
         public void setCurrentlyPlaying(bool playing)
         {
             currentlyPlaying = playing;
@@ -885,9 +890,9 @@ namespace AchievementsTracker
             lastPlayingStartTime = time;
         }
 
-        public void AddPlayingTimeChunk(long timeChunk)
+        public void AddPlayingTimeChunk(long endTime)
         {
-            playingTimeTotal += timeChunk;
+            playingTimeTotal += endTime - lastPlayingStartTime;
         }
 
         public void UpdateLoadlessTimer(object sender, EventArgs e)
