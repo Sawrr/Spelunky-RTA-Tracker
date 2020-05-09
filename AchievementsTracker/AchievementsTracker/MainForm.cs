@@ -316,6 +316,9 @@ namespace AchievementsTracker
 
         public void StartTimer(long time, bool coop)
         {
+            playingTimeTotal = 0;
+            lastPlayingStartTime = time;
+            
             if (startTime == 0 || coop)
             {
                 startTime = time;

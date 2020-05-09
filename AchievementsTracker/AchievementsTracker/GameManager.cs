@@ -36,10 +36,16 @@ namespace AchievementsTracker
 
         private long playingStartTime;
 
-        public GameManager(Tracker tracker, MemoryReader memoryReader)
+        public GameManager(Tracker tracker, MemoryReader memoryReader, long playingStartTime)
         {
             this.tracker = tracker;
             this.memoryReader = memoryReader;
+            this.playingStartTime = playingStartTime;
+        }
+
+        public long getPlayingStartTime()
+        {
+            return playingStartTime;
         }
 
         private void startRun()
@@ -137,15 +143,14 @@ namespace AchievementsTracker
 
             // Screen state
             ScreenState newState = (ScreenState)memoryReader.ReadScreenState();
-            if (newState != ScreenState.Loading1 && newState != ScreenState.Loading2 && newState != ScreenState.Loading3
-                && (state == ScreenState.Loading1 || state == ScreenState.Loading2 || state == ScreenState.Loading3))
+
+            if (newState != ScreenState.Loading1 && state == ScreenState.Loading1)
             {
                 // Set playing start time
                 playingStartTime = time;
                 tracker.TimePlayingBeginEvent(playingStartTime);
             }
-            if ((newState == ScreenState.Loading1 || newState == ScreenState.Loading2 || newState == ScreenState.Loading3)
-                && state != ScreenState.Loading1 && state != ScreenState.Loading2 && state != ScreenState.Loading3)
+            if (newState == ScreenState.Loading1 && state != ScreenState.Loading1)
             {
                 // Stop playing start time and add time chunk
                 if (playingStartTime != 0)

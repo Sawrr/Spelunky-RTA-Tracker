@@ -26,11 +26,14 @@ namespace AchievementsTracker
         private MainForm ui;
         private ImgForm unlockables;
         private Process spelunky;
+        private GameManager gameManager;
         private bool running;
         private RunManager runManager;
 
         private bool host;
         private string roomCode;
+
+        private long playingStartTime;
 
         public Tracker(MainForm form, ImgForm imgForm)
         {
@@ -479,6 +482,18 @@ namespace AchievementsTracker
             try
             {
                 spelunky = SpelunkyProcessListener.listenForSpelunkyProcess();
+
+                // Listen for process terminating
+                spelunky.EnableRaisingEvents = true;
+                spelunky.Exited += new EventHandler((s, e) =>
+                {
+                    Log.WriteLine("Spelunky process exited");
+
+                    // Now start over
+                    playingStartTime = gameManager.getPlayingStartTime();
+                    Main();
+                });
+
                 Log.WriteLine("Spelunky process detected");
                 processHandle = (int)OpenProcess(PROCESS_WM_READ, false, spelunky.Id);
                 baseAddress = spelunky.MainModule.BaseAddress.ToInt32();
@@ -489,23 +504,8 @@ namespace AchievementsTracker
                 Log.WriteLine(e.ToString());
             }
 
-            // Listen for process terminating
-            spelunky.EnableRaisingEvents = true;
-            spelunky.Exited += new EventHandler((s, e) =>
-            {
-                Log.WriteLine("Spelunky process exited");
-
-                if (ui.getCurrentlyPlaying())
-                {
-                    TimePlayingEndEvent(DateTimeOffset.Now.ToUnixTimeMilliseconds());
-                }
-
-                // Now start over
-                Main();
-            });
-
             // Create game manager
-            GameManager gameManager = new GameManager(this, new MemoryReader(processHandle, baseAddress));
+            gameManager = new GameManager(this, new MemoryReader(processHandle, baseAddress), playingStartTime);
 
             // main game loop
             running = true;
