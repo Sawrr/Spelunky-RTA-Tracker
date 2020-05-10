@@ -117,6 +117,7 @@ namespace AchievementsTracker
             if (newRunTime - runTime < 0 && state == ScreenState.Running)
             {
                 // Insta death
+                // NOTE: likely unnecessary now
                 resetRun();
             }
             runTime = newRunTime;
@@ -137,10 +138,7 @@ namespace AchievementsTracker
             if (newState == ScreenState.Loading1 && state != ScreenState.Loading1)
             {
                 // Stop playing start time and add time chunk
-                if (playingStartTime != 0)
-                {
-                    tracker.TimePlayingEndEvent(time);
-                }
+                tracker.TimePlayingEndEvent(time);
             }
             if (newState == ScreenState.Running && state == ScreenState.Loading2 && runInProgress == false)
             {

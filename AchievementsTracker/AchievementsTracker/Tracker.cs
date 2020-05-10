@@ -64,7 +64,11 @@ namespace AchievementsTracker
         public void RunStarted(long time, bool coop)
         {
             ui.StartTimer(time, coop);
-            runManager.StartRun();
+            if (!runManager.IsRunInProgress())
+            {
+                runManager.StartRun();
+                TimePlayingBeginEvent(time);
+            }
         }
 
         public void SendRunStart(long time)
@@ -184,14 +188,22 @@ namespace AchievementsTracker
 
         public void TimePlayingBeginEvent(long currentTime)
         {
-            ui.setCurrentlyPlaying(true);
-            ui.setLastPlayingStartTime(currentTime);
+            if (runManager.IsRunInProgress())
+            {
+                ui.setCurrentlyPlaying(true);
+                ui.setLastPlayingStartTime(currentTime);
+                Log.WriteLine("ui.setLastPlayingStartTime(currentTime)");
+            }
         }
 
         public void TimePlayingEndEvent(long endTime)
         {
-            ui.setCurrentlyPlaying(false);
-            ui.AddPlayingTimeChunk(endTime);
+            if (runManager.IsRunInProgress())
+            {
+                ui.setCurrentlyPlaying(false);
+                ui.AddPlayingTimeChunk(endTime);
+                Log.WriteLine("ui.AddPlayingTimeChunk(endTime);");
+            }
         }
 
         public void CharactersEvent(int num, long time, int plays, byte[] chars)
@@ -502,6 +514,7 @@ namespace AchievementsTracker
             {
                 Log.WriteLine("Error encountered listening for or opening the process");
                 Log.WriteLine(e.ToString());
+                throw e;
             }
 
             // Create game manager
