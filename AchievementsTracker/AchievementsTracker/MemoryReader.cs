@@ -131,6 +131,20 @@ namespace AchievementsTracker
             return buffer[0];
         }
 
+        public int ReadPlayerOneHealth()
+        {
+            byte[] buffer = new byte[1];
+            ReadMemory(buffer, baseAddress, PLAYER_ONE_HEALTH);
+            return buffer[0];
+        }
+
+        public int ReadPlayerTwoHealth()
+        {
+            byte[] buffer = new byte[1];
+            ReadMemory(buffer, baseAddress, PLAYER_TWO_HEALTH);
+            return buffer[0];
+        }
+
         public int ReadPlays()
         {
             byte[] buffer = new byte[4];
@@ -168,16 +182,6 @@ namespace AchievementsTracker
             return ReadMemory(buffer, baseAddress, JOURNAL_TRAPS);
         }
 
-        public int ReadPlayerOneHealthAddr()
-        {
-            return LocateMemory(baseAddress, PLAYER_ONE_HEALTH);
-        }
-
-        public int ReadPlayerTwoHealthAddr()
-        {
-            return LocateMemory(baseAddress, PLAYER_TWO_HEALTH);
-        }
-
         private byte[] ReadMemory(byte[] buffer, int addr, int[] offsets)
         {
             int bytesRead = 0;
@@ -198,36 +202,6 @@ namespace AchievementsTracker
             ReadProcessMemory(processHandle, addr, buffer, buffer.Length, ref bytesRead);
 
             return buffer;
-        }
-
-        private int LocateMemory(int addr, int[] offsets)
-        {
-            int bytesRead = 0;
-
-            // Buffer for next pointer
-            byte[] pointer = new byte[4];
-
-            // Traverse pointer path
-            for (int i = 0; i < offsets.Length - 1; i++)
-            {
-                addr += offsets[i];
-                ReadProcessMemory(processHandle, addr, pointer, pointer.Length, ref bytesRead);
-                addr = BitConverter.ToInt32(pointer, 0);
-            }
-
-            // Read value from final address
-            addr += offsets[offsets.Length - 1];
-
-            return addr;
-        }
-
-        public int ReadExactMemory(int addr)
-        {
-            int bytesRead = 0;
-            byte[] buffer = new byte[1];
-            ReadProcessMemory(processHandle, addr, buffer, buffer.Length, ref bytesRead);
-
-            return buffer[0];
         }
     }
 }

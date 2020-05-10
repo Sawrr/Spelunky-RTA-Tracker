@@ -27,8 +27,6 @@ namespace AchievementsTracker
         private bool runIsTwoPlayer;
         private int p1Health;
         private int p2Health;
-        private int p1HealthAddr;
-        private int p2HealthAddr;
 
         private TutorialState tutState;
         private int tunnelManChapter;
@@ -62,8 +60,6 @@ namespace AchievementsTracker
             {
                 Log.WriteLine("  with multiple players");
                 runIsTwoPlayer = true;
-                p1HealthAddr = memoryReader.ReadPlayerOneHealthAddr();
-                p2HealthAddr = memoryReader.ReadPlayerTwoHealthAddr();
             }
         }
 
@@ -100,11 +96,7 @@ namespace AchievementsTracker
                 }
                 if (newScore >= 500000)
                 {
-                    // Filter out olmec, yama cutscenes
-                    if (!((levelIdx == 20 || levelIdx == 16) && stageTime < 500))
-                    {
-                        tracker.BigMoneyAchieved(time, plays);
-                    }
+                    tracker.BigMoneyAchieved(time, plays);
                 }
             }
             score = newScore;
@@ -115,8 +107,8 @@ namespace AchievementsTracker
             // Two player hp's
             if (runIsTwoPlayer)
             {
-                p1Health = memoryReader.ReadExactMemory(p1HealthAddr);
-                p2Health = memoryReader.ReadExactMemory(p2HealthAddr);
+                p1Health = memoryReader.ReadPlayerOneHealth();
+                p2Health = memoryReader.ReadPlayerTwoHealth();
             }
 
             // Times
@@ -124,16 +116,8 @@ namespace AchievementsTracker
             int newStageTime = memoryReader.ReadStageTimeInMilliseconds();
             if (newRunTime - runTime < 0 && state == ScreenState.Running)
             {
-                // Filter out beginning of olmec, yama cutscenes
-                if (!((levelIdx == 20 || levelIdx == 16) && stageTime < 500))
-                {
-                    // Filter out death of P1 in two player games
-                    if (!(runIsTwoPlayer && p2Health > 0))
-                    {
-                        // Insta death
-                        resetRun();
-                    }
-                }
+                // Insta death
+                resetRun();
             }
             runTime = newRunTime;
             stageTime = newStageTime;
