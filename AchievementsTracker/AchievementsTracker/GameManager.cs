@@ -27,17 +27,23 @@ namespace AchievementsTracker
         private bool runIsTwoPlayer;
         private int p1Health;
         private int p2Health;
-        private int p1HealthAddr;
-        private int p2HealthAddr;
 
         private TutorialState tutState;
         private int tunnelManChapter;
         private int tunnelManRemaining;
 
-        public GameManager(Tracker tracker, MemoryReader memoryReader)
+        private long playingStartTime;
+
+        public GameManager(Tracker tracker, MemoryReader memoryReader, long playingStartTime)
         {
             this.tracker = tracker;
             this.memoryReader = memoryReader;
+            this.playingStartTime = playingStartTime;
+        }
+
+        public long getPlayingStartTime()
+        {
+            return playingStartTime;
         }
 
         private void startRun()
@@ -54,8 +60,6 @@ namespace AchievementsTracker
             {
                 Log.WriteLine("  with multiple players");
                 runIsTwoPlayer = true;
-                p1HealthAddr = memoryReader.ReadPlayerOneHealthAddr();
-                p2HealthAddr = memoryReader.ReadPlayerTwoHealthAddr();
             }
         }
 
@@ -92,11 +96,7 @@ namespace AchievementsTracker
                 }
                 if (newScore >= 500000)
                 {
-                    // Filter out olmec, yama cutscenes
-                    if (!((levelIdx == 20 || levelIdx == 16) && stageTime < 500))
-                    {
-                        tracker.BigMoneyAchieved(time, plays);
-                    }
+                    tracker.BigMoneyAchieved(time, plays);
                 }
             }
             score = newScore;
@@ -107,8 +107,8 @@ namespace AchievementsTracker
             // Two player hp's
             if (runIsTwoPlayer)
             {
-                p1Health = memoryReader.ReadExactMemory(p1HealthAddr);
-                p2Health = memoryReader.ReadExactMemory(p2HealthAddr);
+                p1Health = memoryReader.ReadPlayerOneHealth();
+                p2Health = memoryReader.ReadPlayerTwoHealth();
             }
 
             // Times
@@ -116,16 +116,9 @@ namespace AchievementsTracker
             int newStageTime = memoryReader.ReadStageTimeInMilliseconds();
             if (newRunTime - runTime < 0 && state == ScreenState.Running)
             {
-                // Filter out beginning of olmec, yama cutscenes
-                if (!((levelIdx == 20 || levelIdx == 16) && stageTime < 500))
-                {
-                    // Filter out death of P1 in two player games
-                    if (!(runIsTwoPlayer && p2Health > 0))
-                    {
-                        // Insta death
-                        resetRun();
-                    }
-                }
+                // Insta death
+                // NOTE: likely unnecessary now
+                resetRun();
             }
             runTime = newRunTime;
             stageTime = newStageTime;
@@ -135,6 +128,18 @@ namespace AchievementsTracker
 
             // Screen state
             ScreenState newState = (ScreenState)memoryReader.ReadScreenState();
+
+            if (newState != ScreenState.Loading1 && state == ScreenState.Loading1)
+            {
+                // Set playing start time
+                playingStartTime = time;
+                tracker.TimePlayingBeginEvent(playingStartTime);
+            }
+            if (newState == ScreenState.Loading1 && state != ScreenState.Loading1)
+            {
+                // Stop playing start time and add time chunk
+                tracker.TimePlayingEndEvent(time);
+            }
             if (newState == ScreenState.Running && state == ScreenState.Loading2 && runInProgress == false)
             {
                 // run started

@@ -18,6 +18,8 @@ namespace AchievementsTracker
 
         public const int FORM_WIDTH = 320;
         public const int FORM_TIMER_DY = 40;
+        public const int FORM_LOADLESS_TIMER_DY = 60;
+        public const int FORM_LOADLESS_LABEL_DY = 15;
         public const int FORM_LABEL_X = 12;
         public const int FORM_LABEL_Y = 70;
         public const int FORM_LABEL_DX = 168;
@@ -51,7 +53,17 @@ namespace AchievementsTracker
         private long asoFinishTime;
         private long tutorialFinishTime;
 
+        private long achievementsLoadlessFinishTime;
+        private long journalLoadlessFinishTime;
+        private long charactersLoadlessFinishTime;
+        private long asoLoadlessFinishTime;
+        private long tutorialLoadlessFinishTime;
+
         private int journalNum;
+
+        private long playingTimeTotal;
+        private long lastPlayingStartTime;
+        private bool currentlyPlaying;
 
         public MainForm(TrayApplicationContext ctx)
         {
@@ -85,6 +97,8 @@ namespace AchievementsTracker
             room.Text = "";
             roomStatus.Text = "";
 
+            SetHideLoadless(false);
+
             startTime = 0;
             
             // Init timer
@@ -94,6 +108,7 @@ namespace AchievementsTracker
             }
             runTimer = new Timer();
             runTimer.Tick += new EventHandler(UpdateTimer);
+            runTimer.Tick += new EventHandler(UpdateLoadlessTimer);
             runTimer.Interval = 50;
             runTimer.Start();
 
@@ -103,6 +118,11 @@ namespace AchievementsTracker
             charactersFinishTime = 0;
             asoFinishTime = 0;
             tutorialFinishTime = 0;
+            achievementsLoadlessFinishTime = 0;
+            journalLoadlessFinishTime = 0;
+            charactersLoadlessFinishTime = 0;
+            asoLoadlessFinishTime = 0;
+            tutorialLoadlessFinishTime = 0;
 
             // Label lists
 
@@ -225,6 +245,10 @@ namespace AchievementsTracker
 
             // Reset timer
             timer.Text = FormatTime(0);
+            loadlessTimer.Text = FormatTime(0);
+
+            playingTimeTotal = 0;
+            currentlyPlaying = false;
         }
 
         public void setRoomCode(string code)
@@ -264,7 +288,9 @@ namespace AchievementsTracker
             }
 
             timer.Location = new Point(-5, y + FORM_TIMER_DY);
-            this.Size = new Size(FORM_WIDTH, y + FORM_TIMER_DY + FORM_TIMER_HEIGHT);
+            loadlessTimer.Location = new Point(25, y + FORM_TIMER_DY + FORM_LOADLESS_TIMER_DY);
+            loadlessLabel.Location = new Point(260, y + FORM_TIMER_DY + FORM_LOADLESS_TIMER_DY + FORM_LOADLESS_LABEL_DY);
+            this.Size = new Size(FORM_WIDTH, y + FORM_TIMER_DY + FORM_LOADLESS_TIMER_DY + FORM_TIMER_HEIGHT);
         }
 
         public void drawStatusList()
@@ -301,6 +327,7 @@ namespace AchievementsTracker
             SetTimer(time);
 
             achievementsFinishTime = time;
+            achievementsLoadlessFinishTime = playingTimeTotal + time - lastPlayingStartTime;
         }
 
         public void SetTimer(long time)
@@ -403,6 +430,7 @@ namespace AchievementsTracker
             drawStatusList();
 
             tutorialFinishTime = time;
+            tutorialLoadlessFinishTime = playingTimeTotal + time - lastPlayingStartTime;
         }
 
         public void FinishSpeedlunky(long time)
@@ -529,6 +557,7 @@ namespace AchievementsTracker
             drawStatusList();
 
             journalFinishTime = time;
+            journalLoadlessFinishTime = playingTimeTotal + time - lastPlayingStartTime;
         }
 
         public void FinishCharacters(long time)
@@ -549,6 +578,7 @@ namespace AchievementsTracker
             drawStatusList();
 
             charactersFinishTime = time;
+            charactersLoadlessFinishTime = playingTimeTotal + time - lastPlayingStartTime;
         }
 
         public void FinishCasanova(long time)
@@ -837,11 +867,84 @@ namespace AchievementsTracker
             drawStatusList();
 
             asoFinishTime = time;
+            asoLoadlessFinishTime = playingTimeTotal + time - lastPlayingStartTime;
         }
 
         private void runningLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public bool getCurrentlyPlaying()
+        {
+            return currentlyPlaying;
+        }
+
+        public void setCurrentlyPlaying(bool playing)
+        {
+            currentlyPlaying = playing;
+        }
+
+        public void setLastPlayingStartTime(long time)
+        {
+            lastPlayingStartTime = time;
+        }
+
+        public void AddPlayingTimeChunk(long endTime)
+        {
+            playingTimeTotal += endTime - lastPlayingStartTime;
+        }
+
+        public void UpdateLoadlessTimer(object sender, EventArgs e)
+        {
+            // Make sure run has started
+            if (startTime == 0)
+            {
+                return;
+            }
+
+            long time = playingTimeTotal;
+
+            if (currentlyPlaying)
+            {
+                // Get current time
+                time += DateTimeOffset.Now.ToUnixTimeMilliseconds() - lastPlayingStartTime;
+            }
+
+            // If selected category is complete, display the completion time instead
+            switch (this.category)
+            {
+                case Category.AA:
+                    if (achievementsLoadlessFinishTime != 0) time = achievementsLoadlessFinishTime;
+                    break;
+                case Category.AJE:
+                    if (journalLoadlessFinishTime != 0) time = journalLoadlessFinishTime;
+                    break;
+                case Category.AC:
+                    if (charactersLoadlessFinishTime != 0) time = charactersLoadlessFinishTime;
+                    break;
+                case Category.ASO:
+                    if (asoLoadlessFinishTime != 0) time = asoLoadlessFinishTime;
+                    break;
+                case Category.Tutorial:
+                    if (tutorialLoadlessFinishTime != 0) time = tutorialLoadlessFinishTime;
+                    break;
+            }
+
+            loadlessTimer.Text = FormatTime(time);
+        }
+
+        public void SetHideLoadless(bool hide)
+        {
+            if (hide)
+            {
+                loadlessTimer.Hide();
+                loadlessLabel.Hide();
+            } else
+            {
+                loadlessTimer.Show();
+                loadlessLabel.Show();
+            }
         }
     }
 }

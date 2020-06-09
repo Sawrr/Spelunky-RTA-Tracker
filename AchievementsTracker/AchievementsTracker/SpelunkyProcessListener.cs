@@ -11,6 +11,8 @@ namespace AchievementsTracker
         {
             while (true)
             {
+                System.Threading.Thread.Sleep(SLEEP_TIME);
+
                 Process[] spelunkies = Process.GetProcessesByName("spelunky");
                 if (spelunkies.Length == 1)
                 {
@@ -20,8 +22,6 @@ namespace AchievementsTracker
                 {
                     throw new Exception("You have more than one spelunky process open O__O");
                 }
-
-                System.Threading.Thread.Sleep(SLEEP_TIME);
             }
         }
     }

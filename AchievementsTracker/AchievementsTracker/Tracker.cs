@@ -26,11 +26,14 @@ namespace AchievementsTracker
         private MainForm ui;
         private ImgForm unlockables;
         private Process spelunky;
+        private GameManager gameManager;
         private bool running;
         private RunManager runManager;
 
         private bool host;
         private string roomCode;
+
+        private long playingStartTime;
 
         public Tracker(MainForm form, ImgForm imgForm)
         {
@@ -45,6 +48,7 @@ namespace AchievementsTracker
         {
             this.roomCode = roomCode;
             this.host = host;
+            ui.SetHideLoadless(true);
         }
 
         public void Reset()
@@ -60,7 +64,11 @@ namespace AchievementsTracker
         public void RunStarted(long time, bool coop)
         {
             ui.StartTimer(time, coop);
-            runManager.StartRun();
+            if (!runManager.IsRunInProgress())
+            {
+                runManager.StartRun();
+                TimePlayingBeginEvent(time);
+            }
         }
 
         public void SendRunStart(long time)
@@ -176,6 +184,26 @@ namespace AchievementsTracker
             body += "]}}";
 
             Http.sendUpdate(roomCode, time, host, body);
+        }
+
+        public void TimePlayingBeginEvent(long currentTime)
+        {
+            if (runManager.IsRunInProgress())
+            {
+                ui.setCurrentlyPlaying(true);
+                ui.setLastPlayingStartTime(currentTime);
+                Log.WriteLine("ui.setLastPlayingStartTime(currentTime)");
+            }
+        }
+
+        public void TimePlayingEndEvent(long endTime)
+        {
+            if (runManager.IsRunInProgress())
+            {
+                ui.setCurrentlyPlaying(false);
+                ui.AddPlayingTimeChunk(endTime);
+                Log.WriteLine("ui.AddPlayingTimeChunk(endTime);");
+            }
         }
 
         public void CharactersEvent(int num, long time, int plays, byte[] chars)
@@ -466,6 +494,18 @@ namespace AchievementsTracker
             try
             {
                 spelunky = SpelunkyProcessListener.listenForSpelunkyProcess();
+
+                // Listen for process terminating
+                spelunky.EnableRaisingEvents = true;
+                spelunky.Exited += new EventHandler((s, e) =>
+                {
+                    Log.WriteLine("Spelunky process exited");
+
+                    // Now start over
+                    playingStartTime = gameManager.getPlayingStartTime();
+                    Main();
+                });
+
                 Log.WriteLine("Spelunky process detected");
                 processHandle = (int)OpenProcess(PROCESS_WM_READ, false, spelunky.Id);
                 baseAddress = spelunky.MainModule.BaseAddress.ToInt32();
@@ -474,20 +514,11 @@ namespace AchievementsTracker
             {
                 Log.WriteLine("Error encountered listening for or opening the process");
                 Log.WriteLine(e.ToString());
+                throw e;
             }
 
-            // Listen for process terminating
-            spelunky.EnableRaisingEvents = true;
-            spelunky.Exited += new EventHandler((s, e) =>
-            {
-                Log.WriteLine("Spelunky process exited");
-
-                // Now start over
-                Main();
-            });
-
             // Create game manager
-            GameManager gameManager = new GameManager(this, new MemoryReader(processHandle, baseAddress));
+            gameManager = new GameManager(this, new MemoryReader(processHandle, baseAddress), playingStartTime);
 
             // main game loop
             running = true;

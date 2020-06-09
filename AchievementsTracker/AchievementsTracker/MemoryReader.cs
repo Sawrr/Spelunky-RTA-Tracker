@@ -9,21 +9,21 @@ namespace AchievementsTracker
         public static extern bool ReadProcessMemory(int hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
 
         private int[] SCREEN_STATE = { 0x1384B4, 0x58 };
-        private int[] PLAYER_ONE_HEALTH = { 0x138558, 0x30, 0x280, 0 };
-        private int[] PLAYER_TWO_HEALTH = { 0x138558, 0x30, 0x280, 0x14A4 };
+        private int[] PLAYER_ONE_HEALTH = { 0x1384B4, 0x440694 };
+        private int[] PLAYER_TWO_HEALTH = { 0x1384B4, 0x441B38 };
         private int[] CHAR_SELECT = { 0x1384B4, 0x4C, 0x122BEC };
-        private int[] DAMSEL_COUNT = { 0x138558, 0x30, 0x280, -0x70 };
-        private int[] SHOPPIE_COUNT = { 0x138558, 0x30, 0x280, 0x6CB0 };
+        private int[] DAMSEL_COUNT = { 0x1384B4, 0x440624 };
+        private int[] SHOPPIE_COUNT = { 0x1384B4, 0x447344 };
         private int[] CHARACTERS = { 0x1384B4, 0x4463EC };
         private int[] JOURNAL_PLACES = { 0x1384B4, 0x445DEC };
         private int[] JOURNAL_MONSTERS = { 0x1384B4, 0x445EEC };
         private int[] JOURNAL_ITEMS = { 0x1384B4, 0x445FEC };
         private int[] JOURNAL_TRAPS = { 0x1384B4, 0x4460EC };
-        private int[] RUN_TIME = { 0x138558, 0x30, 0x280, 0x52AC };
-        private int[] STAGE_TIME = { 0x138558, 0x30, 0x280, 0x52BC };
-        private int[] LEVEL_IDX = { 0x138558, 0x30, 0x280, -0xC0 };
-        private int[] SCORE = { 0x138558, 0x30, 0x280, 0x5298 };
-        private int[] BOMBS = { 0x138558, 0x30, 0x280, 0x10 };
+        private int[] RUN_TIME = { 0x1384B4, 0x445940 };
+        private int[] STAGE_TIME = { 0x1384B4, 0x445950 };
+        private int[] LEVEL_IDX = { 0x1384B4, 0x4405D4 };
+        private int[] SCORE = { 0x1384B4, 0x44592C };
+        private int[] BOMBS = { 0x1384B4, 0x4406A4 };
         private int[] PLAYS = { 0x1384B4, 0x4459C8 };
         private int[] TUNNEL_CHAPTER = { 0x1384B4, 0x445BE4 };
         private int[] TUNNEL_REMAINING = { 0x1384B4, 0x445BE8 };
@@ -131,6 +131,20 @@ namespace AchievementsTracker
             return buffer[0];
         }
 
+        public int ReadPlayerOneHealth()
+        {
+            byte[] buffer = new byte[1];
+            ReadMemory(buffer, baseAddress, PLAYER_ONE_HEALTH);
+            return buffer[0];
+        }
+
+        public int ReadPlayerTwoHealth()
+        {
+            byte[] buffer = new byte[1];
+            ReadMemory(buffer, baseAddress, PLAYER_TWO_HEALTH);
+            return buffer[0];
+        }
+
         public int ReadPlays()
         {
             byte[] buffer = new byte[4];
@@ -168,16 +182,6 @@ namespace AchievementsTracker
             return ReadMemory(buffer, baseAddress, JOURNAL_TRAPS);
         }
 
-        public int ReadPlayerOneHealthAddr()
-        {
-            return LocateMemory(baseAddress, PLAYER_ONE_HEALTH);
-        }
-
-        public int ReadPlayerTwoHealthAddr()
-        {
-            return LocateMemory(baseAddress, PLAYER_TWO_HEALTH);
-        }
-
         private byte[] ReadMemory(byte[] buffer, int addr, int[] offsets)
         {
             int bytesRead = 0;
@@ -198,36 +202,6 @@ namespace AchievementsTracker
             ReadProcessMemory(processHandle, addr, buffer, buffer.Length, ref bytesRead);
 
             return buffer;
-        }
-
-        private int LocateMemory(int addr, int[] offsets)
-        {
-            int bytesRead = 0;
-
-            // Buffer for next pointer
-            byte[] pointer = new byte[4];
-
-            // Traverse pointer path
-            for (int i = 0; i < offsets.Length - 1; i++)
-            {
-                addr += offsets[i];
-                ReadProcessMemory(processHandle, addr, pointer, pointer.Length, ref bytesRead);
-                addr = BitConverter.ToInt32(pointer, 0);
-            }
-
-            // Read value from final address
-            addr += offsets[offsets.Length - 1];
-
-            return addr;
-        }
-
-        public int ReadExactMemory(int addr)
-        {
-            int bytesRead = 0;
-            byte[] buffer = new byte[1];
-            ReadProcessMemory(processHandle, addr, buffer, buffer.Length, ref bytesRead);
-
-            return buffer[0];
         }
     }
 }
