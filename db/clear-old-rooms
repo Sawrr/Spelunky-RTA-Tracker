@@ -1,2 +1,16 @@
 use spelunky
+
+// Remove old rooms
 db.rooms.remove({createTime: {$lt: new Date().getTime() - 1000*60*60*48}})
+
+// Keep a rolling log of room audits
+var allRecords = db.roomsAudit.find().sort({"createTime" : -1})
+var total = allRecords.count()
+for (var i = 0; i < total; i++) {
+    if (i < 100) {
+        allRecords.next();
+        continue;
+    }
+    var currentRecord = allRecords.next();
+    db.roomsAudit.remove({_id: currentRecord._id});
+}

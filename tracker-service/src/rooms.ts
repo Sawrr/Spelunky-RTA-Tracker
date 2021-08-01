@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { generateID } from './util';
 import { RoomModel } from './room';
+import { RoomAuditModel } from './roomAudit';
 
 const NUM_JOURNAL_PLACES = 10;
 const NUM_JOURNAL_MONSTERS = 56;
@@ -50,8 +51,15 @@ r.post("/", async (req, res) => {
                 }
             }
 
+            let newRoomAudit = {
+                _id: id,
+                createTime: Date.now()
+            }
+
             // Try to create a room with this id
             await RoomModel.create(newRoom);
+            // Audit trail
+            await RoomAuditModel.create(newRoomAudit);
         } catch (err) {
             // Failed to create a room, try again
             continue;
