@@ -8,26 +8,26 @@ namespace AchievementsTracker
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(int hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
 
-        private int[] SCREEN_STATE = { 0x1384B4, 0x58 };
-        private int[] PLAYER_ONE_HEALTH = { 0x1384B4, 0x440694 };
-        private int[] PLAYER_TWO_HEALTH = { 0x1384B4, 0x441B38 };
-        private int[] CHAR_SELECT = { 0x1384B4, 0x4C, 0x122BEC };
-        private int[] DAMSEL_COUNT = { 0x1384B4, 0x440624 };
-        private int[] SHOPPIE_COUNT = { 0x1384B4, 0x447344 };
-        private int[] CHARACTERS = { 0x1384B4, 0x4463EC };
-        private int[] JOURNAL_PLACES = { 0x1384B4, 0x445DEC };
-        private int[] JOURNAL_MONSTERS = { 0x1384B4, 0x445EEC };
-        private int[] JOURNAL_ITEMS = { 0x1384B4, 0x445FEC };
-        private int[] JOURNAL_TRAPS = { 0x1384B4, 0x4460EC };
-        private int[] RUN_TIME = { 0x1384B4, 0x445940 };
-        private int[] STAGE_TIME = { 0x1384B4, 0x445950 };
-        private int[] LEVEL_IDX = { 0x1384B4, 0x4405D4 };
-        private int[] SCORE = { 0x1384B4, 0x44592C };
-        private int[] BOMBS = { 0x1384B4, 0x4406A4 };
-        private int[] PLAYS = { 0x1384B4, 0x4459C8 };
-        private int[] TUNNEL_CHAPTER = { 0x1384B4, 0x445BE4 };
-        private int[] TUNNEL_REMAINING = { 0x1384B4, 0x445BE8 };
-        private int[] TUTORIAL_STATUS = { 0x1384B4, 0x445BE0 };
+        private int[] SCREEN_STATE = { 0x15446C, 0x58 };
+        private int[] PLAYER_ONE_HEALTH = { 0x15446C, 0x440694 };
+        private int[] PLAYER_TWO_HEALTH = { 0x15446C, 0x441B38 };
+        private int[] CHAR_SELECT = { 0x15446C, 0x4C, 0x122BEC };
+        private int[] DAMSEL_COUNT = { 0x15446C, 0x440624 };
+        private int[] SHOPPIE_COUNT = { 0x15446C, 0x447344 };
+        private int[] CHARACTERS = { 0x15446C, 0x4463EC };
+        private int[] JOURNAL_PLACES = { 0x15446C, 0x445DEC };
+        private int[] JOURNAL_MONSTERS = { 0x15446C, 0x445EEC };
+        private int[] JOURNAL_ITEMS = { 0x15446C, 0x445FEC };
+        private int[] JOURNAL_TRAPS = { 0x15446C, 0x4460EC };
+        private int[] RUN_TIME = { 0x15446C, 0x445940 };
+        private int[] STAGE_TIME = { 0x15446C, 0x445950 };
+        private int[] LEVEL_IDX = { 0x15446C, 0x4405D4 };
+        private int[] SCORE = { 0x15446C, 0x44592C };
+        private int[] BOMBS = { 0x15446C, 0x4406A4 };
+        private int[] PLAYS = { 0x15446C, 0x4459C8 };
+        private int[] TUNNEL_CHAPTER = { 0x15446C, 0x445BE4 };
+        private int[] TUNNEL_REMAINING = { 0x15446C, 0x445BE8 };
+        private int[] TUTORIAL_STATUS = { 0x15446C, 0x445BE0 };
 
         private int processHandle;
         private int baseAddress;
