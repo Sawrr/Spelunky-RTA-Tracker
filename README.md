@@ -45,4 +45,4 @@ The tracker only observes the health of Players 1 and 2 for the Good Teamwork ac
 - Download here if you need it: https://www.microsoft.com/net/download/dotnet-framework-runtime
 
 ## Download
-[Download the beta](https://github.com/Sawrr/Spelunky-RTA-Tracker/releases/download/1.12.0/SpelunkyRTATracker.exe) or check the Releases tab
+[Download the tracker](https://github.com/Sawrr/Spelunky-RTA-Tracker/releases/download/1.13.0/SpelunkyRTATracker.exe) or check the Releases tab
