@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace AchievementsTracker
 {
@@ -16,7 +17,8 @@ namespace AchievementsTracker
         int imageSize = 40;
         int rows = 8;
         bool inverted = false;
-        int[] CHAR_ORDER = { 2, 6, 7, 4, 9, 12, 11, 5, 1, 8, 14, 10, 13, 15, 3, 0 };
+        bool groupByArea = false;
+        Category category = Category.AA;
 
         public ImgForm()
         {
@@ -55,70 +57,120 @@ namespace AchievementsTracker
             inverted = inv;
         }
 
+        public void changeCategory(Category cat)
+        {
+            category = cat;
+        }
+
+        public void SetGroupByArea(bool param)
+        {
+            groupByArea = param;
+        }
+
         public void Reset()
         {
-            ArrangeUnlockables();
-
             foreach (Control c in Controls)
             {
                 c.Show();
             }
+            ArrangeUnlockables();
+
         }
 
         public void ArrangeUnlockables()
         {
-            for (int i = 0; i < 120; i++)
+            Debug.WriteLine("Category: " + category.ToString());
+
+  
+            int pos = 0;
+
+            var imgOrder = ImgOrder.DEFAULT;
+            if (groupByArea)
+            {
+                imgOrder = ImgOrder.BY_AREA;
+            }
+
+            foreach ((EntryType entryType, string name) in imgOrder)
             {
                 // Get the right image box
                 Control picBox;
-                if (i < 16)
+                
+                if (entryType == EntryType.Character)
                 {
-                    picBox = Controls.Find("c" + CHAR_ORDER[i], false)[0];
+
+                    picBox = Controls.Find(name, false)[0];
+                    if (category != Category.AA && category != Category.AC)
+                    {
+                        picBox.Hide();
+                        continue;
+                    }
+                    picBox.Show();
                 }
-                else if (i >= 16 && i < 72)
+                else if (entryType == EntryType.Monster)
                 {
-                    picBox = Controls.Find("m" + (i - 16), false)[0];
+                    picBox = Controls.Find(name, false)[0];
+                    if (category != Category.AA && category != Category.AJE)
+                    {
+                        picBox.Hide();
+                        continue;
+                    }
+                    picBox.Show();
                 }
-                else if (i >= 72 && i < 106)
+                else if (entryType == EntryType.Item)
                 {
-                    picBox = Controls.Find("i" + (i - 72), false)[0];
+                    picBox = Controls.Find(name, false)[0];
+                    if (category != Category.AA && category != Category.AJE)
+                    {
+                        picBox.Hide();
+                        continue;
+                    }
+                    picBox.Show();
                 }
                 else
                 {
-                    picBox = Controls.Find("t" + (i - 106), false)[0];
+                    picBox = Controls.Find(name, false)[0];
+                    if (category != Category.AA && category != Category.AJE)
+                    {
+                        picBox.Hide();
+                        continue;
+                    }
+                    picBox.Show();
                 }
+
 
                 // Position it accordingly
                 int xIdx;
                 int yIdx;
                 if (!inverted)
                 {
-                    xIdx = (i / rows);
-                    yIdx = (i % rows);
+                    xIdx = (pos / rows);
+                    yIdx = (pos % rows);
                 } else
                 {
-                    xIdx = (i % rows);
-                    yIdx = (i / rows);
+                    xIdx = (pos % rows);
+                    yIdx = (pos / rows);
                 }
                 int x = imageSize * xIdx;
                 int y = imageSize * yIdx;
                 picBox.Location = new Point(x, y);
                 picBox.Size = new Size(imageSize, imageSize);
+
+                pos++;
             }
 
             // Handle remainder
             int remainder = 0;
-            if (120 % rows != 0)
+            if ((pos-1) % rows != 0)
             {
                 remainder = 1;
             }
 
             if (inverted)
             {
-                ClientSize = new Size(imageSize * rows, imageSize * (120 / rows + remainder));
+                ClientSize = new Size(imageSize * rows, imageSize * ((pos-1) / rows + remainder));
             } else
             {
-                ClientSize = new Size(imageSize * (120 / rows + remainder), imageSize * rows);
+                ClientSize = new Size(imageSize * ((pos-1) / rows + remainder), imageSize * rows);
             }
         }
 

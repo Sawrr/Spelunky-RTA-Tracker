@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>AchievementsTracker</RootNamespace>
     <AssemblyName>SpelunkyRTATracker</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
+    <Compile Include="EntryType.cs" />
+    <Compile Include="ImgOrder.cs" />
     <Compile Include="Achievement.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="Http.cs" />

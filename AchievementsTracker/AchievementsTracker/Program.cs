@@ -124,10 +124,11 @@ namespace AchievementsTracker
                 form.SetResetHotKey(mods, key);
                 settings.SetHotkey(mods, key);
 
-                // Set image size, rows, inverted
+                // Set image size, rows, inverted, groupByArea
                 settings.SetImageSize(trackerSettings.imageSize);
                 settings.SetRows(trackerSettings.rows);
                 settings.SetInverted(trackerSettings.inverted);
+                settings.SetGroupByArea(trackerSettings.groupByArea);
 
                 // Set background color
                 Color bgColor = ColorTranslator.FromHtml(trackerSettings.backColor);
@@ -269,6 +270,8 @@ namespace AchievementsTracker
                 form.drawList();
                 form.drawStatusList();
 
+                imgForm.changeCategory(Category.AA);
+                imgForm.ArrangeUnlockables();
                 imgForm.Show();
 
                 form.changeCategory(Category.AA);
@@ -325,6 +328,8 @@ namespace AchievementsTracker
                 form.drawList();
                 form.drawStatusList();
 
+                imgForm.changeCategory(Category.AJE);
+                imgForm.ArrangeUnlockables();
                 imgForm.Show();
 
                 form.changeCategory(Category.AJE);
@@ -381,6 +386,8 @@ namespace AchievementsTracker
                 form.drawList();
                 form.drawStatusList();
 
+                imgForm.changeCategory(Category.AC);
+                imgForm.ArrangeUnlockables();
                 imgForm.Show();
 
                 form.changeCategory(Category.AC);
@@ -437,6 +444,7 @@ namespace AchievementsTracker
                 form.drawList();
                 form.drawStatusList();
 
+                imgForm.changeCategory(Category.ASO);
                 imgForm.Hide();
 
                 form.changeCategory(Category.ASO);
@@ -493,6 +501,7 @@ namespace AchievementsTracker
                 form.drawList();
                 form.drawStatusList();
 
+                imgForm.changeCategory(Category.Tutorial);
                 imgForm.Hide();
 
                 form.changeCategory(Category.Tutorial);
@@ -538,7 +547,7 @@ namespace AchievementsTracker
                 settings.ResetSaveFile();
             }
 
-            public void SaveSettings(Color backColor, Color formColor, Keys resetHotkey, int resetHotkeyMods, String freshSave, String gameSave, int imageSize, int rows, bool inverted)
+            public void SaveSettings(Color backColor, Color formColor, Keys resetHotkey, int resetHotkeyMods, String freshSave, String gameSave, int imageSize, int rows, bool inverted, bool groupByArea)
             {
                 trackerSettings.backColor = ColorTranslator.ToHtml(backColor);
                 trackerSettings.textColor = ColorTranslator.ToHtml(formColor);
@@ -549,6 +558,7 @@ namespace AchievementsTracker
                 trackerSettings.imageSize = imageSize;
                 trackerSettings.rows = rows;
                 trackerSettings.inverted = inverted;
+                trackerSettings.groupByArea = groupByArea;
                 trackerSettings.Save();
             }
         }
@@ -565,6 +575,7 @@ namespace AchievementsTracker
             public int imageSize = 40;
             public int rows = 8;
             public bool inverted = false;
+            public bool groupByArea = false;
         }
     }
 

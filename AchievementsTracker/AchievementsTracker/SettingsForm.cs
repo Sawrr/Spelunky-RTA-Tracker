@@ -26,6 +26,7 @@ namespace AchievementsTracker
         int imageSize;
         int rows;
         bool inverted;
+        bool groupByArea;
 
         public SettingsForm(TrayApplicationContext context, MainForm form, ImgForm imgForm)
         {
@@ -55,6 +56,13 @@ namespace AchievementsTracker
             inverted = inv;
             invertedBox.Checked = inv;
             imgForm.SetInverted(inv);
+        }
+
+        public void SetGroupByArea(bool param)
+        {
+            groupByArea = param;
+            groupByAreaBox.Checked = param;
+            imgForm.SetGroupByArea(param);
         }
 
         public void SetBackgroundColor(Color color)
@@ -132,11 +140,12 @@ namespace AchievementsTracker
             SetImageSize((int)imageSizeBox.Value);
             SetRows((int)rowsBox.Value);
             SetInverted(invertedBox.Checked);
+            SetGroupByArea(groupByAreaBox.Checked);
             imgForm.ArrangeUnlockables();
             context.SetBackgroundColor(bgColorDialog.Color);
             context.SetTextColor(textColorDialog.Color);
 
-            context.SaveSettings(bgColorDialog.Color, textColorDialog.Color, hotkey, modifiers, freshSaveFile, gameSaveFile, imageSize, rows, inverted);
+            context.SaveSettings(bgColorDialog.Color, textColorDialog.Color, hotkey, modifiers, freshSaveFile, gameSaveFile, imageSize, rows, inverted, groupByArea);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
