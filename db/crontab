@@ -1,1 +1,1 @@
-10 * * * * cd /app/db/ && mongo < clear-old-rooms
+10 * * * * cd /db && mongosh < clear-old-rooms.mongo

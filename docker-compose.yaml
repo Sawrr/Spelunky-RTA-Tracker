@@ -1,0 +1,19 @@
+networks:
+  spelunky:
+    driver: bridge
+
+services:
+
+  db:
+    image: db-test
+    restart: always
+    networks:
+      - spelunky
+  
+  app:
+    image: service-test
+    restart: always
+    ports:
+      - 80:8080
+    networks:
+      - spelunky

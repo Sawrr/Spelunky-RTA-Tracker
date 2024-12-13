@@ -66,7 +66,8 @@ r.post("/", async (req, res) => {
         }
 
         // Success, return the room id
-        return res.send(id);
+        res.send(id);
+        return;
     }
 
     // Failure, reached max attempts
@@ -79,14 +80,17 @@ r.get("/:id", async (req, res) => {
         let data = await RoomModel.findById(req.params.id);
 
         if (data) {
-            return res.send(data);
+            res.send(data);
+            return;
         }
 
         // Room not found
-        return res.sendStatus(404);
+        res.sendStatus(404);
+        return;
     } catch (err) {
         // Other error occurred
-        return res.sendStatus(500);
+        res.sendStatus(500);
+        return;
     }
 });
 
@@ -95,16 +99,19 @@ r.put("/:id/join", async (req, res) => {
     try {
         let result = await RoomModel.updateOne({ _id: req.params.id }, { joined: true });
 
-        if (result.n === 0) {
+        if (result.matchedCount === 0) {
             // Room not found
-            return res.sendStatus(404);
+            res.sendStatus(404);
+            return;
         }
         
         // Success
-        return res.sendStatus(200);
+        res.sendStatus(200);
+        return;
     } catch (err) {
         // Other error occurred
-        return res.sendStatus(500);
+        res.sendStatus(500);
+        return;
     }
 });
 
@@ -113,19 +120,22 @@ r.put("/:id/start", async (req, res) => {
     try {
         if (!req.headers.time) {
             // Time header required
-            return res.sendStatus(400);
+            res.sendStatus(400);
+            return;
         }
 
         let room = await RoomModel.findById(req.params.id);
 
         if (!room) {
             // Room not found
-            return res.sendStatus(404);
+            res.sendStatus(404);
+            return;
         }
 
         if (room.startTime) {
             // Room has already started
-            return res.sendStatus(412);
+            res.sendStatus(412);
+            return;
         }
 
         // Parse time from header
@@ -133,26 +143,31 @@ r.put("/:id/start", async (req, res) => {
 
         if (time < room.createTime) {
             // Start time can't be earlier than room creation time
-            return res.sendStatus(400);
+            res.sendStatus(400);
+            return;
         }
 
         let result = await RoomModel.updateOne({ _id: req.params.id }, { startTime: time });
 
-        if (result.n === 0) {
+        if (result.matchedCount === 0) {
             // Room not found
-            return res.sendStatus(404);
+            res.sendStatus(404);
+            return;
         }
 
-        if (result.nModified === 0) {
+        if (result.modifiedCount === 0) {
             // Not modified
-            return res.sendStatus(304);
+            res.sendStatus(304);
+            return;
         }
 
         // Success
-        return res.sendStatus(200);
+        res.sendStatus(200);
+        return;
     } catch (err) {
         // Other error occurred
-        return res.sendStatus(500);
+        res.sendStatus(500);
+        return;
     }
 });
 
@@ -161,24 +176,28 @@ r.put("/:id/update", async (req, res) => {
     try {
         if (!req.headers.time) {
             // Time header required
-            return res.sendStatus(400);
+            res.sendStatus(400);
+            return;
         }
 
         if (req.headers.player !== "host" && req.headers.player !== "guest") {
             // Player header must be 'host' or 'guest'
-            return res.sendStatus(400);
+            res.sendStatus(400);
+            return;
         }
 
         let room = await RoomModel.findById(req.params.id);
 
         if (!room) {
             // Room not found
-            return res.sendStatus(404);
+            res.sendStatus(404);
+            return;
         }
 
         if (!room.startTime) {
             // Room hasn't started
-            return res.sendStatus(412);
+            res.sendStatus(412);
+            return;
         }
 
         // Parse time from header
@@ -186,7 +205,8 @@ r.put("/:id/update", async (req, res) => {
 
         if (time < room.createTime || time < room.startTime) {
             // Timestamp can't be earlier than room creation or start time
-            return res.sendStatus(400);
+            res.sendStatus(400);
+            return;
         }
 
         // Start with existing data
@@ -199,7 +219,8 @@ r.put("/:id/update", async (req, res) => {
             || req.body.journal.items.length != NUM_JOURNAL_ITEMS
             || req.body.journal.traps.length != NUM_JOURNAL_TRAPS) {
                 // Bad journal data
-                return res.sendStatus(400);
+                res.sendStatus(400);
+                return;
             }
             // Places
             for (let i = 0; i < NUM_JOURNAL_PLACES; i++) {
@@ -243,7 +264,8 @@ r.put("/:id/update", async (req, res) => {
         if (!room.data.charactersTime && req.body.characters) {
             if (req.body.characters.length != NUM_CHARACTER_ENTRIES) {
                 // Bad characters data
-                return res.sendStatus(400);
+                res.sendStatus(400);
+                return;
             }
             for (let i = 0; i < NUM_CHARACTER_ENTRIES; i++) {
                 if (!room.data.characters[i] && req.body.characters[i]) {
@@ -315,22 +337,26 @@ r.put("/:id/update", async (req, res) => {
         // Update the data
         let result = await RoomModel.updateOne({ _id: req.params.id }, { data: newData, endTime: endTime });
 
-        if (result.n === 0) {
+        if (result.matchedCount === 0) {
             // Room not found
-            return res.sendStatus(404);
+            res.sendStatus(404);
+            return;
         }
 
-        if (result.nModified === 0) {
+        if (result.modifiedCount === 0) {
             // Not modified
-            return res.sendStatus(304);
+            res.sendStatus(304);
+            return;
         }
 
         // Success
-        return res.sendStatus(200);
+        res.sendStatus(200);
+        return;
 
     } catch (err) {
         // Other error occurred
-        return res.sendStatus(500);
+        res.sendStatus(500);
+        return;
     }
 });
 

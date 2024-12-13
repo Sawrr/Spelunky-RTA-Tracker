@@ -1,6 +1,6 @@
 import { connect } from 'mongoose';
 
-const URL = "mongodb://localhost:27017";
+const URL = "mongodb://db:27017";
 const DB_NAME = "spelunky";
 
 export async function connectToDB() {

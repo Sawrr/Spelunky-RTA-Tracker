@@ -1,6 +1,7 @@
-import { Typegoose, prop } from 'typegoose';
+import { getModelForClass, prop } from "@typegoose/typegoose";
 
-export class Room extends Typegoose {
+
+export class Room {
     @prop()
     _id: string;
     @prop()
@@ -37,4 +38,4 @@ export class Room extends Typegoose {
     }
 };
 
-export let RoomModel = new Room().getModelForClass(Room);
+export let RoomModel = getModelForClass(Room);

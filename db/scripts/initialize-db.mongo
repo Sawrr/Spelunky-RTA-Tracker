@@ -1,0 +1,4 @@
+use spelunky
+
+db.createCollection("rooms")
+db.createCollection("roomAudits")
