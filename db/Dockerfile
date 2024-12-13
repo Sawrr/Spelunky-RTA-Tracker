@@ -9,4 +9,4 @@ ADD ./crontab /etc/cron.d/mongo-cron
 RUN chmod 0644 /etc/cron.d/mongo-cron
 RUN crontab /etc/cron.d/mongo-cron
 
-CMD mongod --bind_ip_all & sleep 10 && mongosh < scripts/initialize-db.mongo && sleep infinity
+CMD mongod --bind_ip_all
