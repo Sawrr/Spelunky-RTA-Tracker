@@ -5,13 +5,13 @@ networks:
 services:
 
   db:
-    image: db-test
+    image: docker.io/sawrr/spelunky-rta-tracker-db
     restart: always
     networks:
       - spelunky
   
   app:
-    image: service-test
+    image: docker.io/sawrr/spelunky-rta-tracker-service
     restart: always
     ports:
       - 80:8080
