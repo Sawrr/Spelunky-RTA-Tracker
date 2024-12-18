@@ -9,4 +9,4 @@ ADD ./crontab /etc/cron.d/mongo-cron
 RUN chmod 0644 /etc/cron.d/mongo-cron
 RUN crontab /etc/cron.d/mongo-cron
 
-CMD mongod --bind_ip_all
+CMD mongod --bind_ip_all & cron & sleep infinity
